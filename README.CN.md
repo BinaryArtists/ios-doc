@@ -15,7 +15,7 @@
  * 注释应该规定在80个字符之内。
  * 注释的风格应该像这样：[Tomdoc](http://tomdoc.org/)-style。
  * Document whether object parameters allow `nil` as a value.
- * 使用 `#pragma mark -`s 将方法归类：功能组、协议实现，下面是一般性结构：（fallenink，更倾向于中间夹`-`）
+ * 使用 `#pragma mark -`s 将方法归类：功能组、协议实现，下面是一般性结构：（[fallenink](https://github.com/fallending)，更倾向于中间夹带`-`）
 
 ```objc
 #pragma mark - Initialization
