@@ -33,11 +33,19 @@
 + (instancetype)objectWithThing:(id)thing {}
 - (instancetype)init {}
 
+#pragma mark - Action handler
+
+- (IBAction)onAddItem:(id)sender {}
+
+#pragma mark - Notification handler
+
 #pragma mark - Drawing
 
 - (void)drawRect:(CGRect) {}
 
 #pragma mark - Another functional grouping
+
+#pragma mark - UITableViewDelegate & UITableViewDataSource
 
 #pragma mark - GHSuperclass
 
