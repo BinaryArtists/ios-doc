@@ -1,49 +1,53 @@
-These guidelines build on Apple's existing [Coding Guidelines for Cocoa](https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html).
-Unless explicitly contradicted below, assume that all of Apple's guidelines apply as well.
+这些准则是基于苹果现有的 [Coding Guidelines for Cocoa](https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html)。
+除非显式地与下面冲突，否则假设与所有苹果的准则一致。
 
-## Whitespace
+## 空白
 
- * Tabs, not spaces.
- * End files with a newline.
- * Make liberal use of vertical whitespace to divide code into logical chunks.
- * Don’t leave trailing whitespace.
-    * Not even leading indentation on blank lines.
+ * 制表符（Tabs），而不是 空格（spaces）。
+ * 以另起一行，作为原文件的结束。
+ * 自由地使用纵向空白，将代码分割成不同的逻辑块。
+ * 不要有（行）末尾空白。
+    * 甚至空行也不允许。
 
-## Documentation and Organization
+## 文档 和 组织
 
- * All method declarations should be documented.
- * Comments should be hard-wrapped at 80 characters.
- * Comments should be [Tomdoc](http://tomdoc.org/)-style.
+ * 所有方法声明都应该在文档中说明。
+ * 注释应该规定在80个字符之内。
+ * 注释的风格应该像这样：[Tomdoc](http://tomdoc.org/)-style。
  * Document whether object parameters allow `nil` as a value.
- * Use `#pragma mark`s to categorize methods into functional groupings and protocol implementations, following this general structure:
+ * 使用 `#pragma mark -`s 将方法归类：功能组、协议实现，下面是一般性结构：（fallenink，更倾向于中间夹`-`）
 
 ```objc
-#pragma mark Properties
+#pragma mark - Initialization
+
+- (void)initTableView {}
+
+#pragma mark - Properties
 
 @dynamic someProperty;
 
 - (void)setCustomProperty:(id)value {}
 
-#pragma mark Lifecycle
+#pragma mark - Lifecycle
 
 + (instancetype)objectWithThing:(id)thing {}
 - (instancetype)init {}
 
-#pragma mark Drawing
+#pragma mark - Drawing
 
 - (void)drawRect:(CGRect) {}
 
-#pragma mark Another functional grouping
+#pragma mark - Another functional grouping
 
-#pragma mark GHSuperclass
+#pragma mark - GHSuperclass
 
 - (void)someOverriddenMethod {}
 
-#pragma mark NSCopying
+#pragma mark - NSCopying
 
 - (id)copyWithZone:(NSZone *)zone {}
 
-#pragma mark NSObject
+#pragma mark - NSObject
 
 - (NSString *)description {}
 ```
