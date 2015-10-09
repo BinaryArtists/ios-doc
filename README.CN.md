@@ -177,6 +177,7 @@ if (something == nil) {
  * 指示错误，在[ReactiveCocoa](https://github.com/ReactiveCocoa/ReactiveCocoa) 的信号上发送错误，或者使用 `NSError **` 参数。
 
      1. 开发版中，尽可能用断言，或调试辅助代码，代替用回车键逃避的问题。
+     2. 用断言，去检查编程中，所做的各种假定。
 
 ## 块（Blocks）
 
