@@ -232,6 +232,7 @@ NSDictionary *keyedStuff = @{
  * If you need to expose private methods for subclasses or unit testing, create a class extension named `Class+Private`.
 
 ### 补充
+
 ## 命名（Names）
 
  * 三种编程命名规则，统一一种风格，当前苹果推荐固然是，同其api意志
@@ -244,8 +245,12 @@ NSDictionary *keyedStuff = @{
     第一个单词首字母小写，后面其他单词首字母大写。
     For example: string firstName = string.Empty;
 
-    3. 大驼峰式：(big camel-case)
+    3. 大驼峰式：(big camel-case)(帕斯卡（pascal）命名法)
     每个单词的第一个字母都大写;
     For example：string FirstName = string.Empty;
 
- * 
+    4. 下划线风格：（underscore-case）
+    每个单词用下划线相连
+    For example：string first_name = string.Empty;
+
+ * ....
