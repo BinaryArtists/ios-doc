@@ -1,6 +1,8 @@
 这些准则是基于苹果现有的 [Coding Guidelines for Cocoa](https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html)。
 除非显式地与下面冲突，否则假设与所有苹果的准则一致。
 
+http://www.cocoachina.com/ios/20131129/7445.html
+
 ## 空白（Whitespaces）
 
  * 制表符（Tabs），而不是 空格（spaces）。
@@ -62,9 +64,9 @@
 
 ## 声明（Declaration）
 
- * 绝不声明局部变量 ivar，除非你需要从某个属性cast到目标类型。
+ * 绝不声明局部变量 ivar，除非你需要从某个属性cast到目标类型。（fixme：翻译有问题）
  * 倾向于暴露一个不可变的（immutable）属性，如果它的实现细节为可变的（mutable）。这是声明属性变量的有效理由。
- * 总是生命内存管理语法，甚至在`readonly` 属性。
+ * 总是声明内存管理语法，甚至在`readonly` 属性。
  * 声明属性为 `readonly`，如果它们只在`-init`中设置了一次。
  * 绝不使用 `@synthesize`，除非编译器需要它。注意在协议（protocols）中的 optional 属性必须要有显式的synthesized，如下系统协议：
 
@@ -168,11 +170,13 @@ if (something == nil) {
 }
 ```
 
-## 异常（Exceptions） 和 错误处理（Error Handling）
+## 异常（Exceptions） 和 错误处理（Error Handling）和 断言（Assertion）
 
  * 绝不在，流程控制中使用异常。
  * 只应该，用异常指示程序员犯的错误。
  * 指示错误，在[ReactiveCocoa](https://github.com/ReactiveCocoa/ReactiveCocoa) 的信号上发送错误，或者使用 `NSError **` 参数。
+
+     1. 开发版中，尽可能用断言，或调试辅助代码，代替用回车键逃避的问题。
 
 ## 块（Blocks）
 
@@ -226,3 +230,22 @@ NSDictionary *keyedStuff = @{
  * Categories should be named for the sort of functionality they provide. Don't create umbrella categories.
  * Category methods should always be prefixed.
  * If you need to expose private methods for subclasses or unit testing, create a class extension named `Class+Private`.
+
+### 补充
+## 命名（Names）
+
+ * 三种编程命名规则，统一一种风格，当前苹果推荐固然是，同其api意志
+
+    1. 匈牙利命名：
+    开头字母用变量类型的缩写，其余部分用变量的英文或英文的缩写，要求单词第一个字母大写。
+    For example: long lsum = 0;"l"是类型的缩写；
+
+    2. 小驼峰式：(little camel-case)
+    第一个单词首字母小写，后面其他单词首字母大写。
+    For example: string firstName = string.Empty;
+
+    3. 大驼峰式：(big camel-case)
+    每个单词的第一个字母都大写;
+    For example：string FirstName = string.Empty;
+
+ * 
