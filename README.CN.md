@@ -16,7 +16,7 @@ http://www.cocoachina.com/ios/20131129/7445.html
  * 所有方法声明都应该在文档中说明。
  * 注释应该规定在80个字符之内。
  * 注释的风格应该像这样：[Tomdoc](http://tomdoc.org/)-style。
- * Document whether object parameters allow `nil` as a value.
+ * 文档中或可允许，对象参数用 `nil` 作为值。
  * 使用 `#pragma mark -`s 将方法归类：功能组、协议实现，下面是一般性结构：（[fallenink](https://github.com/fallending)，更倾向于中间夹带 `-` ）
 
 ```objc
@@ -126,9 +126,9 @@ void GHAwesomeFunction(BOOL hasSomeArgs);
 ```
 
  * 使用点语法，当调用幂等方法（多次调用和一次调用返回的结果相同），包括 setters 和 类方法(like `NSFileManager.defaultManager`)。
- * Use object literals, boxed expressions, and subscripting over the older, grosser alternatives.
+ * 使用对象常量，加括号表达式，下标，在旧的方案。（百度翻译）
  * 所有比较应该是显式行为，除了布尔值 `BOOL`s。
- * Prefer positive comparisons to negative.
+ * 倾向于使用正向的比较，而非负向的。（判断相等性，而非不等）
  * Long form ternary operators should be wrapped in parentheses and only used for assignment and arguments.
 
 ```objc
@@ -181,10 +181,10 @@ if (something == nil) {
 
 ## 块（Blocks）
 
- * 块（Blocks）应该在 should have a space between their return type and name.
- * Block definitions should omit their return type when possible.
- * Block definitions should omit their arguments if they are `void`.
- * Parameters in block types should be named unless the block is initialized immediately.
+ * 块（Blocks）的定义或声明中，在返回类型和块名字之间应该留有空格。
+ * 块定义应该尽可能省略其返回类型。
+ * 块定义如果无参（`void`），则可以省略。
+ * 块类型参数可以不必命名，除非这个块被立即初始化。
 
 ```objc
 void (^blockName1)(void) = ^{
@@ -198,9 +198,9 @@ id (^blockName2)(id) = ^ id (id args) {
 
 ## 常量（Literals）
 
- * Avoid making numbers a specific type unless necessary (for example, prefer `5` to `5.0`, and `5.3` to `5.3f`).
- * The contents of array and dictionary literals should have a space on both sides.
- * Dictionary literals should have no space between the key and the colon, and a single space between colon and value.
+ * 给数字指定特定的类型。(例如，偏向于使用 `5` to `5.0`, and `5.3` to `5.3f`)。
+ * 常量数组、字典中的内容，应该两边空格。
+ * 常量字典中的键和冒号间不必空格，冒号和值之间空格。
 
 ``` objc
 NSArray *theStuff = @[ @1, @2, @3 ];
@@ -208,7 +208,7 @@ NSArray *theStuff = @[ @1, @2, @3 ];
 NSDictionary *keyedStuff = @{ GHDidCreateStyleGuide: @YES };
 ```
 
- * Longer or more complex literals should be split over multiple lines (optionally with a terminating comma):
+ * 更长更复杂的常量，应该分割为多行。 (可选择使用，逗号来终止):
 
 ``` objc
 NSArray *theStuff = @[
@@ -228,9 +228,21 @@ NSDictionary *keyedStuff = @{
 
 ## 类别（Categories）
 
- * Categories should be named for the sort of functionality they provide. Don't create umbrella categories.
- * Category methods should always be prefixed.
- * If you need to expose private methods for subclasses or unit testing, create a class extension named `Class+Private`.
+ * 类别应该依据其提供的功能命名，不要创建总括类别。
+ * 类别方法应该加以前缀。Category methods should always be prefixed.
+    局限性：
+        1.类别只能扩充方法，而不能扩充成员变量。
+        2.名称冲突，即类别中的方法与现有方法重名。当发生名称冲突时，类别具有更高的优先级。可以在自己的类别方法名中增加一个前缀，以确保不发生名称冲突。
+
+``` objc
+@interface UIButton (WCProgress)
+
+-(void)WC_setUpCustomButton; // 集中维护的项目：有精力的，应该避免这样；分布维护的项目，则可以如此，避免冲突。
+
+@end
+```
+
+ * 如果为了子类化或者单元测试，需要暴露私有方法，创建特定类别： `Class+Private`。
 
 ### 补充
 
