@@ -127,19 +127,19 @@ void GHAwesomeFunction(BOOL hasSomeArgs);
  * 使用对象常量，加括号表达式，下标，在旧的方案。（百度翻译）
  * 所有比较应该是显式行为，除了布尔值 `BOOL`s。
  * 倾向于使用正向的比较，而非负向的。（判断相等性，而非不等）
- * Long form ternary operators should be wrapped in parentheses and only used for assignment and arguments.
+ * 长形式的三元运算符应该用圆括号，且只用于赋值和参数。
 
 ```objc
 Blah *a = (stuff == thing ? foo : bar);
 ```
 
-* Short form, `nil` coalescing ternary operators should avoid parentheses.
+* 短形式，`nil` 应该省略，不用括号。
 
 ```objc
 Blah *b = thingThatCouldBeNil ?: defaultValue;
 ```
 
- * Separate binary operands with a single space, but unary operands and casts with none:
+ * 与位运算之间，保持一个空格，除了一元操作符和强制类型转换。
 
 ```c
 void *ptr = &value + 10 * 3;
