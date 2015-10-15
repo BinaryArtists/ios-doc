@@ -1,9 +1,14 @@
 这些准则是基于苹果现有的 [Coding Guidelines for Cocoa](https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html)。
 除非显式地与下面冲突，否则假设与所有苹果的准则一致。
 
+参考链接：
+1. http://www.cocoachina.com/ios/20131129/7445.html
+2. 
+
 ## 空白（Whitespaces）
 
  * 制表符（Tabs），而不是 空格（spaces）。
+ * 每一行代码使用4个空格缩进。不使用tab缩进。
  * 以另起一行，作为原文件的结束。
  * 自由地使用纵向空白，将代码分割成不同的逻辑块。
  * 不要有（行）末尾空白。
@@ -94,7 +99,7 @@
 @interface ClassName () <Protocol>
 ```
 
- * C 函数声明在左括号前（the opening parenthesis）应该不留空格，应该像一个类一样前置声明。
+ * C函数声明中，在左括号前（the opening parenthesis）应该不留空格，并且函数名应该像类一样带有命名空间标识。
 
 ```objc
 void GHAwesomeFunction(BOOL hasSomeArgs);
@@ -107,7 +112,7 @@ void GHAwesomeFunction(BOOL hasSomeArgs);
   CGRect rect = CGRectMake(3.0, 12.0, 15.0, 80.0);
 ```
 
-## 表达式（Expressions）
+## 表达式（Expressions）和 间距（）
 
  * 除非在`-init`, `-dealloc` 或者 定制的访问器中，否则不要直接访问成员变量。
 
@@ -134,13 +139,13 @@ view.backgroundColor = [UIColor redColor]; // good
  * 使用对象常量，加括号表达式，下标，在旧的方案。（百度翻译）
  * 所有比较应该是显式行为，除了布尔值 `BOOL`s。
  * 倾向于使用正向的比较，而非负向的。（判断相等性，而非不等）
- * 长形式的三元运算符应该用圆括号，且只用于赋值和参数。
+ * 长的三元运算符应使用圆括号括起来。三元运算符仅用于赋值和做参数。
 
 ```objc
 Blah *a = (stuff == thing ? foo : bar);
 ```
 
-* 短形式，`nil` 应该省略，不用括号。
+* 合并的nil三元运算符应该尽量避免。
 
 ```objc
 Blah *b = thingThatCouldBeNil ?: defaultValue;
@@ -156,6 +161,9 @@ for (int i = 0; i < 10; i++) {
     doCoolThings();
 }
 ```
+ * 每一行代码不要超过100个字符。
+ * 如果一个方法内有多个功能区域，可以使用空行分隔功能区域。
+ * 每一个方法之前都有一个99字符宽的注释行，注释行相对于使用空行更能提高代码的辨识度，当一行代码很长的时候，注释行也起到了越界检测的作用。（maybe）
 
 ## 控制结构（Control Structures）
 
@@ -185,7 +193,7 @@ if (something == nil) {
 
 ## 异常（Exceptions） 和 错误处理（Error Handling）和 断言（Assertion）
 
- * 绝不在，流程控制中使用异常。
+ * 绝不在，流程控制语句中使用异常（NSException）。
  * 只应该，用异常指示程序员犯的错误。
  * 指示错误，在[ReactiveCocoa](https://github.com/ReactiveCocoa/ReactiveCocoa) 的信号上发送错误，或者使用 `NSError **` 参数。
 
@@ -224,7 +232,7 @@ NSArray *theShit = @[ @1, @2, @3 ];
 NSDictionary *keyedStuff = @{ GHDidCreateStyleGuide: @YES };
 ```
 
- * 更长更复杂的常量，应该分割为多行。 (可选择使用，逗号来终止):
+ * 长的字面值应被拆分为多行。 (可选择使用，逗号来终止):
 
 ```objc
 NSArray *theStuff = @[
@@ -260,8 +268,6 @@ NSDictionary *keyedStuff = @{
 
  * 如果为了子类化或者单元测试，需要暴露私有方法，创建特定类别： `Class+Private`。
 
-### 补充
-
 ## 命名（Names）
 
  * 三种编程命名规则，统一一种风格，当前苹果推荐固然是，同其api一致
@@ -282,4 +288,120 @@ NSDictionary *keyedStuff = @{
     每个单词用下划线相连
     For example：string first_name = string.Empty;
 
- * ....
+ * 一个方法的命名首先描述返回什么，接着是什么情况下被返回。方法签名中冒号的前面描述传入参数的类型。以下类方法和实例方法命名的格式语法：
+```objc
+[object/class thing+condition];
+[object/class thing+input:input];
+[object/class thing+identifer:input];
+```
+ * Cocoa命名举例：
+```objc
+realPath    = [path     stringByExpandingTildeInPath];
+fullString  = [string   stringByAppendingString:@"Extra Text"];
+object      = [array    objectAtIndex:3];
+
+// 类方法
+newString   = [NSString stringWithFormat:@"%f",1.5];
+newArray    = [NSArray  arrayWithObject:newString];
+
+// good
+recipients  = [email    recipientsSortedByLastName];
+newEmail    = [CDCEmail emailWithSubjectLine:@"Extra Text"];
+emails      = [mailbox  messagesReceivedAfterDate:yesterdayDate];
+```
+
+ * 当需要获取对象值的另一种类型的时候，方法命名的格式语法如下：
+```objc
+[object adjective+thing];
+[object adjective+thing+condition];
+[object adjective+thing+input:input];
+
+// good
+capitalized = [name    capitalizedString];
+rate        = [number  floatValue];
+newString   = [string  decomposedStringWithCanonicalMapping];
+subarray    = [array   subarrayWithRange:segment];
+```
+ 
+ * 方法签名尽量做到含义明确。
+```objc
+// bad：
+-sortInfo  // 是返回排序结果还是给info做排序
+-refreshTimer  // 返回一个用于刷新的定时器还是刷新定时器
+-update  // 更新什么，如何更新
+
+// good
+-currentSortInfo      // "current" 清楚地修饰了名词SortInfo
+-refreshDefaultTimer  // refresh是一个动词。
+-updateMenuItemTitle  // 一个正在发生的动作
+```
+ 
+ * 方法类型修饰符+/-后要放置一个空格，各参数名之间也要放置一个空格。
+```objc
+// good
+- (void)setExampleText:(NSString *)text image:(UIImage *)image;
+```
+
+ * 如果方法的命名特别长，将方法名拆分成多行。
+```objc
+// good
+color = [NSColor colorWithCalibratedHue: 0.10
+                             saturation: 0.82
+                             brightness: 0.89
+                                  alpha: 1.00];
+```
+ 
+ * 不要将私有的实例变量和方法声明在头文件中，应将私有变量和方法声明在实现文件的类扩展内。
+
+```objc
+// bad:
+//MyViewController.h文件
+@interface MyViewController : UIViewController<
+ UITalbeViewDataSource,
+ UITableViewDelegate> {
+ @private:
+  UITableView *_myTableView;  // 私有实例变量
+}
+
+// 内部使用的属性
+@property (nonatomic,strong) NSNumber *variableUsedInternally;
+- (void)sortName;  // 只用于内部使用的方法
+@end
+
+// good:
+//MyViewController.m文件使用类扩展
+@interface MyViewController()<
+ UITalbeViewDataSource,
+ UITableViewDelegate> {
+  UITableView *_myTableView;
+// 外部需要访问的实例变量声明为属性，不需要外部访问的声明为实例变量
+  NSNumber * variableUsedInternally;
+}
+
+// 从Xcode4.3开始，可以不写方法的前置声明，Interface Builder和Storyboard仍然可以找到方法的定义
+@end
+```
+
+ * 构造函数通常应该返回实例类型而不是id类型
+ ```objc
+- (instancetype)init;
+ ```
+
+## 协议 与 代理
+ * 除了继承一个类或实现一个协议，否则在头文件中仅使用类声明@class指令，不用#import导入类头文件。
+ * 如果一个delegate只有几个方法，比如只是提交和取消，推荐使用block编写动作响应代码。
+ * 由于代理方法的声明一般都很长，所以必须将代理对象和其他的协议对象放在实例变量定义的下面，否则实例变量定义的对齐方式将会被打乱掉。
+ * 当需要实现多个协议的时候，将每一个协议名拆分到单独的行。
+ 
+```objc
+@interface CustomModelViewController : TTViewController <
+
+  TTModelDelegate,
+
+  TTURLRequestDelegate
+
+> {
+```
+
+
+
