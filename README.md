@@ -212,18 +212,21 @@ id (^blockName2)(id) = ^ id (id args) {
 ## 常量（Literals）
 
  * 给数字指定特定的类型。(例如，偏向于使用 `5` to `5.0`, and `5.3` to `5.3f`)。
- * 常量数组、字典中的内容，应该两边空格。
- * 常量字典中的键和冒号间不必空格，冒号和值之间空格。
+ * 数组和字典类型的字面值的方括号两边各放置一个空格。
 
-``` objc
-NSArray *theStuff = @[ @1, @2, @3 ];
+```objc
+NSArray *theShit = @[ @1, @2, @3 ];
+```
 
+ * 字典字面值的键和冒号之间没有空格，冒号和值之间有一个空格。
+
+```objc
 NSDictionary *keyedStuff = @{ GHDidCreateStyleGuide: @YES };
 ```
 
  * 更长更复杂的常量，应该分割为多行。 (可选择使用，逗号来终止):
 
-``` objc
+```objc
 NSArray *theStuff = @[
     @"Got some long string objects in here.",
     [AndSomeModelObjects too],
@@ -247,7 +250,7 @@ NSDictionary *keyedStuff = @{
         1.类别只能扩充方法，而不能扩充成员变量。
         2.名称冲突，即类别中的方法与现有方法重名。当发生名称冲突时，类别具有更高的优先级。可以在自己的类别方法名中增加一个前缀，以确保不发生名称冲突。
 
-``` objc
+```objc
 @interface UIButton (WCProgress)
 
 -(void)WC_setUpCustomButton; // 集中维护的项目：有精力的，应该避免这样；分布维护的项目，则可以如此，避免冲突。
