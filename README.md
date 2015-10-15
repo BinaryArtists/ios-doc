@@ -217,7 +217,7 @@ id (^blockName2)(id) = ^ id (id args) {
 };
 ```
 
-## 常量（Literals）
+## 字面值（Literals）和 常量
 
  * 给数字指定特定的类型。(例如，偏向于使用 `5` to `5.0`, and `5.3` to `5.3f`)。
  * 数组和字典类型的字面值的方括号两边各放置一个空格。
@@ -247,6 +247,68 @@ NSDictionary *keyedStuff = @{
     @"some": @"more",
     @"JSON": @"keys",
     @"and": @"stuff",
+};
+```
+
+ * 对于NSString，NSDictionary，NSArray和NSNumber类，当需要创建这些类的不可变实例时，应该使用这些类的字面值表示形式。使用字面值表示的时候nil不需要传入NSArray和NSDictionary中作为字面值。这种语法兼容老的iOS版本，因此可以在iOS5或者更老的版本中使用它。
+```objc
+// good:
+NSArray *names = @[@"Brian", @"Matt", @"Chris", @"Alex", @"Steve", @"Paul"];
+NSDictionary *productManagers = @{@"iPhone" : @"Kate", @"iPad" : @"Kamal", @"Mobile Web" : @"Bill"};
+NSNumber *shouldUseLiterals = @YES;
+NSNumber *buildingZIPCode = @10018;
+ 
+// bad:
+NSArray *names = [NSArray arrayWithObjects:@"Brian", @"Matt", @"Chris", @"Alex", @"Steve", @"Paul", nil];
+NSDictionary *productManagers = [NSDictionary dictionaryWithObjectsAndKeys: @"Kate", @"iPhone", @"Kamal", @"iPad", @"Bill", @"Mobile Web", nil];
+NSNumber *shouldUseLiterals = [NSNumber numberWithBool:YES];
+NSNumber *buildingZIPCode = [NSNumber numberWithInteger:10018];
+```
+
+ * CGRect函数，相较于使用结构体辅助函数（如CGRectMake()函数），优先使用C99结构体初始化语法。
+```objc
+  CGRect rect = {.origin.x = 3.0, .origin.y = 12.0, .size.width = 15.0, .size.height = 80.0 };
+```
+
+ * 当访问CGRect结构体的x、y、width、height成员时，应使用CGGeometry函数，不直接访问结构体成员。苹果对CGGeometry函数的介绍：
+All functions described in this reference that take CGRect data structures as inputs implicitly standardize those rectangles before calculating their results. For this reason, your applications should avoid directly reading and writing the data stored in the CGRect data structure. Instead, use the functions described here to manipulate rectangles and to retrieve their characteristics.
+```objc
+// good:
+CGRect frame = self.view.frame;
+CGFloat x = CGRectGetMinX(frame);
+CGFloat y = CGRectGetMinY(frame);
+CGFloat width = CGRectGetWidth(frame);
+CGFloat height = CGRectGetHeight(frame);
+
+// bad:
+CGRect frame = self.view.frame;
+CGFloat x = frame.origin.x;
+CGFloat y = frame.origin.y;
+CGFloat width = frame.size.width;
+CGFloat height = frame.size.height;
+```
+
+ * 优先使用常类型变量，而不是内嵌的字符串字面值或数字，因为常类型变量能很容易的复用常用的变量值（如π），同时可以快速地修改值而无需查找替换。常类型变量应该声明为static类型，不要使用#define，除非常类型变量被作为宏使用。
+```objc
+// good:
+static NSString * const RNCAboutViewControllerCompanyName = @"The New York Times Company";
+static const CGFloat RNCImageThumbnailHeight = 50.0;
+ 
+// bad:
+#define CompanyName @"The New York Times Company"
+#define thumbnailHeight 2
+```
+
+ * 当使用enum关键字时，推荐使用苹果最新引入的固定基础类型语法，因为这将获得强类型检查与代码完成功能。SDK现在包含了一个固定基础类型的宏——NS_ENUM（）。
+ * NS_ENUM是在iOS6中开始引入的，为了支持之前的iOS版本，使用简单的内联方法：
+```objc
+#ifndef NS_ENUM
+#define NS_ENUM(_type, _name) enum _name : _type _name; enum _name : _type
+#endif
+
+typedef NS_ENUM(NSInteger, RNCAdRequestState) {
+    RNCAdRequestStateInactive,
+    RNCAdRequestStateLoading
 };
 ```
 
