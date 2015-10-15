@@ -3,7 +3,7 @@
 
 参考链接：
 1. http://www.cocoachina.com/ios/20131129/7445.html
-2. 
+2. http://www.cocoachina.com/ios/20151014/13678.html
 
 ## 空白（Whitespaces）
 
