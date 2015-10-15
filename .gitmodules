@@ -4,3 +4,6 @@
 [submodule "xcode-themes"]
 	path = xcode-themes
 	url = https://github.com/fallending/xcode-themes.git
+[submodule "Objective-C"]
+	path = Objective-C
+	url = https://github.com/Xcode-Snippets/Objective-C.git
