@@ -387,7 +387,7 @@ color = [NSColor colorWithCalibratedHue: 0.10
 - (instancetype)init;
  ```
 
-## 协议 与 代理
+## 协议 (Protocol) 与 代理 (Delegate)
  * 除了继承一个类或实现一个协议，否则在头文件中仅使用类声明@class指令，不用#import导入类头文件。
  * 如果一个delegate只有几个方法，比如只是提交和取消，推荐使用block编写动作响应代码。
  * 由于代理方法的声明一般都很长，所以必须将代理对象和其他的协议对象放在实例变量定义的下面，否则实例变量定义的对齐方式将会被打乱掉。
@@ -402,6 +402,18 @@ color = [NSColor colorWithCalibratedHue: 0.10
 
 > {
 ```
+
+## 参数 (arguements)
+ * 方法参数名前一般使用的前缀包括“the”、“an”、“new”。
+```objc
+    - (void)setTitle:(NSString *)aTitle;
+    - (void)setName:(NSString *)newName;
+    - (id)keyForOption:(CDCOption *)anOption;
+    - (NSArray *)emailsForMailbox:(CDCMailbox *)theMailbox;
+    - (CDCEmail *)emailForRecipients:(NSArray *)theRecipients;
+```
+
+## 变量 (Variable)
 
 
 
