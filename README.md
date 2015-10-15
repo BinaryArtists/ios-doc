@@ -403,6 +403,8 @@ color = [NSColor colorWithCalibratedHue: 0.10
 > {
 ```
 
+ * 缩略词: (pdf, xml, html, url, rtf, http, tiff, png, gif, rom, rgb, ftp)
+
 ## 参数 (arguements)
  * 方法参数名前一般使用的前缀包括“the”、“an”、“new”。
 ```objc
@@ -414,6 +416,134 @@ color = [NSColor colorWithCalibratedHue: 0.10
 ```
 
 ## 变量 (Variable)
+ * 变量的命令应尽量做到自描述。除了在for()循环语句中，单字母的变量应该避免使用（如i,j,k等）。
+   一般循环语句的当前对象的命名前缀包括“one”、“a/an”。对于简单的单个对象使用“item”命名。
+```objc
+for (i = 0; i < count; i++) {
+    oneObject = [allObjects objectAtIndex: i];
+    NSLog (@"oneObject: %@", oneObject);
+}
+
+NSEnumerator *e = [allObjects objectEnumerator];
+id item;
+while (item = [e nextObject])
+      NSLog (@"item: %@", item);
+```
+ 
+ * 指针变量的星号指示符应该紧靠变量，比如NSString *text,而不是NSString* text或NSString * text。
+ 
+ * 尽量的使用属性而非实例变量。
+   除了在初始化方法（init，initWithCoder：等）、dealloc方法以及自定义setter与getter方法中访问属性合成的实例变量，其他的情况使用属性进行访问。
+ 
+```objc
+// good:
+@interface RNCSection: NSObject
+@property (nonatomic) NSString *headline;
+@end
+
+// bad:
+@interface RNCSection : NSObject {
+    NSString *headline;
+}
+```
+
+ * 当你使用@synthesize指令时，编译器会自动为你创建一个下划线_开头的的实例变量，所以不需要同时声明实例变量和属性。
+```objc
+// bad:
+@interface RNCSection : NSObject {
+    NSString *headline;
+}
+@property (nonatomic) NSString *headline;
+@end
+ 
+// good:
+@interface RNCSection: NSObject
+@property (nonatomic) NSString *headline;
+@end
+```
+ 
+ * 不要使用@synthesize除非是编译器需要。注意在@protoco协议中的@optional可选属性必须被显式地使用@synthesize指令合成属性。
+ * 变量命名应该尽可能做到自描述：
+```objc
+// good:
+UIButton *settingsButton;
+ 
+// bad:
+UIButton *setBut;
+```
+
+ * 对于NSString、NSArray、NSNumber或BOOL类型，变量的命名一般不需要表明其类型。
+```objc
+// good:
+NSString       *accountName;
+NSMutableArray *mailboxes;
+NSArray        *defaultHeaders;
+BOOL           userInputWasUpdated;
+
+// bad:
+NSString       *accountNameString;
+NSMutableArray *mailboxArray;
+NSArray        *defaultHeadersArray;
+BOOL           userInputWasUpdatedBOOL;
+```
+ 
+ * 如果变量不是以上基本常用类型，则变量的命名就应该反映出自身的类型。但有时仅需要某些类的一个实例的情况下，那么只需要基于类名进行命名。
+```objc
+NSImage              *previewPaneImage; 
+NSProgressIndicator  *uploadIndicator; 
+NSFontManager        *fontManager;       // 基于类名命名
+```
+
+ * 大部分情况下，NSArray或NSSet类型的变量只需要使用单词复数形式（比如mailboxes），不必在命名中包含“mutable”。如果复数变量不是NSArray或NSSet类型，则需要指定其类型。
+```objc
+NSDictionary * keyedAccountNames;
+NSDictionary * messageDictionary;
+NSIndexSet   * selectedMailboxesIndexSet;
+```
+
+ * 由于Objective-C不支持名字空间，为了防止出现命名空间的冲突，在类名和常类型变量名前添加一个由三个大写的字母组成的前缀（如RNC），对于Core Data实体名则可以忽略此规则。如果你子类化了标准的Cocoa类，将前缀和父类名合并是一个很好的做法。如继承UITableView的类可命名为RNCTableView。
+ * 常类型变量名的书写风格采用驼峰式大小写（第一个单词的首字母小写，其余单词的第一个字母大写。如firstName而不是first_name或firstname。），并使用关联的类名作为其命名前缀，
+ 
+```objc
+// good:
+static const NSTimeInterval RNCArticleViewControllerNavigationFadeAnimationDuration = 0.3;
+ 
+// bad:
+static const NSTimeInterval fadetime = 1.7;
+```
+
+## 下划线
+ * 使用属性的时候，实例变量应该使用self.
+ * 进行访问和设值。局部变量的命令不要包含下划线。实例变量的命名必须使用下划线_作为前缀，这样可以缩小Xcode自动完成的选项取值范围。
+
+## 注释
+ * 使用javadoc风格的文档注释语法。注释的第一行是对注释API的总结，随后的注释行是对代码更多细节的解释。
+```objc
+/**
+ * The maximum size of a download that is allowed.
+ *
+ * If a response reports a content length greater than the max * will be cancelled. This is helpful for preventing excessive memory usage.
+ * Setting this to zero will allow all downloads regardless of size.
+ *
+ * @default 150000 bytes
+ */
+@property (nonatomic) NSUInteger maxContentLength;
+```
+
+ * init与dealloc
+ * dealloc方法应该被放置在实现方法的顶部，直接在@synthesize或@dynamic语句之后。init方法应该被放置在dealloc方法的下面。
+ * init方法的结构看上去应该像这样：
+```objc
+- (instancetype)init {
+    self = [super init]; // or call the designated initalizer
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
+```
+
+
 
 
 
