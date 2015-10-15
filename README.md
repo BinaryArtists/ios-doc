@@ -124,6 +124,13 @@ void GHAwesomeFunction(BOOL hasSomeArgs);
 ```
 
  * 使用点语法，当调用幂等方法（多次调用和一次调用返回的结果相同），包括 setters 和 类方法(like `NSFileManager.defaultManager`)。
+
+```objc
+view.backgroundColor = [UIColor redColor]; // good
+
+[view setBackgroundColor:nil]; // bad
+```
+
  * 使用对象常量，加括号表达式，下标，在旧的方案。（百度翻译）
  * 所有比较应该是显式行为，除了布尔值 `BOOL`s。
  * 倾向于使用正向的比较，而非负向的。（判断相等性，而非不等）
@@ -139,7 +146,7 @@ Blah *a = (stuff == thing ? foo : bar);
 Blah *b = thingThatCouldBeNil ?: defaultValue;
 ```
 
- * 与位运算之间，保持一个空格，除了一元操作符和强制类型转换。
+ * 二元运算符和参数之间需要放置一个空格，一元运算符、强制类型转换和参数之间不放置空格。关键字之后圆括号之前需要放置一个空格。
 
 ```c
 void *ptr = &value + 10 * 3;
