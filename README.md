@@ -149,6 +149,8 @@ Blah *a = (stuff == thing ? foo : bar);
 
 ```objc
 Blah *b = thingThatCouldBeNil ?: defaultValue;
+
+Blah *b = anotherBlah ? : [Blah new];
 ```
 
  * 二元运算符和参数之间需要放置一个空格，一元运算符、强制类型转换和参数之间不放置空格。关键字之后圆括号之前需要放置一个空格。
@@ -200,12 +202,21 @@ if (something == nil) {
      1. 开发版中，尽可能用断言，或调试辅助代码，代替用回车键逃避的问题。
      2. 用断言，去检查编程中，所做的各种假定。
 
+ * 常常进行静态代码分析：Cmd+shift+B
+
 ## 块（Blocks）
 
  * 块（Blocks）的定义或声明中，在返回类型和块名字之间应该留有空格。
  * 块定义应该尽可能省略其返回类型。
  * 块定义如果无参（`void`），则可以省略。
  * 块类型参数可以不必命名，除非这个块被立即初始化。
+ * 避免循环引用，常用方案：(如ReactiveCocoa中定义好的@weakify(self)和@strongify(self) )
+```objc
+__weak typeof(self) weakSelf = self;
+myObj.myBlock = ^{
+  __strong typeof(self) strongSelf = weakSelf;
+}
+```
 
 ```objc
 void (^blockName1)(void) = ^{
