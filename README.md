@@ -1,8 +1,6 @@
 这些准则是基于苹果现有的 [Coding Guidelines for Cocoa](https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html)。
 除非显式地与下面冲突，否则假设与所有苹果的准则一致。
 
-http://www.cocoachina.com/ios/20131129/7445.html
-
 ## 空白（Whitespaces）
 
  * 制表符（Tabs），而不是 空格（spaces）。
@@ -154,11 +152,11 @@ for (int i = 0; i < 10; i++) {
 
 ## 控制结构（Control Structures）
 
- * Always surround `if` bodies with curly braces if there is an `else`. Single-line `if` bodies without an `else` should be on the same line as the `if`.
- * All curly braces should begin on the same line as their associated statement. They should end on a new line.
- * Put a single space after keywords and before their parentheses.
- * Return and break early.
- * No spaces between parentheses and their contents.
+ * 如果有`else`，则`else` `if` 的代码块，都需要用花括号包围。如果`if`只跟单行语句，则它保持与`if`同一行。
+ * 所有的花括号应，与关联的语句同起一行，新起一行结束。
+ * 在关键字后、圆括号前，都空格。
+ * Return 和 break 早起。
+ * 圆括号与其中的内容之间紧邻，不空格。
 
 ```objc
 if (somethingIsBad) return;
@@ -167,6 +165,14 @@ if (something == nil) {
 	// do stuff
 } else {
 	// do other stuff
+}
+
+{
+    // do stuff on function one
+}
+
+{
+    // do stuff on function two
 }
 ```
 
@@ -248,7 +254,7 @@ NSDictionary *keyedStuff = @{
 
 ## 命名（Names）
 
- * 三种编程命名规则，统一一种风格，当前苹果推荐固然是，同其api意志
+ * 三种编程命名规则，统一一种风格，当前苹果推荐固然是，同其api一致
 
     1. 匈牙利命名：
     开头字母用变量类型的缩写，其余部分用变量的英文或英文的缩写，要求单词第一个字母大写。
