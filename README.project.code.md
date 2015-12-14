@@ -15,6 +15,8 @@
 		@class BaseViewController;
 			@impl 导航栏风格
 			@impl 部分常用方法的统一命名
+		@class BaseTableViewController; // 包含BaseViewController
+			@impl 上拉、下拉加载
 		@class BaseViewModel;
 		@class BaseModel;
 	```
@@ -24,6 +26,15 @@
 		@protocol BaseViewProtocol;
 		typedef BaseViewProtocol ReactiveProtocol;
 	```
+
+## 目录规范
+	* |- ViewController/
+		|- 个人中心/
+			|- View/
+			|- Cell/
+			|- ProfileVC.h
+			|- ProfileVC.m
+	* 
 
 ## 特殊控件 和 通用控件
 	* 警告框
