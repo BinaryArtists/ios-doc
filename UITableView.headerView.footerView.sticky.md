@@ -17,7 +17,7 @@
 * 还有一种方法蛮好（这样实际上市吧table向上移动了一部分隐藏在navigation下面）
 
 	```objc
-	_mainTable.contentInset = UIEdgeInsetsMake(<span style="font-family:Microsoft YaHei;">sectionHeight</span>, 0, 0, 0); 
+	_mainTable.contentInset = UIEdgeInsetsMake(sectionHeight, 0, 0, 0); 
 	```
 * 还有一种案例是：键盘弹起的时候，会将footerView推上去，怎么解决呢？看下面例子代码，就懂了。
 ```objc
