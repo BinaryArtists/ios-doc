@@ -23,10 +23,10 @@
 
 	```objc
 	// 创建串行队列
-	dispatch_queue_t queue = 	dispatch_queue_create(queueName, DISPATCH_QUEUE_SERIAL);
+	dispatch_queue_t queue = 	dispatch_queue_create(@"com.example.serialQueue", DISPATCH_QUEUE_SERIAL);
 	 
 	// 创建并发队列
-	dispatch_queue_t barrierQueue	= dispatch_queue_create(name, DISPATCH_QUEUE_CONCURRENT);
+	dispatch_queue_t barrierQueue	= dispatch_queue_create(@"com.example.concurrentQueue", DISPATCH_QUEUE_CONCURRENT);
 	
 	// 获取主线程队列
 	dispatch_queue_t mainQueue	= dispatch_get_main_queue();
@@ -36,6 +36,65 @@
 
 ### 4. 基础用法举例
 
+1. 如何创建队列（略）
+
+2. 自定义上下文
+
+```objc
+void myFinalizerFunction(void *context)
+{
+	MyDataContext* theData = (MyDataContext*)context;
+	// 清除这个数据的内容
+    myCleanUpDataContextFunction(theData);
+    // 释放数据.
+    free(theData);
+}
+
+dispatch_queue_t createMyQueue()
+{
+    MyDataContext*  data = (MyDataContext*) malloc(sizeof(MyDataContext));
+    myInitializeDataContextFunction(data);
+    // 创建队列并设置上下文.
+    dispatch_queue_t serialQueue =
+  dispatch_queue_create("com.example.CriticalTaskQueue", NULL);
+    if (serialQueue)
+    {
+		dispatch_set_context(serialQueue, data);
+        dispatch_set_finalizer_f(serialQueue, &myFinalizerFunction); // _f，C函数
+	}
+	return serialQueue;
+}
+```
+
+3. 用队列执行、管理任务（略）
+4. 执行(block object, function)、完成(block object, funtion)、并发执行循环（略）
+5. 挂起、恢复队列（略）（都是简单的api调用）
+6. 使用信号量（Dispatch Semaphores）
+	*	信号量的作用是控制多个任务对有限数量资源的访问。
+	*	当创建信号量（使用dispatch_semaphore_create方法），我们可以指定一个正整数，表示可用资源的数量。
+	*	在每一个任务里，调用dispatch_semaphore_wait来等待信号量。
+	*	当等待调用返回时，获取资源并做自己的工作。
+	*	当我们用到资源后，释放掉它，然后通过调用dispatch_semaphore_signal方法来发出信号。
+
+```objc
+// 创建一个信号量
+dispatch_semaphore_t fd_sema = dispatch_semaphore_create(getdtablesize() / 2);
+// 等待一个空闲的文件描述符
+dispatch_semaphore_wait(fd_sema, DISPATCH_TIME_FOREVER);
+fd = open("/etc/services", O_RDONLY);
+// 当完成时，释放掉文件描述符
+close(fd);
+dispatch_semaphore_signal(fd_sema);
+```
+
+7. Dispatch Group的使用
+	*	Dispatch groups是阻塞线程直到一个或多个任务完成的一种方式。(GCD提供了两种通知方式)
+	*	dispatch_group_wait。它会阻塞当前线程，直到组里面所有的任务都完成或者等到某个超时发生。
+	*	dispatch_group_notify。它以异步的方式工作，当 Dispatch Group中没有任何任务时，它就会执行其代码，那么 completionBlock便会运行。
+8. [Operation Queues, Dispatch Queues, Dispatch Sources](https://developer.apple.com/library/ios/documentation/General/Conceptual/ConcurrencyProgrammingGuide/OperationQueues/OperationQueues.html#//apple_ref/doc/uid/TP40008091-CH102-SW24)
+9. Dispatch Queues 和 线程安全
+	*	不要在一个正执行在同一个队列的任务中，调用dispatch_sync，会造成死锁(deadlock)。
+	*	多线程竞争资源的情况下，避免在dispatch_once中堵塞色（比如：CoreData在global线程中）
 
 ### 5. 
 
