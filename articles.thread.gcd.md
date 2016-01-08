@@ -94,7 +94,7 @@ dispatch_semaphore_signal(fd_sema);
 8. [Operation Queues, Dispatch Queues, Dispatch Sources](https://developer.apple.com/library/ios/documentation/General/Conceptual/ConcurrencyProgrammingGuide/OperationQueues/OperationQueues.html#//apple_ref/doc/uid/TP40008091-CH102-SW24)
 9. Dispatch Queues 和 线程安全
 	*	不要在一个正执行在同一个队列的任务中，调用dispatch_sync，会造成死锁(deadlock)。
-	*	多线程竞争资源的情况下，避免在dispatch_once中堵塞色（比如：CoreData在global线程中）
+	*	多线程竞争资源的情况下，避免在dispatch_once中堵塞色（比如：[CoreData的多线程问题](https://github.com/BinaryArtists/objective-c-style-guide/blob/master/articles.ios/library/coredata.multithread_issues.md)）
 
 ### 5. 
 
