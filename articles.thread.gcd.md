@@ -17,12 +17,13 @@
 *	［基础概念］串行（Serial）、并发（Concurrent）、并行（Parallelism）、异步（Synchronous）、同步（Asynchronous）
 *	［基础概念］上下文切换（Context Switch），一个上下文切换指当你在单个进程里切换执行不同的线程时存储与恢复执行状态的过程。
 *	［GCD对象（Dispatch Objects）］，详见[Apple官方参考]中的Data types，如dispatch_queue_t(_t是为结构体，struct，命名的一种规范)。
-*	［内存管理］NO ARC下注意使用dispatch_retain、dispatch_release，区别于CoreFoundation的retain、release方法。
+*	［内存管理］NO ARC下注意使用dispatch_retain、dispatch_release，区别于CoreFoundation的retain、release方法。而，ARC自动管理GCD是从iOS6开始的。
 *	［分发队列（Dispatch Queues）］，强大的执行多任务的工具，先进先出队列（FIFO），不需要使用者创建线程，方便实用。
 *	［队列类型（Queue Types）］，有三种队列类型：Serial，串行队列；Concurrent，在iOS5之前，并发队列一般指的就是全局队列(Global queue)，进程中存在四个全局队列：高、中(默认)、低、后台四个优先级队列，可以调用dispatch_get_global_queue函数传入优先级来访问队列。iOS5之后，可以用dispatch_queue_create。Main dispatch queue，主线程，它能保证所有的任务都在主线程执行，而主线程是唯一可用于更新UI的线程。
 
 	```objc
 	// 创建串行队列
+	// Apple建议我们使用倒置域名来命名队列，比如 “com.dreamingwish.subsystem.task”。
 	dispatch_queue_t queue = 	dispatch_queue_create(@"com.example.serialQueue", DISPATCH_QUEUE_SERIAL);
 	 
 	// 创建并发队列
@@ -94,7 +95,17 @@ dispatch_semaphore_signal(fd_sema);
 8. [Operation Queues, Dispatch Queues, Dispatch Sources](https://developer.apple.com/library/ios/documentation/General/Conceptual/ConcurrencyProgrammingGuide/OperationQueues/OperationQueues.html#//apple_ref/doc/uid/TP40008091-CH102-SW24)
 9. Dispatch Queues 和 线程安全
 	*	不要在一个正执行在同一个队列的任务中，调用dispatch_sync，会造成死锁(deadlock)。
+```objc
+// === now on main thread
+dispatch_sync(dispatch_get_main_queue(), ^{
+    //
+	NSLog(@"dead or not ?");
+});
+// 死锁；如果在非主线程这么做，是可以同步取值的。
+```
 	*	多线程竞争资源的情况下，避免在dispatch_once中堵塞色（比如：[CoreData的多线程问题](https://github.com/BinaryArtists/objective-c-style-guide/blob/master/articles.ios/library/coredata.multithread_issues.md)）
+
+10. 用串行队列（Serial）替代锁（Lock）
 
 ### 5. 
 
