@@ -24,13 +24,11 @@
 	```objc
 	// 创建串行队列
 	// Apple建议我们使用倒置域名来命名队列，比如 “com.dreamingwish.subsystem.task”。
-	dispatch_queue_t queue = 	dispatch_queue_create(@"com.example.serialQueue", DISPATCH_QUEUE_SERIAL);
-	 
+	dispatch_queue_t queue = dispatch_queue_create(@"com.example.serialQueue", DISPATCH_QUEUE_SERIAL);
 	// 创建并发队列
-	dispatch_queue_t barrierQueue	= dispatch_queue_create(@"com.example.concurrentQueue", DISPATCH_QUEUE_CONCURRENT);
-	
+	dispatch_queue_t barrierQueue = dispatch_queue_create(@"com.example.concurrentQueue", DISPATCH_QUEUE_CONCURRENT);
 	// 获取主线程队列
-	dispatch_queue_t mainQueue	= dispatch_get_main_queue();
+	dispatch_queue_t mainQueue = dispatch_get_main_queue();
 	```
 *	可以“man dispatch_object”获取更多信息。
 
@@ -76,7 +74,6 @@ dispatch_queue_t createMyQueue()
 	*	在每一个任务里，调用dispatch_semaphore_wait来等待信号量。
 	*	当等待调用返回时，获取资源并做自己的工作。
 	*	当我们用到资源后，释放掉它，然后通过调用dispatch_semaphore_signal方法来发出信号。
-
 ```objc
 // 创建一个信号量
 dispatch_semaphore_t fd_sema = dispatch_semaphore_create(getdtablesize() / 2);
@@ -87,7 +84,6 @@ fd = open("/etc/services", O_RDONLY);
 close(fd);
 dispatch_semaphore_signal(fd_sema);
 ```
-
 7. Dispatch Group的使用
 	*	Dispatch groups是阻塞线程直到一个或多个任务完成的一种方式。(GCD提供了两种通知方式)
 	*	dispatch_group_wait。它会阻塞当前线程，直到组里面所有的任务都完成或者等到某个超时发生。
@@ -105,7 +101,50 @@ dispatch_sync(dispatch_get_main_queue(), ^{
 ```
 	*	多线程竞争资源的情况下，避免在dispatch_once中堵塞色（比如：[CoreData的多线程问题](https://github.com/BinaryArtists/objective-c-style-guide/blob/master/articles.ios/library/coredata.multithread_issues.md)）
 
-10. 用串行队列（Serial）替代锁（Lock）
+10. 用串行队列（Serial）替代锁（Lock），来完成同步机制
+	*	传统多线程编程中，常遇到的这样的场景：对一个资源，同时进行写入或读出的操作；冲突的解决方式是，用锁来保护该资源对象。（例子copy的，看看就好，不必与使用场景对号入座，看明白原理就行。）
+	```objc
+	// ...
+	NSLock *lock;
+	-(id)something {
+    	id localSomething;
+    	[lock lock];
+    	localSomething = [[something retain] autorelease];
+    	[lock unlock];
+    	return localSomething;
+	}
+	-(void)setSomething:(id)newSomething {
+    	[lock lock];
+    	if(newSomething != something)
+    	{
+        	[something release];
+        	something = [newSomething retain];
+        	[self updateSomethingCaches];
+    	}
+    	[lock unlock];
+	}
+	```
+	*	使用GCD，可以使用queue来替代：
+	```objc
+	// ...
+	dispatch_queue_t queue;
+	-(id)something {
+		__block id localSomething;
+		dispatch_sync(queue, ^{
+			localSomething = [something retain];
+		});
+		return [localSomething autorelease];
+	}
+	-(void)setSomething:(id)newSomething {
+		dispatch_async(queue, ^{
+			if (newSomething != something) {
+				[something release];
+				something = [newSomething retain];
+				[self updateSomethingCaches];
+			}
+		});
+	}
+	```
 
 ### 5. 
 
