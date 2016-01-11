@@ -5,17 +5,27 @@
 *	[Grand Central Dispatch In-Depth:Part 1/2](http://www.raywenderlich.com/60749/grand-central-dispatch-in-depth-part-1)
 *	[深入理解GCD（－）](http://blog.jobbole.com/66866/)
 
-### 1. GCD是什么
+### 目录
+*	[1. GCD是什么](#1)
+*	[2. 优势](#2)
+*	[3. GCD对象和ARC](#3)
+*	[4. 基础用法举例](#4)
+*	[5. 使用GCD途径有几个好处](#5)
+*	[6. GCD在并行计算的使用与表现](#6)
+*	[7. 管理 Dispatch Sources](#7)
+*	[8. 回顾 Dispatch Queue](#8)
+
+<h3 id="1">1. GCD是什么</h3>
 *	是libdispatch的市场名称，而libdispatch是Apple的一个库。
 *	GCD比之NSOperationQueue更底层更高效，因为它运行在系统级别。
 *	除了并行处理能力，GCD还提供高度集成的事件控制系统。可以设置句柄来响应文件描述符、mach ports（Mach port用于OS X上的进程间通讯）、进程、计时器、信号、用户生成事件。这些句柄通过GCD来并发执行。
 *	GCD的API，可以使用block，也可以使用传统C机制提供函数指针和上下文指针。
 *	在mac的terminal上敲命令“man dispatch”可以获取GCD文档。
 
-### 2. 优势
+<h3 id="2">2. 优势</h3>
 *	易用性、效率高、性能优（详细可以看参考链接）
 
-### 3. GCD对象和ARC
+<h3 id="3">3. GCD对象和ARC</h3>
 *	［基础概念］串行（Serial）、并发（Concurrent）、并行（Parallelism）、异步（Synchronous）、同步（Asynchronous）
 *	［基础概念］上下文切换（Context Switch），一个上下文切换指当你在单个进程里切换执行不同的线程时存储与恢复执行状态的过程。
 *	［基础概念］临界区（Critical Section），这段代码不能被并发执行，共享资源被竞争会不可预测的结果。
@@ -35,10 +45,14 @@
 	// 获取主线程队列
 	dispatch_queue_t mainQueue = dispatch_get_main_queue();
 	```
+*	要主线程去操作UI相关方法：
+	```
+	实际上Apple规定UIKit的方法都必须放在主线程中调用，事实证明，确实很多不涉及UI操作的UIKit方法都不能在子线程中调用，甚至一些文件加载的函数。而其根本原因是UIKit的这些方法都在内部调用了一些可能产生竞态的资源（很多方法会调用render context来进行中间转换等操作），而一些UIKit方法被验证确实能放在子线程中调用（虽然不推荐这么做，因为这么做不稳定，你不能确定某一天Apple会修改这些方法的内部实现而导致其只能在主线程中执行）也印证了这一点。
+	```
 *	可以“man dispatch_object”获取更多信息。
 
 
-### 4. 基础用法举例
+<h3 id="4">4. 基础用法举例</h3>
 
 1. 如何创建队列（略）
 
@@ -79,6 +93,7 @@ dispatch_queue_t createMyQueue()
 	*	在每一个任务里，调用dispatch_semaphore_wait来等待信号量。
 	*	当等待调用返回时，获取资源并做自己的工作。
 	*	当我们用到资源后，释放掉它，然后通过调用dispatch_semaphore_signal方法来发出信号。
+		信号量是一个整形值并且具有一个初始计数值，并且支持两个操作：信号通知和等待。当一个信号量被信号通知，其计数会被增加。当一个线程在一个信号量上等待时，线程会被阻塞（如果有必要的话），直至计数器大于零，然后线程会减少这个计数。
 ```objc
 // 创建一个信号量
 dispatch_semaphore_t fd_sema = dispatch_semaphore_create(getdtablesize() / 2);
@@ -151,13 +166,13 @@ dispatch_sync(dispatch_get_main_queue(), ^{
 	}
 	```
 
-### 5. 使用GCD途径有几个好处：
+<h3 id="5">5. 使用GCD途径有几个好处：</h3>
 *	平行计算: 注意在第二个版本的代码中， -setSomething:是怎么使用dispatch_async的。调用 -setSomething:会立即返回，然后这一大堆工作会在后台执行。如果updateSomethingCaches是一个很费时费力的任务，且调用者将要进行一项处理器高负荷任务，那么这样做会很棒。
 *	安全: 使用GCD，我们就不可能意外写出具有不成对Lock的代码。在常规Lock代码中，我们很可能在解锁之前让代码返回了。使用GCD，队列通常持续运行，你必将归还控制权。
 *	控制: 使用GCD我们可以挂起和恢复dispatch queue，而这是基于锁的方法所不能实现的。我们还可以将一个用户队列指向另一个dspatch queue，使得这个用户队列继承那个dispatch queue的属性。使用这种方法，队列的优先级可以被调整——通过将该队列指向一个不同的全局队列，若有必要的话，这个队列甚至可以被用来在主线程上执行代码。
 *	集成: GCD的事件系统与dispatch queue相集成。对象需要使用的任何事件或者计时器都可以从该对象的队列中指向，使得这些句柄可以自动在该队列上执行，从而使得句柄可以与对象自动同步。
 
-### 6. GCD在并行计算的使用与表现
+<h3 id="6">6. GCD在并行计算的使用与表现</h3>
 *	dispatch_async\dispatch_group(dispatch_group_async, dispatch_group_notify)\dispatch_apply
 *	dispatch_group的[一个例子](http://blog.csdn.net/q199109106q/article/details/8566300)：
 ```objc
@@ -211,14 +226,120 @@ void dispatch_barrier_sync( dispatch_queue_t queue, dispatch_block_t block);
 ```
 
 ```
-		说到底，GCD就是系统来帮用户来管理线程，而不需要再编写线程代码。程序员只需要专心编写执行某项功能的代码，添加到block或方法（函数）中，然后可以有下面两种方式来处理block或方法（函数）。
-        1.直接将block加入到dispatch queues
-        2.将Dispatch source封装为一个特定类型的系统事件，当系统事件发生时提交一个特定的block对象或函数到dispatch queue
+说到底，GCD就是系统来帮用户来管理线程，而不需要再编写线程代码。程序员只需要专心编写执行某项功能的代码，添加到block或方法（函数）中，然后可以有下面两种方式来处理block或方法（函数）。
+	1.直接将block加入到dispatch queues
+	2.将Dispatch source封装为一个特定类型的系统事件，当系统事件发生时提交一个特定的block对象或函数到dispatch queue
 ```
 
-### 7. 管理 Dispatch Sources
-*	
+<h3 id="7">7. 管理 Dispatch Sources</h3>
+*	它监听某类类型事件的对象，当这类事件发生的时候，它自动将一个事件处理句柄，异步提交到指定的队列中进行处理。
+*	下面是GCD 10.6.0版本支持的事件：
+		1. Mach port send right state changes.
+		2. Mach port receive right state changes.
+		3. External process state change.
+		4. File descriptor ready for read.
+		5. File descriptor ready for write.
+		6. Filesystem node event.
+		7. POSIX signal.
+		8. Custom timer.
+		9. Custom event.
+它支持所有kqueue所支持的事件（kqueue是什么？见http://en.wikipedia.org/wiki/Kqueue）以及mach（mach是什么？见http://en.wikipedia.org/wiki/Mach_(kernel)）端口、内建计时器支持（这样我们就不用使用超时参数来创建自己的计时器）和用户事件。
+*	用户事件
+	1. 用户事件有两种： DISPATCH_SOURCE_TYPE_DATA_ADD 和 DISPATCH_SOURCE_TYPE_DATA_OR.用户事件源有个 unsigned long data属性，我们将一个 unsigned long传入 dispatch_source_merge_data。当使用 _ADD版本时，事件在联结时会把这些数字相加。当使用 _OR版本时，事件在联结时会把这些数字逻辑与运算。当事件句柄执行时，我们可以使用dispatch_source_get_data函数访问当前值，然后这个值会被重置为0。
+	2. 案例：异步更新一个进度条。因为主线程就是GCD的另一个dispatch queue，所以我们可以将GUI更新工作submit到主线程中。然而，这些事件可能会有一大堆，我们不想对GUI进行频繁而累赘的更新，理想的情况是当主线程繁忙时，将所有的改变累积起来。
+	```objc
+	dispatch_source_t source = dispatch_source_create(DISPATCH_SOURCE_TYPE_DATA_ADD, 0, 0, dispatch_get_main_queue());
+dispatch_source_set_event_handler(source, ^{
+    [progressIndicator incrementBy:dispatch_source_get_data(source)];
+});
+dispatch_resume(source);
+// processing below
+dispatch_apply([array count], globalQueue, ^(size_t index) {
+    // do some work on data at index
+    dispatch_source_merge_data(source, 1);
+});
+	```
+*	内建事件
+	1. 案例：用GCD读取标准输入
+	```objc
+	dispatch_queue_t globalQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+dispatch_source_t stdinSource = dispatch_source_create(DISPATCH_SOURCE_TYPE_READ,
+                                                       STDIN_FILENO,
+                                                       0,
+                                                       globalQueue);
+dispatch_source_set_event_handler(stdinSource, ^{
+    char buf[1024];
+    int len = read(STDIN_FILENO, buf, sizeof(buf));
+    if(len > 0)
+        NSLog(@"Got data from stdin: %.*s", len, buf);
+});
+dispatch_resume(stdinSource);
+	```
+	2. 这是标准的UNIX方式来处理事务的好处，不用去写loop。如果使用经典的 read调用，我们还得万分留神，因为返回的数据可能比请求的少，还得忍受无厘头的“errors”，比如 EINTR (系统调用中断)。
+	3. 对于其他文件描述符，我们必须考虑在完成读写之后怎样清除描述符。对于dispatch source还处于活跃状态时，我们决不能关闭描述符。如果另一个文件描述符被创建了（可能是另一个线程创建的）并且新的描述符刚好被分配了相同的数字，那么你的dispatch source可能会在不应该的时候突然进入读写状态。de这个bug可不是什么好玩的事儿。
+适当的清除方式是使用 dispatch_source_set_cancel_handler，并传入一个block来关闭文件描述符。然后我们使用 dispatch_source_cancel来取消dispatch source，使得句柄被调用，然后文件描述符被关闭。
+*	计时器
+	1. 计时器事件稍有不同。它们不使用handle/mask参数，计时器事件使用另外一个函数 dispatch_source_set_timer 来配置计时器。
+	2. 参数中，数leeway参数比较有意思。这个参数告诉系统我们需要计时器触发的精准程度。所有的计时器都不会保证100%精准，这个参数用来告诉系统你希望系统保证精准的努力程度。如果你希望一个计时器没五秒触发一次，并且越准越好，那么你传递0为参数。另外，如果是一个周期性任务，比如检查email，那么你会希望每十分钟检查一次，但是不用那么精准。所以你可以传入60，告诉系统60秒的误差是可接受的。
+这样有什么意义呢？简单来说，就是降低资源消耗。如果系统可以让cpu休息足够长的时间，并在每次醒来的时候执行一个任务集合，而不是不断的醒来睡去以执行任务，那么系统会更高效。如果传入一个比较大的leeway给你的计时器，意味着你允许系统拖延你的计时器来将计时器任务与其他任务联合起来一起执行。
+
+<h3 id="8">8. 回顾 Dispatch Queue</h3>
+*	队列的挂起和继续，dispatch_suspend、dispatch_resume
+*	dispatch_set_target_queueyou两个作用：
+	1. 用来给新建的queue设置优先级
+	```objc
+	dispatch_queue_t serialQueue = dispatch_queue_create("com.oukavip.www",NULL);  
+dispatch_queue_t globalQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND,0);  
+dispatch_set_target_queue(serialQueue, globalQueue);  
+/* * 第一个参数为要设置优先级的queue,第二个参数是参照物，既将第一个queue的优先级和第二个queue的优先级设置一样。 
+     */ 
+	```
+	2. 修改串行队列的目标队列，使多个串行queue在目标queue上依次挨个执行。
+	```objc
+	+(void)testTargetQueue {  
+    	dispatch_queue_t targetQueue = dispatch_queue_create("test.target.queue", DISPATCH_QUEUE_SERIAL);  
+    	//
+    	dispatch_queue_t queue1 = dispatch_queue_create("test.1", DISPATCH_QUEUE_SERIAL);
+    	//
+    	dispatch_set_target_queue(queue1, targetQueue);  
+ 		//
+    	dispatch_async(queue1, ^{  
+        	NSLog(@"1 in");  
+        	[NSThread sleepForTimeInterval:3.f];  
+        	NSLog(@"1 out");  
+    	});  
+	}
+	```
+*	单例初始化：dispatch_once。关于这个，遇到一个案例是：
+	```objc
+	// Thread main....
+	-[[SomeThing sharedInstance] doSomeThing];
+	// Thread global 23...
+	-[[...] doCoreDataOperation]...block
+	-[[SomeThing sharedInstance] loadWhatever];
+	-[[SomeThing sharedInstance] init];
+	/**
+	**	23线程卡死了，导致主线程也卡死了
+	**	当然，coreData多线程操作，要尤其注意
+	**	里面有什么玄机呢？后面来讨论，它的低负载性
+	*/
+	```
+	比 @synchronized方法简单些，并且GCD确保以更快的方式完成这些检测，它保证block中的代码在任何线程通过 dispatch_once 调用之前被执行，但它不会强制每次调用这个函数都让代码进行同步控制。实际上，如果你去看这个函数所在的头文件，你会发现目前它的实现其实是一个宏，进行了内联的初始化测试，这意味着通常情况下，你不用付出函数调用的负载代价，并且会有更少的同步控制负载。
+	
+*	连续的数据预取，可以使用串行队列。
+*	[dispatch_once的低负载性](http://www.dreamingwish.com/article/gcd-guide-dispatch-once-1.html)
+	```
+	dispatch_once的低负载性，我们要讨论三种场景：
+	第一次执行，block需要被调用，调用结束后需要置标记变量
+	非第一次执行，而此时#1尚未完成，线程需要等待#1完成
+	非第一次执行，而此时#1已经完成，线程直接跳过block而进行后续任务
+ 	对于场景#1，整体任务的效率瓶颈完全不在于dispatch_once，而在于block本身占用的cpu时间，并且也只会发生一次。
+	对于场景#2，发生的次数并不会很多，甚至很多时候一次都不会发生，假如发生了，那么也只是一个符合预期的行为：后来的线程需要等待第一线程完成。即使你写一个受虐型的单元测试来故意模拟场景#2，也不能说明什么问题，得不到的永远在骚动，被偏爱的都有恃无恐。
+	对于场景#3，在程序进行过程中，可能发生成千上万次或者天文数字次，这才是效率提升的关键之处
+	```
 
 
-### 8. 
+
+
+
 
