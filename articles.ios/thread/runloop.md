@@ -15,14 +15,34 @@
 来自“简书”：关于Runloop的资料，官方文档总是太过简练，网上资源说法也不太统一，只能从CFRunLoopRef开源代码着手，试着学习总结下。（NSRunloop是对CFRunloopRef的面向对象封装，但是不是线程安全）。
 
 <h3 id="2">runloop类型梳理</h3>
-	CFRunLoopRef、CFRunLoopSourceRef、CFRunLoopObserverRef、CFRunLoopTimerRef
+
+*	CFRunLoopRef
+		
+	![图1](https://github.com/BinaryArtists/objective-c-style-guide/blob/master/articles.ios/imges/runloop_sources.png)
+		
+		CFRunLoop对象监听输入源(如图1)，当它们ready的时候，分发控制去处理。
+		
+		输入源可能是：
+		*	用户输入设备
+		*	网络连接
+		*	周期性或延时性事件
+		*	异步回调
+		
+		后面三种类型，可以被runloop监听
 	
+*	CFRunLoopSourceRef
+
+*	CFRunLoopObserverRef
+
+*	CFRunLoopTimerRef
 	
 *	是什么？
 *	.....
 *	.....
 
 <h3 id="3">理解runloop内部原理</h3>
+*	简述
+		
 *	与线程的关系
 
 		Runloop的寄生于线程：一个线程只能有唯一对应的runloop；但这个根runloop里可以嵌套子runloops；
@@ -33,9 +53,10 @@
 
 <h3 id="4">runloop使用点（如何使用）</h3>
 *	访问runloop和mode
+*	启动runloop
+*	管理源
 *	管理定时器
 *	管理端口
-*	启动runloop
 *	调度和取消消息
 
 <h3 id="5">从事件处理看runloop（何时使用）</h3>
