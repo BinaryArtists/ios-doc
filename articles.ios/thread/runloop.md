@@ -3,6 +3,7 @@
 ### 参考链接
 1. [RunLoop个人小结](http://www.jianshu.com/p/37ab0397fec7)
 2. [深入理解runloop](http://blog.ibireme.com/2015/05/18/runloop/)
+3. [ iOS多线程开发（三）－－－Run Loop（二，三）](http://blog.chinaunix.net/uid-24862988-id-3411917.html)
 
 ### 目录
 *	[1. 前言](#1)
@@ -57,14 +58,17 @@
 	```
 	
 *	CFRunLoopSourceRef：事件来源
-	按照官方文档CFRunLoopSourceRef为3类，但数据结构只有两类（？？？）
+	来源呢？(也就是使用场合)
+	
 	```objc
-	Port-Based Sources:与内核端口相关
-	Custom Input Sources:与自定义source相关
-	Cocoa Perform Selector Sources:与PerformSEL方法相关）
+	1) Port-Based Sources:与内核端口相关(CFRunLoopMachPerformCallBack)
+		or Custom Input Sources:与自定义source相关
+	2) 使用线程定时器
+	3) Cocoa Perform Selector Sources:与PerformSEL方法相关）
+	4) 使线程周期性工作
 	```
 
-	数据结构（source0/source1）:
+	CFRunLoopSource数据结构（source0/source1, 见[官方文档](https://developer.apple.com/library/ios/documentation/CoreFoundation/Reference/CFRunLoopRef/index.html)）:
 	```objc
 	// source0 (manual): order(优先级)，callout(回调函数)
 	CFRunLoopSource {
@@ -183,6 +187,8 @@
 		线程(创建)-->runloop将进入-->最高优先级OB创建释放池-->runloop将睡-->最低优先级OB销毁旧池创建新池-->runloop将退出-->最低优先级OB销毁新池-->线程(销毁)
 		
 *	自运作
+	Run loop从两个不同的事件源中接收消息。Input sources(CFRunLoopSource)投递异步消息，通常来自于另一个thread或另一个应用程序。Timer sources(CFRunLoopTimer)当在计划的时间或重复的时间间隔内投递同步消息。两种事件源都使用应用程序指定的处理方式对到达的事件进行处理。下图展示了run loop和不同的事件源结构。
+
 	![图1](https://github.com/BinaryArtists/objective-c-style-guide/blob/master/articles.ios/imges/runloop_sources.jpg)
 		
 		CFRunLoop对象监听输入源(如图1)，当它们ready的时候，分发控制去处理。
