@@ -328,8 +328,51 @@ _UIApplicationHandleEventQueue() 会把 IOHIDEvent 处理并包装成 UIEvent �
 *	网络请求
 	关于网络请求的接口:最底层是CFSocket层，然后是CFNetwork将其封装，然后是NSURLConnection对CFNetwork进行面向对象的封装，NSURLSession 是 iOS7 中新增的接口，也用到NSURLConnection的loader线程。所以还是以NSURLConnection为例。
 当开始网络传输时，NSURLConnection 创建了两个新线程：com.apple.NSURLConnectionLoader 和 com.apple.CFSocket.private。其中 CFSocket 线程是处理底层 socket 连接的。NSURLConnectionLoader 这个线程内部会使用 RunLoop 来接收底层 socket 的事件，并通过之前添加的 Source0 通知到上层的 Delegate。
-	![图2]()
+	![图2](https://github.com/BinaryArtists/objective-c-style-guide/blob/master/articles.ios/imges/runloop_network_request.jpg)
 
 <h3 id="6">runloop具体应用场合</h3>
+
 *	滑动和图片刷新
+	当tableview的cell上有需要从网络获取的图片的时候，滚动tableView，异步线程会去加载图片，加载完成后主线程就会设置cell的图片，但是会造成卡顿。可以让设置图片的任务在CFRunLoopDefaultMode下进行，当滚动tableView的时候，RunLoop是在 UITrackingRunLoopMode 下进行，不去设置图片，而是当停止的时候，再去设置图片。
+	
+	```objc
+	-(void)viewDidLoad {
+  		[super viewDidLoad];
+  		// 只在NSDefaultRunLoopMode下执行(刷新图片)
+  		[self.myImageView performSelector:@selector(setImage:) 		withObject:[UIImage imageNamed:@""] afterDelay:ti 		inModes:@[NSDefaultRunLoopMode]];    
+	}
+	```
+
 *	常驻子线程，保持一直处理事件
+	为了保证线程长期运转，可以在子线程中加入RunLoop，并且给Runloop设置item，防止Runloop自动退出。
+	
+	```objc
+	+(void)networkRequestThreadEntryPoint:(id)__unused object {
+    	@autoreleasepool {
+        	[[NSThread currentThread] setName:@"AFNetworking"];
+        	NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
+        	[runLoop addPort:[NSMachPort port] forMode:NSDefaultRunLoopMode];
+        	[runLoop run];
+    	}
+	}
+	+(NSThread *)networkRequestThread {
+   		static NSThread *_networkRequestThread = nil;
+    	static dispatch_once_t oncePredicate;
+    	dispatch_once(&oncePredicate, ^{
+        	_networkRequestThread = [[NSThread alloc] initWithTarget:self selector:@selector(networkRequestThreadEntryPoint:) object:nil];
+        [_networkRequestThread start];
+    	});
+    	return _networkRequestThread;
+	}
+	-(void)start {
+    	[self.lock lock];
+    	if ([self isCancelled]) {
+        	[self performSelector:@selector(cancelConnection) onThread:[[self class] networkRequestThread] withObject:nil waitUntilDone:NO modes:[self.runLoopModes allObjects]];
+    	} else if ([self isReady]) {
+        	self.state = AFOperationExecutingState;
+        	[self performSelector:@selector(operationDidStart) onThread:[[self class] networkRequestThread] withObject:nil waitUntilDone:NO modes:[self.runLoopModes allObjects]];
+    	}
+    	[self.lock unlock];
+	}
+	```
+
