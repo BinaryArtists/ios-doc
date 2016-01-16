@@ -28,7 +28,10 @@
 		*	周期性或延时性事件
 		*	异步回调
 		
-		后面三种类型，可以被runloop监听
+		后面三种类型（），可以被runloop监听
+		
+	a. 访问runloop和mode
+	b. 启动runloop
 	
 *	CFRunLoopSourceRef
 
@@ -52,8 +55,6 @@
 *	
 
 <h3 id="4">runloop使用点（如何使用）</h3>
-*	访问runloop和mode
-*	启动runloop
 *	管理源
 *	管理定时器
 *	管理端口
