@@ -1,13 +1,14 @@
 ## Runloop要点
 
 ### 参考链接
-[RunLoop个人小结](http://www.jianshu.com/p/37ab0397fec7)
+1. [RunLoop个人小结](http://www.jianshu.com/p/37ab0397fec7)
+2. [深入理解runloop](http://blog.ibireme.com/2015/05/18/runloop/)
 
 ### 目录
 *	[1. 前言](#1)
 *	[2. runloop关键类型](#2)
 *	[3. 理解runloop内部原理](#3)
-*	[4. runloop使用点](#4)
+*	[4. 苹果用 RunLoop 实现的功能](#4)
 *	[5. 从事件处理看runloop](#5)
 *	[6. runloop应用场合](#6)
 
@@ -302,7 +303,7 @@
 *	管理端口
 *	调度和取消消息
 
-<h3 id="5">从事件处理看runloop（何时使用）</h3>
+<h3 id="5">苹果用 RunLoop 实现的功能</h3>
 *	界面刷新
 *	
 	当UI改变（ Frame变化、 UIView/CALayer 的继承结构变化等）时，或手动调用了 UIView/CALayer 的 setNeedsLayout/setNeedsDisplay方法后，这个 UIView/CALayer 就被标记为待处理。
@@ -330,7 +331,7 @@ _UIApplicationHandleEventQueue() 会把 IOHIDEvent 处理并包装成 UIEvent �
 当开始网络传输时，NSURLConnection 创建了两个新线程：com.apple.NSURLConnectionLoader 和 com.apple.CFSocket.private。其中 CFSocket 线程是处理底层 socket 连接的。NSURLConnectionLoader 这个线程内部会使用 RunLoop 来接收底层 socket 的事件，并通过之前添加的 Source0 通知到上层的 Delegate。
 	![图2](https://github.com/BinaryArtists/objective-c-style-guide/blob/master/articles.ios/imges/runloop_network_request.jpg)
 
-<h3 id="6">runloop具体应用场合</h3>
+<h3 id="6">runloop具体应用场合 （何时使用）</h3>
 
 *	滑动和图片刷新
 	当tableview的cell上有需要从网络获取的图片的时候，滚动tableView，异步线程会去加载图片，加载完成后主线程就会设置cell的图片，但是会造成卡顿。可以让设置图片的任务在CFRunLoopDefaultMode下进行，当滚动tableView的时候，RunLoop是在 UITrackingRunLoopMode 下进行，不去设置图片，而是当停止的时候，再去设置图片。
@@ -345,6 +346,7 @@ _UIApplicationHandleEventQueue() 会把 IOHIDEvent 处理并包装成 UIEvent �
 
 *	常驻子线程，保持一直处理事件
 	为了保证线程长期运转，可以在子线程中加入RunLoop，并且给Runloop设置item，防止Runloop自动退出。
+	例子来自：[AFNetworking](https://github.com/AFNetworking/AFNetworking)
 	
 	```objc
 	+(void)networkRequestThreadEntryPoint:(id)__unused object {
@@ -376,3 +378,18 @@ _UIApplicationHandleEventQueue() 会把 IOHIDEvent 处理并包装成 UIEvent �
 	}
 	```
 
+*	AsyncDisplayKit
+	AsyncDisplayKit 是 Facebook 推出的用于保持界面流畅性的框架，其原理大致如下：
+
+	UI 线程中一旦出现繁重的任务就会导致界面卡顿，这类任务通常分为3类：排版，绘制，UI对象操作。
+
+	排版通常包括计算视图大小、计算文本高度、重新计算子式图的排版等操作。
+绘制一般有文本绘制 (例如 CoreText)、图片绘制 (例如预先解压)、元素绘制 (Quartz)等操作。
+	UI对象操作通常包括 UIView/CALayer 等 UI 对象的创建、设置属性和销毁。
+
+	其中前两类操作可以通过各种方法扔到后台线程执行，而最后一类操作只能在主线程完成，并且有时后面的操作需要依赖前面操作的结果 （例如TextView创建时可能需要提前计算出文本的大小）。ASDK 所做的，就是尽量将能放入后台的任务放入后台，不能的则尽量推迟 (例如视图的创建、属性的调整)。
+
+	为此，ASDK 创建了一个名为 ASDisplayNode 的对象，并在内部封装了 UIView/CALayer，它具有和 UIView/CALayer 相似的属性，例如 frame、backgroundColor等。所有这些属性都可以在后台线程更改，开发者可以只通过 Node 来操作其内部的 UIView/CALayer，这样就可以将排版和绘制放入了后台线程。但是无论怎么操作，这些属性总需要在某个时刻同步到主线程的 UIView/CALayer 去。
+
+	ASDK 仿照 QuartzCore/UIKit 框架的模式，实现了一套类似的界面更新的机制：即在主线程的 RunLoop 中添加一个 Observer，监听了 kCFRunLoopBeforeWaiting 和 kCFRunLoopExit 事件，在收到回调时，遍历所有之前放入队列的待处理的任务，然后一一执行。
+	具体的代码可以看这里：[_ASAsyncTransactionGroup](https://github.com/facebook/AsyncDisplayKit/blob/master/AsyncDisplayKit%2FDetails%2FTransactions%2F_ASAsyncTransactionGroup.m)。
