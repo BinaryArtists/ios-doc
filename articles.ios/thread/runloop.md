@@ -18,7 +18,7 @@
 
 *	CFRunLoopRef
 		
-	![图1](https://github.com/BinaryArtists/objective-c-style-guide/blob/master/articles.ios/imges/runloop_sources.png)
+	![图1](https://github.com/BinaryArtists/objective-c-style-guide/blob/master/articles.ios/imges/runloop_sources.jpg)
 		
 		CFRunLoop对象监听输入源(如图1)，当它们ready的时候，分发控制去处理。
 		
