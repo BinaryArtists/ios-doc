@@ -19,14 +19,14 @@
 *	CFRunLoopRef
 	a. 创建与退出：mode切换和item依赖
 	
-	>> 主线程的runloop自动创建，子线程的runloop默认不创建（在子线程中调用NSRunLoop *runloop = [NSRunLoop currentRunLoop];
+	> 主线程的runloop自动创建，子线程的runloop默认不创建（在子线程中调用NSRunLoop *runloop = [NSRunLoop currentRunLoop];
 获取RunLoop对象的时候，就会创建RunLoop）
 
-	>> runloop退出的条件：app退出；线程关闭；设置最大时间到期；modeItem为空；
+	> runloop退出的条件：app退出；线程关闭；设置最大时间到期；modeItem为空；
 
-	>> 同一时间一个runloop只能在一个mode，切换mode只能退出runloop，再重进指定mode（隔离modeItems使之互不干扰）
+	> 同一时间一个runloop只能在一个mode，切换mode只能退出runloop，再重进指定mode（隔离modeItems使之互不干扰）
 
-	>> 一个item可以加到不同mode；一个mode被标记到commonModes里（这样runloop不用切换mode）。
+	> 一个item可以加到不同mode；一个mode被标记到commonModes里（这样runloop不用切换mode）。
 	
 	b. 启动runloop
 	
