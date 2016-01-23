@@ -12,6 +12,7 @@
 * [5. Core Graphics](#5)
 * [6. Core Animation](#6)
 * [7. OpenGL ES](#7)
+* [8. Cocoa对象](#8)
 
 <h3 id="1">系统框架分层</h3>
 
@@ -62,9 +63,9 @@
 
 10. 三个图，包括了Foundation所以的类，图中灰色的是iOS不支持的，灰色部分是OS X系统的：
 
-    ![Foundation 1]()
-    ![Foundation 2]()
-    ![Foundation 3]()
+    ![Foundation 1](https://github.com/BinaryArtists/objective-c-style-guide/blob/master/articles.ios/imges/Foundation_1.jpg)
+    ![Foundation 2](https://github.com/BinaryArtists/objective-c-style-guide/blob/master/articles.ios/imges/Foundation_2.jpg)
+    ![Foundation 3](https://github.com/BinaryArtists/objective-c-style-guide/blob/master/articles.ios/imges/Foundation_3.jpg)
 
 将上图Foundation框架中的类进行逻辑分类如下：
 > 值对象
@@ -105,6 +106,8 @@
 
 8. 上图
     ![]()
+
+在图中可以看出，responder类是图中最大分支的根类，UIResponder为处理响应事件和响应链定义了界面和默认行为。当用户用手指滚动列表或者在虚拟键盘上输入时，UIKit就生成时间传送给UIResponder响应链，直到链中有对象处理这个 事件。相应的核心对象，比如：UIApplication  ，UIWindow，UIView都直接或间接的从UIResponder继承。
 
 <h3 id="4">Core Data</h3>
 
@@ -154,3 +157,5 @@ OpenGL ES支持2D和3D绘图，Apple的OpenGL ES实现通过硬件提供了高�
 2. 创建2D和3D图形
 3. 创建更复杂的图形，比如数据虚拟化、模拟飞行，或者视频游戏
 4. 访问底层图形设备
+
+<h3 id="8">Cocoa对象</h3>
