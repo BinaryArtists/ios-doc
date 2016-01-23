@@ -105,7 +105,7 @@
   通过继承UIView类或间接继承UIView类实现自定义用户界面
 
 8. 上图
-    ![]()
+    ![UIKit architect](https://github.com/BinaryArtists/objective-c-style-guide/blob/master/articles.ios/imges/uikit.jpg)
 
 在图中可以看出，responder类是图中最大分支的根类，UIResponder为处理响应事件和响应链定义了界面和默认行为。当用户用手指滚动列表或者在虚拟键盘上输入时，UIKit就生成时间传送给UIResponder响应链，直到链中有对象处理这个 事件。相应的核心对象，比如：UIApplication  ，UIWindow，UIView都直接或间接的从UIResponder继承。
 
@@ -159,3 +159,70 @@ OpenGL ES支持2D和3D绘图，Apple的OpenGL ES实现通过硬件提供了高�
 4. 访问底层图形设备
 
 <h3 id="8">Cocoa对象</h3>
+
+1. Objective-C是面向对象的语言
+  Objective-C和Java、C++一样，有封装，继承，多态，重用。但是它不像C++那样有重载操作法、模版和多继承，也没有Java的垃圾回收机制。
+
+2. Objective-C的优点
+  Objective-C语言有C++、Java等面向对象的特点，那是远远不能体现它的优点的。Objective-C的优点是它是动态的。动态能力有三种：
+  动态类-运行时确定类的对象
+  动态绑定-运行时确定要调用的方法
+  动态加载--运行时为程序加载新的模块
+
+3. 动态能力相关的isa指针
+  每个Objective-C对象都有一个隐藏的数据结构，这个数据结构是Objective-C对象的第一个成员变量，它就是isa指针。这个指针指向哪 呢？它指向一个类对象(class object  记住它是个对象，是占用内存空间的一个变量，这个对象在编译的时候编译器就生成了，专门来描述某个类的定义)，这个类对象包含了Objective-C 对象的一些信息（为了区分两个对象，我把前面提到的对象叫Objective-C对象），包括Objective-C对象的方法调度表，实现了什么协议等 等。这个包含信息就是Objective-C动态能力的根源了。
+
+那我们看看isa指针类型的数据结构是什么样的？如果抛开NSObject对象的其他的成员数据和变量，NSObject可以看成这样：
+
+```objc
+@interface NSObject <NSObject> {  
+     Class isa;  
+}
+```
+
+不考虑@interface关键字在编译时的作用，可以把NSObject更接近C语言结构表示为：
+
+```objc
+struct NSObject{  
+ 　　Class isa;  
+}
+```
+
+Class是用typedef 定义的
+
+```objc
+typedef struct objc_class *Class;  
+```
+
+那NSObject可以这么写了
+```objc
+struct NSObject{  
+　　objc_class * isa;
+}
+```
+
+那objc_class的结构是什么样的呢？大概是这样的：
+
+```objc
+struct objc_class {  
+     Class isa;  
+
+     Class super_class;  
+
+     const char * name;  
+
+     long version;  
+     long info;  
+
+     long instance_size;  
+     struct objc_ivar_list * ivars;  
+     struct objc_method_list ** methodLists;   
+
+     struct objc_cache * cache;  
+     struct objc_protocol_list * protocols;     
+}
+```
+
+这里会看到， 在这个结构体里还有一个isa指针，又是一重指向，是不是有种到了盗梦空间的感觉。不用紧张，take easy，不会有那么多层次的，这里的isa指针指向的是元类对象(metaclass object)，带有元字，证明快到头了。那元对象有啥用呢？它用来存储的关于类的版本，名字，类方法等信息。所有的元类对象(metaclass object)都指向 NSObject的元类对象，到头还是NSObject。一共三次：类对象->元类对象->NSObject元类对象。
+
+为了得到整个类组织架构的信息，objc_class结构里定义了第二个成员变量Class super_class，它指向父类的类对象。说了这么多，可能关系缕不清楚，有道是一张图胜过千言万语
