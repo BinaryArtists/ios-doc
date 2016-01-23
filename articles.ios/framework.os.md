@@ -1,8 +1,8 @@
- ## 系统框架介绍
+## 系统框架介绍
 
 参考链接：
-[iOS的主要框架介绍](http://blog.csdn.net/yuhuangc/article/details/7575519)
-[IOS 整体框架类图值得收藏](http://www.cnblogs.com/ygm900/p/3599081.html)
+1. [iOS的主要框架介绍](http://blog.csdn.net/yuhuangc/article/details/7575519)
+2. [IOS 整体框架类图值得收藏](http://www.cnblogs.com/ygm900/p/3599081.html)
 
 ### 目录
 * [1. 系统框架分层](#1)
