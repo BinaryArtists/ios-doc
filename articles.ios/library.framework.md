@@ -1,17 +1,16 @@
 ## 讲讲库：framework、static library、dynamic library
 
 参考链接：
-1. [iOS的主要框架介绍](http://blog.csdn.net/yuhuangc/article/details/7575519)
-2. [iOS库--.a与.framework](http://www.tuicool.com/articles/7J7vai)
-3. [iOS 动态库与静态库的区别（framework,.a,.dylib）](http://www.th7.cn/Program/IOS/201503/405727.shtml)
-4. [如何为iOS项目开发Framework](http://ios.jobbole.com/81583/)
+  1. [iOS的主要框架介绍](http://blog.csdn.net/yuhuangc/article/details/7575519)
+  2. [iOS库--.a与.framework](http://www.tuicool.com/articles/7J7vai)
+  3. [iOS 动态库与静态库的区别（framework,.a,.dylib）](http://www.th7.cn/Program/IOS/201503/405727.shtml)
+  4. [如何为iOS项目开发Framework](http://ios.jobbole.com/81583/)
 
 ### 目录
 * [1. 库](#1)
 * [2. 静态库](#2)
 * [3. 动态库](#3)
-* [1. 框架（framework)](#1)
-* [2. ]()
+* [4. 框架（framework)](#4)
 
 <h3 id="1">库</h3>
 
@@ -42,7 +41,7 @@
     > 目前苹果的AppStore不支持模块更新，无法更新某个单独文件(除非自己写一个更新机制：有自己的服务端放置最新动态库文件)
 
 
-<h3 id="1">什么是框架（framework)？</h3>
+<h3 id="4">什么是框架（framework)？</h3>
 
 1. 是什么？
      框架是一个目录，这个目录包含了共享库，访问共享库里代码的头文件，和其它的图片和声音的资源文件。一个共享库定义的方法或函数可以被应用程序调用。
@@ -58,13 +57,3 @@
     * .a文件不能直接使用，至少要有.h文件配合，.framework文件可以直接使用。
     * .a + .h + sourceFile = .framework。
     建议用.framework.
-
-<h3 id="2"></h3>
-
-<h3 id="3"></h3>
-
-<h3 id="4"></h3>
-
-<h3 id="5"></h3>
-
-<h3 id="6"></h3>
