@@ -1,8 +1,14 @@
 ## 系统框架细谈
 
+参考链接：
+
+  1. [IOS框架和服务](http://blog.csdn.net/goohong/article/details/28911301)
 
 ### 目录
-
+  * [1. Cocoa Touch Layer（触摸UI层）](#1)
+  * [2. MediaLayer（媒体层）](#2)
+  * [3. CoreServices Layer（核心服务层）](#3)
+  * [4. Core OS Layer（核心OS层）](#4)
 
 <h3 id="1">Cocoa Touch Layer（触摸UI层）</h3>
 
@@ -408,6 +414,7 @@ MediaLayer提供如下框架和服务。
         除了SpriteKit框架，也有其它Xcode工具来创建颗粒发射效果和纹理图。你能使用Xcode工具来管理应用资源和快速地更新Sprite Kit场景。
 
 <h3 id="3">CoreServices Layer（核心服务层）</h3>
+
 CoreServices Layer 包含应用需要的基础的系统服务。这些服务中的核心是CoreFoundation和Foundation框架，定义了所有应用使用的基本类型。
 该层也包含独立的技术来支持一些其它功能， 例如位置、iCloud、社交媒体和网络。
 
@@ -597,8 +604,10 @@ Cache支持。
 22）System Configuration Framework（系统配置框架）
        SystemConfiguration 框架(SystemConfiguration.framework)提供可达性接口，你能用它来确定设备的网络配置，也能使用该框架确定一个Wi-Fi或蜂窝连接是否在用以及一个特定的主机服务器是否能够存取。
 
-四   Core OS Layer（核心OS层）
-        CoreOS层包含其它大多数技术建在其之上的低级别的功能。虽然应用不直接使用这些技术，它们被其它框架使用。在需要显而易见的处理安全或与外设通讯的情形，你也能使用该层提供的框架。
+<h3 id="4">Core OS Layer（核心OS层）</h3>
+
+CoreOS层包含其它大多数技术建在其之上的低级别的功能。虽然应用不直接使用这些技术，它们被其它框架使用。在需要显而易见的处理安全或与外设通讯的情形，你也能使用该层提供的框架。
+
 4.1  Core OS包含的框架：
 1）Accelerate 加速框架
    Accelerate框架 (Accelerate.framework)包含执行数字信号处理、线性代数、图像处理计算的接口。
