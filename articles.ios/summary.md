@@ -14,7 +14,7 @@
 *	持续集成工具jakens
 *	xib与StoryBoard
 
-### CocoaTouch、Media
+### [系统框架层] CocoaTouch、Media
 *	UIKit
 	1. 原理性的，图层啊，控制链啊，事件链啊什么的
 	2. 应用管理
@@ -30,12 +30,13 @@
 	12. 设备名称与模式信息
 	2. UITableView
 	3. UIScrollView
+*	自动布局
 *	图像技术（Quartz\CoreAnimation\OpenGL ES）
 *	音频技术（CoreAudioFamily:CoreAudio.framework,AudioUnit.framework,AudioToolbox.framework\OpenAL）
 *	视频技术（MediaPlayer.framework）
 
 
-### Core OS、Core Services
+### [系统框架层] Core OS、Core Services
 Core Services是Core OS基础上提供的更丰富的功能。
 
 *	线程（POSIX线程、NSOperationQueue、GCD、NSThread）与运行循环（Run Loops）
@@ -73,10 +74,15 @@ Core Services是Core OS基础上提供的更丰富的功能。
 *	PlayRound
 *	Type check和推断
 *	类型别名
-*	
+*
+
+### 代码层
+
+
+### 工具层
+
 
 ### 客户端架构谈
 
 
 ### 开源模块精选
-
