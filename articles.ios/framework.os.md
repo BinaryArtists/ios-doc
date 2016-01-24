@@ -84,7 +84,7 @@
     * Multi-Touch Controls
 
 整体架构图：
-    ![architect 1]()
+    ![architect 1](https://github.com/BinaryArtists/objective-c-style-guide/blob/master/articles.ios/imges/architect_1.jpg)
 
 3. 如下图：各个框架对应IOS系统里特定的一层，上层基于下层，更高层次的框架是对底层框架基于对象的抽象。应该尽量使用上层的框架来代替下面的框架。
 
