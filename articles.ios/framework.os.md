@@ -1,9 +1,14 @@
 ## 系统框架介绍
 
 参考链接：
+
 1. [iOS的主要框架介绍](http://blog.csdn.net/yuhuangc/article/details/7575519)
 
 2. [IOS 整体框架类图值得收藏](http://www.cnblogs.com/ygm900/p/3599081.html)
+
+3. [苹果iOS操作系统整体架构层次讲解](http://www.kejixun.com/article/201308/17085.html)
+
+4. [IOS框架和服务](http://blog.csdn.net/GooHong/article/details/28911301)
 
 ### 目录
 * [1. 系统框架分层](#1)
@@ -19,11 +24,73 @@
 
 1. [什么是框架](https://github.com/BinaryArtists/objective-c-style-guide/blob/master/articles.ios/library.framework.md)
 
-2. 如下图：各个框架对应IOS系统里特定的一层，上层基于下层，更高层次的框架是对底层框架基于对象的抽象。应该尽量使用上层的框架来代替下面的框架。
+2. 具体的分层：iOS的系统架构分为四个层次，自底向上依次是：核心操作系统层（Core OS layer）、核心服务层（Core Services layer）、媒体层（Media layer）和可触摸层（Cocoa Touch layer）
+
+    * 可触摸层的上层，则是应用开发层（application）。
+    * Core OS 层 包含核心部分、文件系统、网络基础、安全特性、能量管理和一些设备驱动，还有一些系统级别的API。它可以直接和硬件设备进行交互。作为app开发者不需要与这一层打交道。
+    * Core Services 层 提供核心服务，例如字符串处理函数、集合管理、网络管理、URL处理工具、联系人维护、偏好设置等。
+    * Media 层 是媒体层，通过它我们可以在应用程序中使用各种媒体文件，进行音频与视频的录制，图形的绘制，以及制作基础的动画效果。
+    * Cocoa Touch 是可触摸层，这一层为我们的应用程序开发提供了各种有用的框架，并且大部分与用户界面有关，本质上来说它负责用户在iOS设备上的触摸交互操作。
+
+3. [核心操作系统层] 位于iOS系统架构最下面的一层是核心操作系统层，它包括内存管理、文件系统、电源管理以及一些其他的操作系统任务。它可以直接和硬件设备进行交互。核心操作系统层包括以下这些组件：
+
+    * OS X Kernel
+    * Mach 3.0
+    * BSD
+    * Sockets     
+    * Power Management  
+    * File System
+    * Keychain     
+    * Certificates   
+    * Security
+    * Bonjour
+
+4. [核心服务层] 我们可以通过它来访问iOS的一些服务。它包括以下这些组件：
+
+    * Collections     
+    * Address Book   
+    * Networking
+    * File Access     
+    * SQLite    
+    * Core Location
+    * Net Services    
+    * Threading    
+    * Preferences
+    * URL Utilities
+
+5. [媒体层] 通过它我们可以在应用程序中使用各种媒体文件，进行音频与视频的录制，图形的绘制，以及制作基础的动画效果。它包括以下这些组件：
+
+    * Core Audio     
+    * OpenGL    
+    * Audio Mixing
+    * Audio Recording   
+    * Video Playback   
+    * JPG，PNG，TIFF
+    * PDF     
+    * Quartz    
+    * Core Animation
+    * OpenGL ES
+
+6. [可触摸层] 这一层为我们的应用程序开发提供了各种有用的框架，并且大部分与用户界面有关，本质上来说它负责用户在iOS设备上的触摸交互操作。它包括以下这些组件：
+
+    * Multi-Touch Events  
+    * Core Motion   
+    * Camera
+    * View Hierarchy   
+    * Localization   
+    * Alerts
+    * Web Views     
+    * Image Picker   
+    * Multi-Touch Controls
+
+整体架构图：
+    ![architect 1]()
+
+3. 如下图：各个框架对应IOS系统里特定的一层，上层基于下层，更高层次的框架是对底层框架基于对象的抽象。应该尽量使用上层的框架来代替下面的框架。
 
   ![pic 1](https://github.com/BinaryArtists/objective-c-style-guide/blob/master/articles.ios/imges/system_framework.jpg)
 
-3. Cocoa
+4. Cocoa
     * 建立初步印象？Cocoa是苹果公司为Mac OS X所创建的原生面向对象的API，是Mac OS X上五大API之一（其它四个是Carbon、POSIX、X11和Java）（有点类似windows里MFC，.net framework，Cocoa Touch是iOS的）
 
     * 它是什么？Cocoa是OS X和 iOS操作系统的程序的运行环境。
@@ -170,60 +237,5 @@ OpenGL ES支持2D和3D绘图，Apple的OpenGL ES实现通过硬件提供了高�
   动态绑定-运行时确定要调用的方法
   动态加载--运行时为程序加载新的模块
 
-3. 动态能力相关的isa指针
-  每个Objective-C对象都有一个隐藏的数据结构，这个数据结构是Objective-C对象的第一个成员变量，它就是isa指针。这个指针指向哪 呢？它指向一个类对象(class object  记住它是个对象，是占用内存空间的一个变量，这个对象在编译的时候编译器就生成了，专门来描述某个类的定义)，这个类对象包含了Objective-C 对象的一些信息（为了区分两个对象，我把前面提到的对象叫Objective-C对象），包括Objective-C对象的方法调度表，实现了什么协议等 等。这个包含信息就是Objective-C动态能力的根源了。
-
-那我们看看isa指针类型的数据结构是什么样的？如果抛开NSObject对象的其他的成员数据和变量，NSObject可以看成这样：
-
-```objc
-@interface NSObject <NSObject> {  
-     Class isa;  
-}
-```
-
-不考虑@interface关键字在编译时的作用，可以把NSObject更接近C语言结构表示为：
-
-```objc
-struct NSObject{  
- 　　Class isa;  
-}
-```
-
-Class是用typedef 定义的
-
-```objc
-typedef struct objc_class *Class;  
-```
-
-那NSObject可以这么写了
-```objc
-struct NSObject{  
-　　objc_class * isa;
-}
-```
-
-那objc_class的结构是什么样的呢？大概是这样的：
-
-```objc
-struct objc_class {  
-     Class isa;  
-
-     Class super_class;  
-
-     const char * name;  
-
-     long version;  
-     long info;  
-
-     long instance_size;  
-     struct objc_ivar_list * ivars;  
-     struct objc_method_list ** methodLists;   
-
-     struct objc_cache * cache;  
-     struct objc_protocol_list * protocols;     
-}
-```
-
-这里会看到， 在这个结构体里还有一个isa指针，又是一重指向，是不是有种到了盗梦空间的感觉。不用紧张，take easy，不会有那么多层次的，这里的isa指针指向的是元类对象(metaclass object)，带有元字，证明快到头了。那元对象有啥用呢？它用来存储的关于类的版本，名字，类方法等信息。所有的元类对象(metaclass object)都指向 NSObject的元类对象，到头还是NSObject。一共三次：类对象->元类对象->NSObject元类对象。
-
-为了得到整个类组织架构的信息，objc_class结构里定义了第二个成员变量Class super_class，它指向父类的类对象。说了这么多，可能关系缕不清楚，有道是一张图胜过千言万语
+3. 根类 NSObject
+  NSObject是大部分Objective-C类的根类，它没有父类。其它类继承NSObject，访问Objective-C运行时系统的基本接口，这样其他类的实例可以获得运行时的能力。
