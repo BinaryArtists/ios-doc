@@ -84,5 +84,9 @@ Core Services是Core OS基础上提供的更丰富的功能。
 
 ### 客户端架构谈
 
-
 ### 开源模块精选
+	1. 解析器
+		*	html解析器：[hpple](https://github.com/topfunky/hpple), [example](http://segmentfault.com/a/1190000003860297)
+		*
+
+	2. ？？？
