@@ -13,3 +13,6 @@
 [submodule "dev-blog"]
 	path = dev-blog
 	url = https://github.com/nixzhu/dev-blog.git
+[submodule "favourite.module.ios/TransformerKit"]
+	path = favourite.module.ios/TransformerKit
+	url = https://github.com/mattt/TransformerKit.git
