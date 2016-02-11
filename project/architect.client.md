@@ -23,14 +23,85 @@
   * “如果你想较实在的评价一部电影 ，你首先需做到的是对它进行分类”，如果要编写框架代码，则要在垂直方向上下功夫
   * 再回顾一下iOS系统框架分层：CocoaTouch（UIkit）,Media（CoreAnimation）,CoreServices（coreData、Foundation、CFNetwork）,CoreOS
   * 那我们编写可复用组件的时候，结构方面可以参考BeeFramework（它写的很棒，它不光提供直接可复用组件，也实现了“插件式”，还有部分编码约定）：
-
+    - [Features]
+    - CLI
+    - MVC
+      - View
+        - Liveload
+        - Application
+        - Config
+        - Container
+          - Board
+          - Stack
+          - Router
+          - Window
+        - CSS style sheet
+        - XML template
+        - DOM
+          - Animation/Transition
+          - Data binding
+          - Capability
+          - Elements
+          - Elements ext
+          - Signaling
+          - Auto layout
+          - Query (jQuery-like syntax)
+        - View-Model
+          - Once
+          - Paging
+          - Stream
+        - Other
+          - Color
+          - Font
+          - Image
+          - Metrics
+      - Model
+      - Controller
+        - Message
+        - MessageController
+        - Queue
+        - Routine
+        - Extensions
+          - Message + JSON
+          - Message + HTTP
+          - Message + XML
+          - Message + ActiveRecord
+    - System
+      - Cache
+        - File
+        - Memory
+        - Keychain
+        - UserDefaults
+      - Database
+        - SQLite wrapper
+        - ActiveRecord
+        - Driver
+      - Foundation
+        - Assertion
+        - Log
+        - Performance
+        - Runtime
+        - Sandbox
+        - Singleton
+        - System information
+        - Thread
+        - Ticker
+        - UnitTest
+      - Localization
+      - Network
+        - HTTP client
+        - HTTP server
+        - Reachability
+        - Socket
+      - Resource
+      - Service
   * 它们的使用方式，大致是：派生、组合、装饰（切面）等
 
 2. 再备案一下我使用的一套方案
   * vendor：内部或外部开源的，较为深度定制的、独立的子模块，如XXTextView
   * oc.tool：（作为框架的最底层）script、类别（基于foundation）、基类、显式的编码约定（这点可参照Bee中的@notification等）
   * Storage：对象的缓存方案
-  * Network：为api请求、文件下载等提供的网络支持
+  * Network：为api请求、文件下载等提供的网络支持、实体的序列化和反序列化
   * Testor：（未来可在手机端直接使用的提测方案）、单元自动化测试等
   * support：（这一层有点意思）一些可以用的编程模型，如：状态机、生产消费者模型等
 
