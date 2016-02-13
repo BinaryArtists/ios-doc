@@ -9,4 +9,4 @@ backup: [极客学院的技术笔记](http://wiki.jikexueyuan.com/project/notes/
 
 ### [Android 及 iOS 技能树](http://www.wtoutiao.com/p/G27UI9.html)
 
-  ![]()
+  ![android.tech-tree](https://github.com/BinaryArtists/not-just-code/blob/master/articles.ios/imges/android.tech-tree.png)

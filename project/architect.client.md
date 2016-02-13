@@ -120,10 +120,6 @@
    > [http://zxing.org/w/decode.jspx](http://zxing.org/w/decode.jspx)
   * ？？？？
 
-3. todo：还未添加2中的参考链接
-
-
 <h3 id="2.1.boss">2.1 常见模块与推荐解决方案</h3>
-
 
 @db
