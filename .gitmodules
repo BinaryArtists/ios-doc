@@ -19,3 +19,6 @@
 [submodule "iOS-Pro"]
 	path = iOS-Pro
 	url = https://github.com/tangqiaoboy/iOS-Pro.git
+[submodule "swift-compiler-crashes"]
+	path = swift-compiler-crashes
+	url = https://github.com/practicalswift/swift-compiler-crashes.git
