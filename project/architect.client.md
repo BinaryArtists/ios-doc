@@ -110,6 +110,8 @@
   * 即时聊天：
     > 环信
     > [因为公司需求要在安卓和 ios 客户端上做即时聊天系统，请问有什么好的解决方案](http://www.v2ex.com/t/125584)
+    > [最近要用到IM，比较了下LeanCloud、融云、环信，请问LeanCloud有什么优势？](http://www.zhihu.com/question/26779860)
+    > [LeanCloud 开放资源](https://open.leancloud.cn)
   * 二维码（[未整理！！！](http://www.v2ex.com/t/253312#reply14)）
    > CIDetector
    > photoKit
