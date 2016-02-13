@@ -16,3 +16,6 @@
 [submodule "favourite.module.ios/TransformerKit"]
 	path = favourite.module.ios/TransformerKit
 	url = https://github.com/mattt/TransformerKit.git
+[submodule "iOS-Pro"]
+	path = iOS-Pro
+	url = https://github.com/tangqiaoboy/iOS-Pro.git
