@@ -4,6 +4,21 @@
 
 ### 几个主题（作为补充）
 
+0. iOS 博客收集
+  * [巧叔精心整理了国内40多位iOS开发博主的博客地址](https://github.com/tangqiaoboy/iOSBlogCN)
+  * [objc.io](http://www.objc.io/)
+  * [Ray Wenderlich](http://www.raywenderlich.com)
+  * [iOS Developer Tips](http://iosdevelopertips.com/)
+  * [iOS Dev Weekly](http://iosdevweekly.com/)
+  * [NSHipster](http://nshipster.com/)
+  * [Bartosz Ciechanowski](http://ciechanowski.me)
+  * [Big Nerd Ranch Blog](http://blog.bignerdranch.com)
+  * [Nils Hayat](http://nilsou.com/)
+  * 巧叔又说：
+    > 使用博客RSS聚合工具（例如Feedly：http://www.feedly.com/）可以获得更好的博客阅读体验。手机上也有很多优秀的博客阅读工具（我使用的是Newsify）。合理地使用这些工具也可以将你在地铁上、睡觉前等碎片时间充分利用上。
+    > 去年出版的《iOS 7 Programming Pushing the Limits》 以及  《Objective-C高级编程：iOS与OS X多线程和内存管理》 都算是不错的进阶方面的读物
+  * 
+
 1. Xcode
   * 使用技巧
   * 调试技巧（lldb，chies？）
