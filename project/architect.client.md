@@ -105,6 +105,18 @@
   * Testor：（未来可在手机端直接使用的提测方案）、单元自动化测试等
   * support：（这一层有点意思）一些可以用的编程模型，如：状态机、生产消费者模型等
 
+2.1 从应用场景角度
+  * 图片缓存：
+  * 即时聊天：
+    > 环信
+    >
+  * 二维码（[未整理！！！](http://www.v2ex.com/t/253312#reply14)）
+   > CIDetector
+   > photoKit
+   > QRCode
+   > 二维码的图像识别算法， GlobalHistogramBinarizer 和 HybridBinarizer 分别适用不同的场景，图片识别的话要看图片属于什么类型的，黑白的肯定是前者识别更有效，带有渐变的或者有阴影的则采用后一个算法。
+   > [http://zxing.org/w/decode.jspx](http://zxing.org/w/decode.jspx)
+  * ？？？？
 
 3. todo：还未添加2中的参考链接
 
