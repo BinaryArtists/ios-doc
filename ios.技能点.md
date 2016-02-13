@@ -1,0 +1,145 @@
+## iOS 技能点
+
+以下摘录几个，看客且当互补，同时一定要注意，技术革新厉害，要记得补充新鲜的营养液。...^_^_^...
+
+### 几个主题（作为补充）
+
+1. Xcode
+  * 使用技巧
+  * 调试技巧（lldb，chies？）
+
+2. 
+
+### [巧叔的iOS 技能图谱](http://www.aiweibang.com/yuedu/tech/85762720.html)
+
+1. 编程语言
+  * swift
+  * Objective-C
+  * C++/C
+  * JavaScript
+
+2. 操作系统
+  * Mac OSX
+  * iOS
+  * watchOS
+  * tvOS
+  * Linux 常用命令
+
+3. 开发基础
+  * UI 控件
+  * Storyboard & Xib
+  * Core Data & Sqlite（Database）
+  * Core Graphics
+  * Animation
+  * Block & GCD
+  * Test Case 编写
+  * Framework
+  * Autolayout
+  * 手势识别、重力感应
+
+4. 开发进阶
+  * 引用计数
+  * Runtime
+  * Runloop
+  * 对象模型
+  * Hybrid....
+  * 沙盒机制
+  * AVFoundation
+  * Core Text
+  * 逆向与安全
+    * class dump
+    * IDA Pro
+    * Hopper
+    * iOS Class Guard
+
+5. 设计模式
+  * MVC(架构模式)
+  * MVVM(架构模式)
+  * notification
+  * delegate
+  * kvo
+  * factory pattern
+  * command pattern
+
+6. 函数式编程（有人说，这应该是响应式？别开玩笑了。）
+  * ReactiveCocoa
+  * RxSwift
+
+7. 开发工具
+  * IDE
+    > Xcode
+    > AppCode
+  * 调试工具
+    > Charles, Wireshark
+    > Reveal
+    > Instruments
+  * 插件
+    > Alcatraz
+    > VVDocument
+    > XVim
+    > FuzzyAutocompletePlugin
+    > KSImageNamed-Xcode
+  * 辅助工具
+    > xScope
+    > ImageOptim
+    > 马克鳗
+    > Dash
+    > Deploymate
+    > FauxPas
+    > PaintCode
+  * 命令行工具
+    > xcodebuild, xcode-select
+    > nomad
+    > xctool
+    > fastlane
+  * 持续集成
+    > Jenkins
+    > Travis CI
+    > Bot
+
+8. 开源项目
+  * AFNetworking & Alamofire
+  * Masonry
+  * SDWebImage
+  * SwiftyJson
+  * JSPatch
+  * React Native
+
+9. 包管理
+  * CocoaPods
+  * Carthage
+  * Swift Package Manager
+
+10. App 打包上传与审核
+  * Apple Developer 网站
+  * iTunes Connect 网站
+  * IAP
+  * 加急审核申请
+  * 打包脚本
+
+11. 第三方服务
+  * 崩溃收集
+    > Bugly
+    > Crashlytics(Fabric)
+    > BugHD
+    > bugtags.com
+  * 数据统计
+    > Google Analytics
+    > 友盟
+    > MTA
+    > Flurry
+    > App Annie
+  * 应用分发
+    > TestFlight
+    > 蒲公英
+    > FIR
+  * 集成平台
+    > buddybuild.com
+
+### [iOS 开发技能点集合](http://www.v2ex.com/t/169291)
+
+
+### [iOS工程师技能列表](https://segmentfault.com/a/1190000002946644)
+
+
+### [iOS技能树](http://blog.csdn.net/doubleuto/article/details/40106195)
