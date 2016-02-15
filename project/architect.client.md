@@ -104,6 +104,9 @@
   * Network：为api请求、文件下载等提供的网络支持、实体的序列化和反序列化
   * Testor：（未来可在手机端直接使用的提测方案）、单元自动化测试等
   * support：（这一层有点意思）一些可以用的编程模型，如：状态机、生产消费者模型等
+    > 事件处理模型 [signals-ios](https://github.com/uber/signals-ios)
+    > ReactCocoa
+    > 状态机[blakewatters/TransitionKit](https://github.com/blakewatters/TransitionKit)
 
 2.1 从应用场景角度
   * 图片缓存：
