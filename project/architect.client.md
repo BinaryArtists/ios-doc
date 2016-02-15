@@ -125,4 +125,17 @@
 
 <h3 id="2.1.boss">2.1 常见模块与推荐解决方案</h3>
 
-@db
+1.关于框架
+
+android 目前的工程没有什么特别的框架，主要还是将高聚合低耦合的一些功能拆分集中放在common当中。。
+
+其实关于有几个框架还是有几个不错的
+
+[google推荐框架结构](https://github.com/google/iosched) 暂时没看，mark一下
+
+[Android-CleanArchitecture](https://github.com/android10/Android-CleanArchitecture) 
+这个框架功能还是分的比较细的，无论是结构还是代码主要分为3层。视图、数据、控制。。层层之间会添加接口层做下分离，其实主要还是为了降低耦合
+
+
+
+
