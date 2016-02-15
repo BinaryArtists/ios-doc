@@ -73,7 +73,7 @@ PulseEvent is very difficult to port to Mac or iOS.
 
 iOS eventing framework
 
-4. 
+4. 大头，很火的：ReactCocoa，信号
 
 ### 其他
 
@@ -91,4 +91,8 @@ windows 下的线程有，消息队列
 
 It creates a long-lived, unidirectional HTTP channel between your Cocoa app and a web server so that your app can receive events from the server.
 
-5.
+
+
+
+
+5. swift：[未整理](https://github.com/search?l=Swift&o=desc&q=ios++event&ref=searchresults&s=stars&type=Repositories&utf8=%E2%9C%93)
