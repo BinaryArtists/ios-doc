@@ -20,10 +20,26 @@
 
 > 观察对应当前，oc文件的target
 > targets->build settings->Product Module Name中设置的名字（这个名称很重要，swift 的头文件就是根据这个来命名的。）
-> 在oc文件中，引用头文件：<productmodulename-swift.h>
+> 在oc文件中，引用头文件：{ProductModuleName}-Swift.h
 
 1. 类继承
   * 报错：cannot subclass a class with objc_subclassing_restricted attribute
+  * [Prevent class from being subclassed in Objective-c](http://stackoverflow.com/questions/19194807/prevent-class-from-being-subclassed-in-objective-c)
+    ```objc
+    #if defined(__has_attribute) && __has_attribute(objc_subclassing_restricted)
+    # define FOO_FINAL __attribute__((objc_subclassing_restricted))
+    #else
+    # define FOO_FINAL
+    #endif
+
+    FOO_FINAL
+    @interface Foo : NSObject
+    @end
+
+    @interface Bar : Foo
+    @end
+    ```
+  * 所以我们在{ProjectName}-Swift.h文件里可以找到答案
 
 2. 类型兼容问题（类继承本质是，类型兼容问题？）
 
