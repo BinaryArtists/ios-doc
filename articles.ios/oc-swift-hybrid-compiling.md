@@ -14,8 +14,6 @@
 0. [官方文档](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/index.html#//apple_ref/doc/uid/TP40014216-CH2-ID0)
 1. [在项目里交叉使用Swift和OC](http://blog.csdn.net/huangchentao/article/details/35278663)
 2. [初探swift语言的学习笔记九(OC与Swift混编)](http://blog.csdn.net/fengsh998/article/details/34440159)
-3. [ Objective-C 与 Swift 混编之路](http://blog.csdn.net/mmoaay/article/details/48422309)
-4. 该篇包含一些有用错误集[Swift项目兼容Objective-c问题汇总](http://www.bubuko.com/infodetail-846370.html)
 
 例子工程：[SwiftProject](https://github.com/BinaryArtists/Musician)（测试代码，主要看SwiftProjectTests target中）
 
