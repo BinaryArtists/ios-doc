@@ -55,3 +55,8 @@ fallen.ink
 
 12. 造成 Swift 编译 Crash 的列表
   * [swift-compiler-crashes](https://github.com/practicalswift/swift-compiler-crashes/tree/cfa24e7cd7d76483241b4da6b7ae25433e3dfab4)
+
+
+### 其他：
+
+* [既然所有语言都是图灵完备的，为什么适用的领域不一样？](http://www.zhihu.com/question/23457627)
