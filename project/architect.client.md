@@ -100,6 +100,7 @@
 2. 再备案一下我使用的一套方案（初衷在于，通用不臃肿）
   * vendor：内部或外部开源的，较为深度定制的、独立的子模块，如XXTextView
   * oc.tool：（作为框架的最底层）script、类别（基于foundation）、基类、显式的编码约定（这点可参照Bee中的@notification等）、动画、cocoa框架的扩展，语言层次的扩展
+  另一部分可称作：oc.partially
   * Application：AppContext、AppAppearance、AppConfig、AppSystem（归属于系统、应用等相关属性）
   * Config：（向下依赖Storage的配置模块，与network、api等组合使用）UserConfig、NetworkConfig、其他Config
   * Storage：对象的缓存方案
