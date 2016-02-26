@@ -8,6 +8,7 @@
 3.2 通过银联平台下载 CSR 文件并传送至Apple开发者网站
 3.3 集成银联 SDK 控件
 3.4 [银联ApplePay控件开发包](https://open.unionpay.com/ajweb/help/file/toDetailPage?id=345&flag=2)
+4. [技术服务](https://open.unionpay.com/ajweb/product/detail?id=80)
 
 ### 微信
 1. [微信sdk下载](https://pay.weixin.qq.com/wiki/doc/api/app.php?chapter=11_1)
