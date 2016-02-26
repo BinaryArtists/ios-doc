@@ -23,6 +23,7 @@
       * 1.1.1 类继承
       * 1.1.2 类型兼容
     * [1.2 swift调用OC](#1.2)
+    * [1.3 swift调用C＋＋](#1.3)
   * [2. framework](#2)
   * [3. 静态库](#3)
   * [4. 动态库](#4)
@@ -38,6 +39,7 @@
 ***注意***
 凡是用Swift写的类，如果不继成自NSObject或NSObject 的派生类，哪么编译后将不会生成对应的转换类。从而使得OC 中找不到相应的声明。
 
+--------
 1. 类继承
   * 报错：cannot subclass a class with objc_subclassing_restricted attribute
   * [Prevent class from being subclassed in Objective-c](http://stackoverflow.com/questions/19194807/prevent-class-from-being-subclassed-in-objective-c)
@@ -57,6 +59,7 @@
     ```
   * 所以我们在{ProjectName}-Swift.h文件里可以找到答案
 
+--------
 2. oc使用swift中的协议
 
 [在swift中的写法是：](http://www.jianshu.com/p/9876b2eb8fa2)
@@ -86,6 +89,10 @@ Xcode会自动将OC的方法转换成Swift中的使用方式,方法名一致。
   * swift中，可以继承oc类
 
 2.
+
+<h3 id="1.3">swift调用C＋＋</h3>
+
+  > [注意：你不能直接把 C++ 代码导入 Swift。解决办法是为 C++ 代码创建一个 Objective-C 或者 C 的封装](http://c.biancheng.net/cpp/html/2269.html)
 
 <h3 id="2">framework</h3>
 
@@ -291,3 +298,24 @@ Swift 2 中这个方法被删除，不要使用。
 [如何正确使用协议](https://github.com/kevin833752/MyTranslationSet/blob/master/TranslationSet/协议%20-%20我当前的推荐%28Protocols%20-%20My%20Current%20Recommendations%29.md)
 
 [Swift 2.0 中的面向协议的MVVM](http://swift.gg/2015/09/11/swift-2-0-protocol-oriented-mvvm/)
+
+--------
+3. [Swift与Objective-C和Cocoa混合编程的基本设置](http://c.biancheng.net/cpp/html/2269.html)
+
+本文提供了一些混编，乃至迁移的前置信息，让我们大致的了解oc、swift联合编译。
+
+      这篇指南包括了三个有关兼容性的重要方面方便你更好地利用来开发 Cocoa 应用：
+      互用性 使你将 Swift 和 Objective-C 相接合，允许在 Objective-C 中使用 Swift 的 Class 并且当你在写 Swift 代码时利用熟悉的 Cocoa Class、Pattern、Practice。
+      混合和匹配 允许你创建结合了 Swift 和 Objective-C 文件的混合语言应用，他们能更彼此进行通信。
+      迁移 由于以上两点，从已经存在的 Objective-C 代码迁移到 Swift 是非常简单的，使得用最新的 Swift 特性代替你的 Objective-C 应用部分内容成为了可能。
+
+--------
+4. [Swift与Objective-C API的交互](http://c.biancheng.net/cpp/html/2291.html)
+
+本文，将oc与swift的互用，进行了一些“特性翻译”工作，有助于平滑过渡。
+
+--------
+5.
+
+--------
+6.
