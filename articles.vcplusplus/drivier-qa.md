@@ -9,3 +9,9 @@
 5. ControlService停止服务
 6. DeleteService 删除服务
 7. CloseServiceHandle 关闭服务句柄
+
+### [DeviceIoControl的使用说明](http://blog.csdn.net/lujunql/article/details/2532152)
+
+应用程序和驱动程序的通信过程是：应用程序使用CreateFile函数打开设备，然后用DeviceIoControl与驱动程序进行通信，包括读和写两种操作。还可以用ReadFile读数据用WriteFile写数据。操作完毕时用CloseHandle关闭设备。我们比较常用的就是用DeviceIoControl对设备进行读写操作。
+
+###
