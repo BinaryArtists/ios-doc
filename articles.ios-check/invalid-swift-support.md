@@ -1,4 +1,7 @@
-## 提 APPStore 报 Invalid Swift Support 有人遇到过么？
+## [提 APPStore 报 Invalid Swift Support 有人遇到过么？](http://swiftcn.io/topics/17)
+
+参考链接：
+	1. [Invalid Swift Support / The SwiftSupport folder is empty](http://stackoverflow.com/questions/32559204/invalid-swift-support-the-swiftsupport-folder-is-empty)
 
 ---------
 
