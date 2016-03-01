@@ -7,7 +7,8 @@
 
 1. [官网](https://buddybuild.com)
 2. 苹果开发账号：username，password
-3. 准备好工程：
+3. 准备好工程：https://github.com/BinaryArtists/FATodos
+4. 测试buddybuild账号：fengzilijie@qq.com,fengzi
 
 
 ### 刚起步
@@ -74,6 +75,8 @@
 11. 将要部署到一个设备上啦，
 
 12. 上传证书，“Upload Certificates”
+
+*后来就没有继续了，初步看来适用于：个人开发、小团队协作*
 
 #### 起飞了
 
