@@ -43,3 +43,20 @@
 ```objc
   _searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0.0f,0.0f,255.0f,44.0f)];
 ```
+
+
+开发过程中，发现titleview很难居中，通过各种尝试终于找到了解决方法。
+首先清楚你个概念：
+1.leftBarButtonItem，导航条中左侧button。
+2.rightBarButtonItem，导航条中右侧button。
+3.titleview，不用介绍了吧，就是标题。
+问题原因：
+经过尝试，发现titleview的起点位置和尺寸依赖于leftBarButtonItem和rightBarButtonItem的位置。
+解决方案：
+设置titleview之前，先初始化leftBarButtonItem和rightBarButtonItem的位置，
+然后根据leftBarButtonItem和rightBarButtonItem的位置来使titleview居中。
+
+
+最后：如果是在xib中拖的titleView，并自动布局，要注意
+1. 需要contentView，设置约束与titleView一致
+2. 其他约束也需要格外注意！
