@@ -57,6 +57,7 @@
 然后根据leftBarButtonItem和rightBarButtonItem的位置来使titleview居中。
 
 
-最后：如果是在xib中拖的titleView，并自动布局，要注意
+*注意*
+最后：如果是在xib中拖的titleView，并自动布局
 1. 需要contentView，设置约束与titleView一致
 2. 其他约束也需要格外注意！
