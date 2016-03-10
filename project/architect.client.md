@@ -104,6 +104,10 @@
 
   另一部分可称作：oc.partially
   * Application：AppContext、AppAppearance、AppConfig、AppSystem（归属于系统、应用等相关属性）
+    > 用delegate
+    > delegate中去处理边缘模块的耦合，如：行为统计类的？？？貌似也不到（主要是还是要做好，消息系统）
+
+
   * Config：（向下依赖Storage的配置模块，与network、api等组合使用）UserConfig、NetworkConfig、其他Config
     > 增加注入？github上有个库～
 

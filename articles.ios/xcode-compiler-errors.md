@@ -10,4 +10,8 @@ std::string word = "hello"s;
 ```
 Update: As of Xcode 6, c++14 is available as a first-class language dialect.
 
-### []()
+### Member initializer 'bits_' does not name a non-static data member or base class
+
+里面说到将 ZXingWidget - BuildSettings - Other Warning Flags 里的 -Werror 和 -Wno-unused-parameter 去掉,
+但其实只要去掉 -Werror 就可以了, 如果 -Wno-unused-parameter  这个也去掉了会产生很多变量没有使用的警告.
+此时可以编译通过了,烦恼的是  也有少许警告.
