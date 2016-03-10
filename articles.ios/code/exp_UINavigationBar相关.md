@@ -31,4 +31,12 @@
   [ self . navigationController . navigationBar setTitleVerticalPositionAdjustment : 0.0 forBarMetrics : UIBarMetricsDefault ] ;
 ```
 
+  >> UINavigationBar下：
+  - (void)setTitleVerticalPositionAdjustment:(CGFloat)adjustment forBarMetrics:(UIBarMetrics)barMetrics
+官方描述： Sets the title’s vertical position adjustment for given bar metrics. 调整某个BarMetrics（这个不知道怎么翻译）下标题的垂直位置。
+UIBarButtonItem下：
+  - (void)setBackgroundVerticalPositionAdjustment:(CGFloat)adjustment forBarMetrics:(UIBarMetrics)barMetrics
+官方描述： Sets the background vertical position offset for given bar metrics.This offset is used to adjust the vertical centering of bordered bar buttons within the bar. 调整某个BarMetrics（这个不知道怎么翻译）下背景的垂直位置的偏差值，这个偏差值用来调整该圆角按钮的垂直中心在Bar内的位置。
+
+
   * 终极方案：不用系统的NavigationBar啦，咱们自定义一个
