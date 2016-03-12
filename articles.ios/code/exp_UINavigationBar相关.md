@@ -69,6 +69,7 @@ UIButton *locationButtonAux = [UIButton buttonWithType:UIButtonTypeCustom];
 ```
 
   * 终极方案：不用系统的NavigationBar啦，咱们自定义一个导航栏
+  可以参考：[第三方库](https://github.com/BinaryArtists/not-just-code/blob/master/articles.ios/library.thirdpart.md)中的“导航派”，啦啦啦～
 
 
 ### [对leftItemsSupplementBackButton属性的认识](http://mmz06.blog.163.com/blog/static/12141696201110288374588/)
