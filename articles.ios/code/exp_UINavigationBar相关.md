@@ -38,5 +38,41 @@ UIBarButtonItem下：
   - (void)setBackgroundVerticalPositionAdjustment:(CGFloat)adjustment forBarMetrics:(UIBarMetrics)barMetrics
 官方描述： Sets the background vertical position offset for given bar metrics.This offset is used to adjust the vertical centering of bordered bar buttons within the bar. 调整某个BarMetrics（这个不知道怎么翻译）下背景的垂直位置的偏差值，这个偏差值用来调整该圆角按钮的垂直中心在Bar内的位置。
 
+所以最终看起来是这样
+```
+#define kExtendNavigationBarHeight  84
+#undef  kNavigationBarHeight
+#define kNavigationBarHeight        44
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+    // 导航栏高度调整
+    CGRect rect = self.navigationController.navigationBar.frame;
+    self.navigationController.navigationBar.frame = CGRectMake(rect.origin.x, rect.origin.y, rect. size.width, kExtendNavigationBarHeight);
+    [self.navigationController.navigationBar setTitleVerticalPositionAdjustment:kNavigationBarHeight-kExtendNavigationBarHeight
+                                                                 forBarMetrics: UIBarMetricsDefault];
+    [self.navigationItem.leftBarButtonItem setBackgroundVerticalPositionAdjustment:kNavigationBarHeight-kExtendNavigationBarHeight
+                                                                     forBarMetrics:UIBarMetricsDefault];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+
+    // 开启iOS7返回手势
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    }
+
+    CGRect rect = self.navigationController.navigationBar.frame;
+    self.navigationController.navigationBar.frame = CGRectMake(rect.origin.x, rect.origin.y, rect. size.width, kNavigationBarHeight);
+    [self.navigationController.navigationBar setTitleVerticalPositionAdjustment:0.f
+                                                                 forBarMetrics:UIBarMetricsDefault];
+
+    [self.navigationItem.leftBarButtonItem setBackgroundVerticalPositionAdjustment:0.f
+                                                                     forBarMetrics:UIBarMetricsDefault];
+}
+
+```
 
   * 终极方案：不用系统的NavigationBar啦，咱们自定义一个
