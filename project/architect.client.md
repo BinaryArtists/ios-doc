@@ -124,6 +124,13 @@
 
   * Service：独立的服务模块、如：即时通信服务、API服务、付费服务（仿照BeeFramework）
 
+  * UI
+    * Decorator 装饰模式
+      > [UINavigationItem-Loading](https://github.com/Just-/UINavigationItem-Loading)
+      > 类似上面，很多装饰扩展
+
+    * Customizor 自定义的一些UI控件
+
 2.1 从应用场景角度
   * 图片缓存：
   * 即时聊天：

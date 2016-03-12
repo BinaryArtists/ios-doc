@@ -31,11 +31,23 @@
 ### 二维码
 	* [开源框架:ZXing](http://blog.csdn.net/ysy441088327/article/details/8515556)
 
-### 分段控件
+### 分段类型的“控件们”
 	* [ZZSegmentedControl]()
 		> 12年分类信息，咨询类app中常用到的样式，下划线切换。
-		
+
 	* [RFSegmentView]()
 		> 用UIView构建的
 
 	* [TTSegment]()
+
+	* [RKSwipeBetweenViewControllers](https://github.com/cwRichardKim/RKSwipeBetweenViewControllers)
+
+	* [SLPagingView](https://github.com/StefanLage/SLPagingView)
+
+### 导航派
+	* [TLYShyNavBar](https://github.com/telly/TLYShyNavBar)
+
+	*	[DropdownMenu](https://github.com/nmattisson/DropdownMenu)
+		> 在导航栏以下，下拉菜单
+
+	* [KLNoteViewController](https://github.com/KieranLafferty/KLNoteViewController)
