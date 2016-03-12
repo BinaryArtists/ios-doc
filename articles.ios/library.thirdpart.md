@@ -2,7 +2,7 @@
 
 
 ### 网络
-	* GCD Async Socket: 异步socket库
+	*	GCD Async Socket: 异步socket库
 	* AFNetWork: 轻量级的iOS网络通信类库
 	* Reachability: 苹果提供的例程
 
@@ -12,10 +12,10 @@
 	* Base64: Google的GTMBase64
 
 ### 日志
-	* [LumberJack]
+	* [LumberJack](https://github.com/CocoaLumberjack/CocoaLumberjack)
 
 ### 协议
-	* [ProtocolBuffer]
+	* [ProtocolBuffer](http://www.ibm.com/developerworks/cn/linux/l-cn-gpb/)
 
 ### 图表
 	* [EChart](https://github.com/zhuhuihuihui/EChart)
@@ -32,13 +32,13 @@
 	* [开源框架:ZXing](http://blog.csdn.net/ysy441088327/article/details/8515556)
 
 ### 分段类型的“控件们”
-	* [ZZSegmentedControl]()
+	* ZZSegmentedControl
 		> 12年分类信息，咨询类app中常用到的样式，下划线切换。
 
-	* [RFSegmentView]()
+	* RFSegmentView
 		> 用UIView构建的
 
-	* [TTSegment]()
+	* TTSegment
 
 	* [RKSwipeBetweenViewControllers](https://github.com/cwRichardKim/RKSwipeBetweenViewControllers)
 
