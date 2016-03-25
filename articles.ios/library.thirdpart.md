@@ -25,7 +25,7 @@
 	* [realm/objc, swift, java](https://github.com/realm/realm-cocoa)
 		> [文档](https://realm.io/docs/objc/latest/)
 		> Realm 并不是基于 Core Data ，也不是基于 SQLite 所构建的。它拥有自己的数据库存储引擎，可以高效且快速地完成数据库的构建操作。
-		>
+		> [Realm的学习笔记—1](http://www.jianshu.com/p/95fd23c4ec5f)
 	*
 
 ### 二维码
