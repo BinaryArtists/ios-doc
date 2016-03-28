@@ -11,8 +11,6 @@
     * [2.1.boss 常见的模块与推荐的解决方案](#2.1.boss)
   * [2.2 ReactNative](#2.2)
 
-
-
 <h3 id="1.2.boss">1.2 常见模块与推荐解决方案</h3>
 
 注意：其中有些开源模块，仍然在制作中。
@@ -103,7 +101,7 @@
     > 数据转换：https://github.com/mattt/TransformerKit、http://nshipster.cn/nsvaluetransformer/
 
   另一部分可称作：oc.partially
-  * Application：AppContext、AppAppearance、AppConfig、AppSystem（归属于系统、应用等相关属性）
+  * Application：AppContext、AppAppearance、AppConfig、AppSystem、AppModule（归属于系统、应用等相关属性）
     > 用delegate
     > delegate中去处理边缘模块的耦合，如：行为统计类的？？？貌似也不到（主要是还是要做好，消息系统）
 
