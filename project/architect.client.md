@@ -106,6 +106,7 @@
     > 用delegate
     > delegate中去处理边缘模块的耦合，如：行为统计类的？？？貌似也不到（主要是还是要做好，消息系统）
     > 注意不能起名字，混淆语境！！！
+    > 好处？快速清楚骨架！
 
   * Config：（向下依赖Storage的配置模块，与network、api等组合使用）UserConfig、NetworkConfig、其他Config
     > 增加注入？github上有个库～
