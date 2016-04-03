@@ -139,24 +139,79 @@
 
 * 系统提供的dispatch方法
 
-* 后台运行
-  >
+* 后台运行（使用block的另一个用处，是可以让程序在后台较长久的运行。
+  >在以前，当应用被按Home键退出后，应用仅有最多五秒钟的时间做一些保存或清理资源的工作。但是应用可以调用UIApplication的beginBackgroundTaskExpirationHandler方法，让应用最多有10分钟的时间在后台长久运行。
+  这个时间饿意用来做清理本地内存、发送统计数据等工作。
+
+```
+// AppDelegate.h
+@property (assign, nonatomic) UIBackgroundTaskIdentifier backgroundUpdateTask;
+
+// AppDelegate.m
+- (void)applicationDidEnterBackground:(UIApplication *)application {
+  [self beginBackgroundTask];
+
+  // do something
+
+  [self endBackgroundUpdateTask];
+}
+
+- (void)beginBackgroundTask {
+  self.backgroundUpdateTask = [[UIApplication shareApplication] beginBackgroundTaskWithExpriationHandler:^{
+    [self endBackgroundUpdateTask];
+    }];
+}
+
+- (void)endBackgroundUpdateTask {
+  [[UIApplication shareApplication] endBackgroundTask: self.backgroundUpdateTask];
+
+  self.backgroundUpdateTask = UIBackgroundTaskInvalid;
+}
+
+```
 
 
 ### 使用UIWindow
 
+> UIWindow是最顶层的界面容器。
+> UIWindow并不包含任何默认的内容，但是它被当作UIView的容器，用于放置应用中所有的UIView。
+
+* UIWindow的主要作用：
+  1. 作为UIView的最顶层的容器，包含应用显示所需要的所有的UIView
+  2. 传递触摸消息和键盘事件给UIView
+
+* 系统对UIWindow的使用
+  > iOS系统为了保证UIAlertView在所有界面之上，它会临时创建一个新的UIWindow，通过将其UIWindow的UIWindowLevel设置得更高，让UIAlertView盖在所有的应用界面之上。
+  > 作者的例子：例如我们在做有道云笔记时，想做一个密码保护功能，在用户从应用的任何界面按Home键退出，过一段时间从后台切换回来时，显示一个密码输入界面。只有用户输入OK，才能被允许进入退出前的界面。借助UIWindow在实现的。
 
 ### 动态下载系统提供的多种中文字体（略）
 
-### 使用应用内支付
+### 使用应用内支付（略）
 
-### 基于UIWebView的混合编程
+### 基于UIWebView的混合编程（略）
 
-### 安全性问题
+### 安全性问题（分类的很好，层次分明）
 
+* 网络安全
+  1. （传输数据加密）安全传输用户密码（应该加密）
+  2. （传输协议）防止通讯协议被轻易破解（Protobuf）
+  3. （支付环节）验证应用内支付的凭证（避免越狱手机，支付凭证被劫持）
 
-### 基于CoreText的排版引擎
+* 本地安全和数据安全
+  1. 程序文件的安全
+    > js去重要逻辑
+
+  2. 本地数据安全（加密存储、keychain）
+    > 注意，keychain是有可能存储出错的，貌似在存储空间不足的时候。
+
+  3. 源代码安全
+    > 通过file、class-dump、theos、otool等工具，可以分析编译之后的程序文件。IDA的威胁最大。
+    > 除了可以用一些宏来简单混淆类名外，我们也可以将关键的逻辑用纯C实现。
+
+### 基于CoreText的排版引擎（略）
 
 ### 实战技巧
 
 1. App Store 与审核
+
+略
