@@ -1,6 +1,6 @@
 ## 架构谈
 
-先来造几个名字（默认它们的粒度，从大到小）component, service, mediator, 😄
+先来造几个名字（默认它们的粒度，从大到小）component, service, mediator, 😄（通用型为module）
 
 ### Model
 
