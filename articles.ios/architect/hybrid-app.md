@@ -1,7 +1,7 @@
 ## 混合架构
 
 参考链接：
-  1. []()
+  1. [构建混合移动应用的流行框架优缺点对比](http://www.open-open.com/news/view/1de00ba)，提到了：Ionic、Onsen UI、AngularJS、Framework 7、React Native、jQuery Mobile、Native Script、Famous
 
 
 ### 准备工作
@@ -24,9 +24,19 @@ Make sure that /usr/local/bin is in your $PATH.
 
 [安装过成可参考](http://jingyan.baidu.com/article/a948d6515d4c850a2dcd2e18.html)
 
-2. [npm](https://docs.npmjs.com)，是Node.js的包管理器
+2. [npm](https://docs.npmjs.com)，是Node.js的包管理器，node package manager
 
 装了node-v4.4.2.pkg就可以使用npm了
+
+```
+
+npm install webpack --save-dev
+
+npm install html-webpack-plugin --save-dev
+
+npm install html-loader --save-dev
+
+```
 
 3. cordova
 
@@ -106,10 +116,44 @@ Make sure that /usr/local/bin is in your $PATH.
 
 [WebPack 简明学习教程](http://www.jianshu.com/p/b95bbcfc590d)
 
+[详解前端模块化工具-Webpack](https://segmentfault.com/a/1190000003970448)
+
+6. Angular.js
+
+[AngularJS中文](http://www.apjs.net)
+
+7. Backbone.js
+
+
 ### 框架
 
 1. [Framework7](http://www.f7cn.com/docs/custom-build.html#.VxLkFDZq2Oo)
 
 [Framework7-github](https://github.com/nolimits4web/Framework7)
 
+  * 安装
+    通过bower安装
+    ```
+    bower install framework7
+    ```
+
+    如果要安装bower
+    ```
+    npm install -g bower
+    ```
+
+    源码安装
+    ```
+    npm install --global gulp
+
+    npm install
+
+    gulp build
+    ```
+
+    出现的错误：
+    * [安装Zepto出错提示 license should be a valid SPDX license expression?](https://segmentfault.com/q/1010000003040821)，在dependencies前面加上了："license": "BSD-2-Clause",
+
+  * 有关于framework7和codorva有个demo可以学习：[BelinChung/HiApp](https://github.com/BelinChung/HiApp)
+  
 2.

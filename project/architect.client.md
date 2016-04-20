@@ -116,6 +116,8 @@
     > 其他方案还有，系统的coreData，第三方的FMDatabase、MagicalRecord
 
   * Network：为api请求、文件下载等提供的网络支持、实体的序列化和反序列化
+    > ApiManager, ApiDefine, ApiConfig(这个可以为配置多个环境而写，如果server已有相关对象，则可以省略)
+
   * Testor：（未来可在手机端直接使用的提测方案）、单元自动化测试等
   * support：（这一层有点意思）一些可以用的编程模型，如：状态机、生产消费者模型等
     > 事件处理模型 [signals-ios](https://github.com/uber/signals-ios)
