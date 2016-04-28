@@ -1,8 +1,7 @@
-## 混合架构
+## 混合架构 之 大杂烩
 
 参考链接：
   1. [构建混合移动应用的流行框架优缺点对比](http://www.open-open.com/news/view/1de00ba)，提到了：Ionic、Onsen UI、AngularJS、Framework 7、React Native、jQuery Mobile、Native Script、Famous
-
 
 ### 准备工作
 
@@ -155,5 +154,5 @@ npm install html-loader --save-dev
     * [安装Zepto出错提示 license should be a valid SPDX license expression?](https://segmentfault.com/q/1010000003040821)，在dependencies前面加上了："license": "BSD-2-Clause",
 
   * 有关于framework7和codorva有个demo可以学习：[BelinChung/HiApp](https://github.com/BelinChung/HiApp)
-  
+
 2.
