@@ -95,7 +95,10 @@
       - Service
   * 它们的使用方式，大致是：派生、组合、装饰（切面）等
 
-2. 再备案一下我使用的一套方案（初衷在于，通用不臃肿）
+2. 再备案一下我使用的一套方案
+
+*三层：框架（suite.oc），可复用tool组件、UI组件、业务组件（component），普通MVC结构（project）*
+
   * vendor：内部或外部开源的，较为深度定制的、独立的子模块，如XXTextView
   * oc.tool：（作为框架的最底层）script、类别（基于foundation）、基类、显式的编码约定（这点可参照Bee中的@notification等）、动画、cocoa框架的扩展，语言层次的扩展
     > 数据转换：https://github.com/mattt/TransformerKit、http://nshipster.cn/nsvaluetransformer/
