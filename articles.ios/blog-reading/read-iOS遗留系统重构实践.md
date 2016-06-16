@@ -42,9 +42,9 @@
 
 第二部分实践点中的重构方案，可以参考。
 
----------
+-------------------
 
 ## 参考
 
-  [1]: http://www.infoq.com/cn/articles/ios-legacy-codebase-refactor
-  [2]: https://github.com/BinaryArtists/not-just-code/blob/master/articles.ios/blog-reading/read-iOS%E9%81%97%E7%95%99%E7%B3%BB%E7%BB%9F%E9%87%8D%E6%9E%84%E5%AE%9E%E8%B7%B5.md
+  1. [iOS遗留系统重构实践](http://www.infoq.com/cn/articles/ios-legacy-codebase-refactor)
+  2. [github-doc](https://github.com/BinaryArtists/not-just-code/blob/master/articles.ios/blog-reading/read-iOS%E9%81%97%E7%95%99%E7%B3%BB%E7%BB%9F%E9%87%8D%E6%9E%84%E5%AE%9E%E8%B7%B5.md)
