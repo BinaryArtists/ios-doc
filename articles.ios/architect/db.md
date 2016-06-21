@@ -1,6 +1,11 @@
 ## 移动端数据库
 
-  * [IOS-数据库模块搭建方案](http://www.jianshu.com/p/ef895925c270)
+  * [IOS-数据库模块搭建方案](http://www.jianshu.com/p/ef895925c270)，要点如下：
+    > 笔者建议自行搭建数据库管理类，同时配合成熟的开源ORM框架快速搭建数据库模块。
+    > 数据库 多线程问题
+    > 1. 定义DAO基类ZZBaseDAO
+    > 2. ZZBaseDAO实现类，通过调用NSObject的 setValuesForKeysWithDictionary和valueForKey实现NSDictionary和entity对象间转换
+    > 3. 处理数据库中特殊字段如id等与oc关键字冲突的情况：定义函数setValue:forUndefinedKey，实现特殊数据库字段与entity中property的映射。
 
 ### 设计
 
@@ -12,6 +17,10 @@
 
     3. Transactions
       > SQLite itself is also transactional
+
+  * 特性设计
+    * ORM
+      > Java对象映射到SQLite数据库的表单
 
 ### 可选方案
 
