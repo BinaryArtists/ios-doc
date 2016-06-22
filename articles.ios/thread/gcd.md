@@ -1,9 +1,12 @@
 ## GCD(Grand Central Dispatch)要点
+
 *	[Apple官方参考](https://developer.apple.com/library/ios/documentation/Performance/Reference/GCD_libdispatch_Ref/)
 *	[GCD使用三部曲:基本用法](http://www.jianshu.com/p/d56064507fb8)
 *	[GCD入门（一）:基本概念和Dispatch Queue](http://www.dreamingwish.com/article/grand-central-dispatch-basic-1.html)
 *	[Grand Central Dispatch In-Depth:Part 1/2](http://www.raywenderlich.com/60749/grand-central-dispatch-in-depth-part-1)
 *	[深入理解GCD（－）](http://blog.jobbole.com/66866/)
+* [iOS多线程的初步研究（十）-- dispatch同步](http://blog.csdn.net/lengshengren/article/details/12905821)
+	> GCD提供两种方式支持dispatch队列同步，即dispatch组和信号量。
 
 ### 目录
 *	[1. GCD是什么](#1)
@@ -291,8 +294,8 @@ dispatch_resume(stdinSource);
 	dispatch_queue_t serialQueue = dispatch_queue_create("com.oukavip.www",NULL);  
 dispatch_queue_t globalQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND,0);  
 dispatch_set_target_queue(serialQueue, globalQueue);  
-/* * 第一个参数为要设置优先级的queue,第二个参数是参照物，既将第一个queue的优先级和第二个queue的优先级设置一样。 
-     */ 
+/* * 第一个参数为要设置优先级的queue,第二个参数是参照物，既将第一个queue的优先级和第二个queue的优先级设置一样。
+     */
 	```
 	2. 修改串行队列的目标队列，使多个串行queue在目标queue上依次挨个执行。
 	```objc
@@ -325,7 +328,7 @@ dispatch_set_target_queue(serialQueue, globalQueue);
 	*/
 	```
 	比 @synchronized方法简单些，并且GCD确保以更快的方式完成这些检测，它保证block中的代码在任何线程通过 dispatch_once 调用之前被执行，但它不会强制每次调用这个函数都让代码进行同步控制。实际上，如果你去看这个函数所在的头文件，你会发现目前它的实现其实是一个宏，进行了内联的初始化测试，这意味着通常情况下，你不用付出函数调用的负载代价，并且会有更少的同步控制负载。
-	
+
 *	连续的数据预取，可以使用串行队列。
 *	[dispatch_once的低负载性](http://www.dreamingwish.com/article/gcd-guide-dispatch-once-1.html)
 	```
@@ -337,9 +340,3 @@ dispatch_set_target_queue(serialQueue, globalQueue);
 	对于场景#2，发生的次数并不会很多，甚至很多时候一次都不会发生，假如发生了，那么也只是一个符合预期的行为：后来的线程需要等待第一线程完成。即使你写一个受虐型的单元测试来故意模拟场景#2，也不能说明什么问题，得不到的永远在骚动，被偏爱的都有恃无恐。
 	对于场景#3，在程序进行过程中，可能发生成千上万次或者天文数字次，这才是效率提升的关键之处
 	```
-
-
-
-
-
-

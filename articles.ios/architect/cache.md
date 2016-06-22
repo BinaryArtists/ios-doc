@@ -4,6 +4,10 @@
   * NSURLCache
     * [设计一个移动应用的本地缓存机制](http://www.cnblogs.com/zhuqil/archive/2011/08/02/2124870.html)
 
+todo：
+以YYCache为目标做性能优化：[YYCache源码分析(一)](http://www.cocoachina.com/ios/20160614/16672.html), [YYCache 源码分析(二)](http://ios.jobbole.com/85740/), [YYCache 源码分析(三)](http://ios.jobbole.com/85940/)
+
+
 ### 文件缓存设计
 
   1. 功能设计
@@ -25,6 +29,7 @@
 待 补充
 
 ### TMCache
+官方说：Fast, non-deadlocking parallel object cache
 
   1. TMCache
     * 用dispatch_group_t实现异步并行处理，用信号量dispatch_semaphore_t实现同步处理。
@@ -33,15 +38,26 @@
   3. TMMemoryCache
     * 允许增删改查的progress accessory
   4. TMTCacheBackgroundTaskManager
-    *
+    * 后台任务处理
 
 ### PINCache
 
+  1. 下标访问
+  2. 信号量同步，改为针对同步，并共用
+  3. 添加“判断是否存在某持久化对象方法”、“ttlCache行为”
+  4. 修改“decodedString:” “encodeString:”方法的实现
 
+### YYCache [YYCache 设计思路](http://blog.ibireme.com/2015/10/26/yycache/)
+  1. 功能角度可以稍稍放低，重点看它怎么提升性能的！！！
 
-### YYCache
+  看几篇文章吧，对我这个菜鸟，启发很大：
+  2. [学习YYCache总结](http://www.jianshu.com/p/45a974fafa7c)
+    * YYMemoryCache实现 之 CFMutableDictionaryRef：CFDictionaryAddValue, If key which matches this key is already present in the dictionary, function does nothing ("add if absent")
+    * YYMemoryCache实现 之 OSSpinLockLock：测试NSLock，pthread_mutex_t，OSSpinLock，@synchronized加锁的效率
+      > [不再安全的 OSSpinLock](http://blog.ibireme.com/2016/01/16/spinlock_is_unsafe_in_ios/):除了 OSSpinLock 外，dispatch_semaphore 和 pthread_mutex 性能是最高的。有消息称，苹果在新系统中已经优化了 pthread_mutex 的性能，所以它看上去和 OSSpinLock 差距并没有那么大了。
 
-
-### 性能
-
-还没计算
+    * YYMemoryCache实现 之 YYLinkedMapNode，YYLinkedMap：
+    * YYKVStorage 离线存储：实现技术大致分为三类：基于文件读写、基于 mmap 文件内存映射、基于数据库。
+      > TMDiskCache, PINDiskCache, SDWebImage 等缓存，都是基于文件系统的。
+      > FastImageCache 采用的是 mmap 将文件映射到内存。
+      > NSURLCache、FBDiskCache 都是基于 SQLite 数据库的。
