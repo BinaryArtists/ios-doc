@@ -7,6 +7,23 @@
 todo：
 以YYCache为目标做性能优化：[YYCache源码分析(一)](http://www.cocoachina.com/ios/20160614/16672.html), [YYCache 源码分析(二)](http://ios.jobbole.com/85740/), [YYCache 源码分析(三)](http://ios.jobbole.com/85940/)
 
+### 系统方案
+
+  1. NSUserDefaults
+  2. Sqlite
+  3. Json serialization
+  4. NSArchiver
+  5. CoreData
+  6. 其他：
+  6.1 [nicklockwood/AutoCoding](https://github.com/nicklockwood/AutoCoding)，自动归档，不需要写encodeWithCoder:、initWithCoder:。
+  6.2 [nicklockwood/FastCoding](https://github.com/nicklockwood/FastCoding)，更快、可伸缩的二进制文件格式存储，替代归档、属性列表、json。
+
+### Features
+
+  1. 独立的 GCD 队列
+  2. block 回调
+  3. MD5
+  4. TTL（Time to live） 时效性
 
 ### 文件缓存设计
 
