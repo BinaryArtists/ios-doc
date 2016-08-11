@@ -2,6 +2,7 @@
 
 1. http://www.cnblogs.com/ygm900/p/3599081.html中的cocoa对象
 2. 特性：kvo、kvc、method swizzling、block
+3. [Runtime全方位装逼指南](http://www.cocoachina.com/ios/20160523/16386.html)
 
 ### Runtime 是什么？
 
@@ -225,3 +226,29 @@ objc_removeAssociatedObjects 方法将会移除源对象中所有的关联对象
 略
 
 9. 动态方法解析
+
+前面我们留下了一点东西没说，那就是如果某个对象调用了不存在的方法时会怎么样，一般情况下程序会crash，错误信息类似下面这样：
+
+unrecognized selector sent to instance 0x7fd0a141afd0
+
+但是在程序crash之前，Runtime 会给我们动态方法解析的机会，消息发送的步骤大致如下：
+
+1.检测这个 selector 是不是要忽略的。比如 Mac OS X 开发，有了垃圾回收就不理会 retain，release 这些函数了
+
+2.检测这个 target 是不是 nil 对象。ObjC 的特性是允许对一个 nil 对象执行任何一个方法不会 Crash，因为会被忽略掉
+
+3.如果上面两个都过了，那就开始查找这个类的 IMP，先从 cache 里面找，完了找得到就跳到对应的函数去执行
+
+如果 cache 找不到就找一下方法分发表
+
+4.如果分发表找不到就到超类的分发表去找，一直找，直到找到NSObject类为止
+
+如果还找不到就要开始进入消息转发了，消息转发的大致过程如图：
+[image](https://github.com/BinaryArtists/not-just-code/blob/master/articles.ios/imges/%E6%B6%88%E6%81%AF%E8%BD%AC%E5%8F%91.jpg)
+1.进入 resolveInstanceMethod: 方法，指定是否动态添加方法。若返回NO，则进入下一步，若返回YES，则通过 class_addMethod 函数动态地添加方法，消息得到处理，此流程完毕。
+
+2.resolveInstanceMethod: 方法返回 NO 时，就会进入 forwardingTargetForSelector: 方法，这是 Runtime 给我们的第二次机会，用于指定哪个对象响应这个 selector。返回nil，进入下一步，返回某个对象，则会调用该对象的方法。
+
+3.若 forwardingTargetForSelector: 返回的是nil，则我们首先要通过 methodSignatureForSelector: 来指定方法签名，返回nil，表示不处理，若返回方法签名，则会进入下一步。
+
+4.当第 methodSignatureForSelector: 方法返回方法签名后，就会调用 forwardInvocation: 方法，我们可以通过 anInvocation 对象做很多处理，比如修改实现方法，修改响应对象等。
