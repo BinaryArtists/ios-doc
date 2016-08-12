@@ -2,13 +2,28 @@
 
 1. http://www.cnblogs.com/ygm900/p/3599081.html中的cocoa对象
 2. 特性：kvo、kvc、method swizzling、block
-3. [Runtime全方位装逼指南](http://www.cocoachina.com/ios/20160523/16386.html)
+3. [iOS-Runtime知识点整理](http://www.cnblogs.com/Mike-zh/p/4557014.html)
+4. 推荐看：[iOS开发之runtime详解](http://www.jianshu.com/p/ea1743715609)
 
-### Runtime 是什么？
+### Runtime是什么？
 
-  1. 运行时系统
+Objc是一门动态语言，所以它总是想办法把一些决定工作从编译、链接延迟到运行时。这意味着只有编译器是不够的，还需要一个运行时系统（runtime system）来执行编译后的代码。
 
-### Objective-C 对象模型
+Runtime其实有两个版本:“modern”和 “legacy”。我们现在用的 Objective-C 2.0 采用的是现行(Modern)版的Runtime系统，只能运行在 iOS 和 OS X 10.5 之后的64位程序中。而OS X较老的32位程序仍采用 Objective-C 1中的（早期）Legacy 版本的 Runtime 系统。这两个版本最大的区别在于当你更改一个类的实例变量的布局时，在早期版本中你需要重新编译它的子类，而现行版就不需要。
+
+可以在这里下到苹果维护的开源代码[runtime源码](http://opensource.apple.com/tarballs/objc4/)。
+
+### Runtime的知识点与使用场景
+
+  1. 获取property、member列表
+  2. 交换方法
+  3. Class、Object的关联对象（假属性）
+  4. 动态添加方法、拦截未实现的方法
+  5. 动态创建一个类
+  6. 动态方法解析
+  7. 消息转发
+
+### Runtime实现原理之［Objective-C 对象模型］
 
 * isa指针
   1. 对象是类的一个实例，类也是一个对象，所以它也必须是另一个类的实例，这个类就是元类（metaclass）
@@ -43,19 +58,19 @@ NSObject 子类的子类的。。。
     > [kvo就利用了动态修改isa指针的值的技术](https://developer.apple.com/library/ios/documentation/cocoa/conceptual/KeyValueObserving/Articles/KVOImplementation.html)
     > method swizzling：（class_replaceMethod替换类方法的定义）（method_exchangeImplementations交换两个方法的实现）（method_setImplementation设置一个方法的实现）
 
-### Tagged Pointer 对象
+### Runtime实现原理之［Tagged Pointer 对象］
 
 主要解决32位 到 64位迁移时，带来的内存使用、性能上的损失。
 
 简述：将一个对象指针拆成两部分，一部分直接保存数据，一部分作为特殊标记，表示这是一个特别的指针，不指向任何一个地址
 
-### block 对象模型
+### Runtime实现原理之［block 对象模型］
 
 block的数据结构定义：
 
 [Block_private.h](https://llvm.org/svn/llvm-project/compiler-rt/tags/Apple/Libcompiler_rt-10/BlocksRuntime/Block_private.h)
 
-### runtime 语法表达式
+### Runtime实现原理之［runtime 语法表达式（术语）］
 
 1. objc_msgSend
 
