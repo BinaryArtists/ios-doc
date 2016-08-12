@@ -50,6 +50,9 @@
 ```
 
 下面附上完整的消息转发流程图：
-[image]()
+[image](https://github.com/BinaryArtists/not-just-code/blob/master/articles.ios/imges/msg_dispatch_diagram.png)
 
-###
+### 动态方法解析
+
+
+### 方法缓存

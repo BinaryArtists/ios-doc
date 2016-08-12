@@ -5,6 +5,12 @@
 3. [iOS-Runtime知识点整理](http://www.cnblogs.com/Mike-zh/p/4557014.html)
 4. 推荐看：[iOS开发之runtime详解](http://www.jianshu.com/p/ea1743715609)
 5. 推荐看：[Objective-C Runtime 运行时之一：类与对象](http://www.cocoachina.com/ios/20141031/10105.html)
+6. [Objective-C Runtime 运行时之二：成员变量与属性](http://www.cocoachina.com/ios/20141105/10134.html)
+7. [Objective-C Runtime 运行时之三：方法与消息](http://www.cocoachina.com/ios/20141106/10150.html)
+8. [Objective-C Runtime 运行时之四：Method Swizzling](http://blog.jobbole.com/79580/)
+9. [Objective-C Runtime 运行时之五：协议与分类](http://www.cocoachina.com/ios/20141110/10174.html)
+9.1??? [Associated Objects](http://esoftmobile.com/2014/02/18/associated-objects/)
+10. [Objective-C Runtime 运行时之六：拾遗](http://www.cocoachina.com/ios/20141111/10186.html)
 
 ### Runtime是什么？
 
@@ -16,6 +22,12 @@ Runtime其实有两个版本:“modern”和 “legacy”。我们现在用的 O
 
 ### Runtime的技术点
 
+  1. 类与对象
+    * 类与对象基础数据结构
+    * 类与对象操作函数
+    * 动态创建类和对象
+    * 实例操作函数
+  2.
 
 ### Runtime的使用场景
 
