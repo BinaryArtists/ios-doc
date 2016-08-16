@@ -76,16 +76,32 @@
 
     （2）将bool转换成有意义的枚举getProduct(ProductStatus)
 
-    3. 不要修改输入参数
-    4. 尽量不要使用输出参数
+  * 不要修改输入参数
+  * 尽量不要使用输出参数
     使用输出参数说明这个函数不只做了一件事情，而且使用者使用的时候可能还会感到困惑。正确的方式应该是分解函数，让函数只做一件事。
 
 ### 编写函数体
-    1. 相关操作放在一起
-    2. 尽量减少代码嵌套，if-else，for
-    3. 提取复杂逻辑，语义化
+  * 相关操作放在一起
+  * 尽量减少代码嵌套，if-else，for
+  * 提取复杂逻辑，语义化
     ```
     if (age > 18 && gender == "man") {
       //doSth
     }
     ```
+    变成了：
+    ```
+    var canDoSth = function (age, gender){
+      return age > 18 && gender == "man";
+    }
+    ...
+    ...
+    ...
+    if(canDoSth(age, gender)){
+      //doSth
+    }
+    ```
+
+### Reference
+
+  * [提高代码质量：如何编写函数](http://www.tuicool.com/articles/FVf2qyY)
