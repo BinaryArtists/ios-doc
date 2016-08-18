@@ -89,11 +89,167 @@ Objc Runtime其实是一个Runtime库，它基本上是用C和汇编写的，这
 
 ### 类与对象操作函数
 
+runtime提供了大量的函数来操作类与对象。类的操作方法大部分是以class为前缀的，而对象的操作方法大部分是以objc或object_为前缀。下面我们将根据这些方法的用途来分类讨论这些方法的使用。
 
+  * 类名(name)
+    类名操作的函数主要有：
+    ```
+    // 获取类的类名
+    const char * class_getName ( Class cls );
+    ```
+    对于class_getName函数，如果传入的cls为Nil，则返回一个字字符串。
 
+  * 父类(super_class)和元类(meta-class)
+    父类和元类操作的函数主要有：
+    ```
+    // 获取类的父类
+    Class class_getSuperclass ( Class cls );
+
+    // 判断给定的Class是否是一个元类
+    BOOL class_isMetaClass ( Class cls );
+    ```
+    class_getSuperclass函数，当cls为Nil或者cls为根类时，返回Nil。不过通常我们可以使用NSObject类的superclass方法来达到同样的目的。
+    class_isMetaClass函数，如果是cls是元类，则返回YES；如果否或者传入的cls为Nil，则返回NO。
+
+  * 实例变量大小(instance_size)
+  实例变量大小操作的函数有：
+  ```
+  // 获取实例大小
+  size_t class_getInstanceSize ( Class cls );
+  ```
+
+  * 成员变量(ivars)及属性
+    在objc_class中，所有的成员变量、属性的信息是放在链表ivars中的。ivars是一个数组，数组中每个元素是指向Ivar(变量信息)的指针。runtime提供了丰富的函数来操作这一字段。大体上可以分为以下几类：
+
+    1.成员变量操作函数，主要包含以下函数：
+    ```
+    // 获取类中指定名称实例成员变量的信息
+    Ivar class_getInstanceVariable ( Class cls, const char *name );
+
+    // 获取类成员变量的信息
+    Ivar class_getClassVariable ( Class cls, const char *name );
+
+    // 添加成员变量
+    BOOL class_addIvar ( Class cls, const char *name, size_t size, uint8_t alignment, const char *types );
+
+    // 获取整个成员变量列表
+    Ivar * class_copyIvarList ( Class cls, unsigned int *outCount );
+    ```
+    class_getInstanceVariable函数，它返回一个指向包含name指定的成员变量信息的objc_ivar结构体的指针(Ivar)。
+    class_getClassVariable函数，目前没有找到关于Objective-C中类变量的信息，一般认为Objective-C不支持类变量。注意，返回的列表不包含父类的成员变量和属性。
+
+    Objective-C不支持往已存在的类中添加实例变量，因此不管是系统库提供的提供的类，还是我们自定义的类，都无法动态添加成员变量。但如果我们通过运行时来创建一个类的话，又应该如何给它添加成员变量呢？这时我们就可以使用class_addIvar函数了。不过需要注意的是，这个方法只能在objc_allocateClassPair函数与objc_registerClassPair之间调用。另外，这个类也不能是元类。成员变量的按字节最小对齐量是1<
+
+    class_copyIvarList函数，它返回一个指向成员变量信息的数组，数组中每个元素是指向该成员变量信息的objc_ivar结构体的指针。这个数组不包含在父类中声明的变量。outCount指针返回数组的大小。需要注意的是，我们必须使用free()来释放这个数组。
+
+    2.属性操作函数，主要包含以下函数：
+    ```
+    // 获取指定的属性
+    objc_property_t class_getProperty ( Class cls, const char *name );
+
+    // 获取属性列表
+    objc_property_t * class_copyPropertyList ( Class cls, unsigned int *outCount );
+
+    // 为类添加属性
+    BOOL class_addProperty ( Class cls, const char *name, const objc_property_attribute_t *attributes, unsigned int attributeCount );
+
+    // 替换类的属性
+    void class_replaceProperty ( Class cls, const char *name, const objc_property_attribute_t *attributes, unsigned int attributeCount );
+    ```
+    这一种方法也是针对ivars来操作，不过只操作那些是属性的值。我们在后面介绍属性时会再遇到这些函数。
+
+    3.在MAC OS X系统中，我们可以使用垃圾回收器。runtime提供了几个函数来确定一个对象的内存区域是否可以被垃圾回收器扫描，以处理strong/weak引用。这几个函数定义如下：
+    ```
+    const uint8_t * class_getIvarLayout ( Class cls );
+    void class_setIvarLayout ( Class cls, const uint8_t *layout );
+    const uint8_t * class_getWeakIvarLayout ( Class cls );
+    void class_setWeakIvarLayout ( Class cls, const uint8_t *layout );
+    ```
+
+    但通常情况下，我们不需要去主动调用这些方法；在调用objc_registerClassPair时，会生成合理的布局。在此不详细介绍这些函数。
+
+  * 方法(methodLists)
+    方法操作主要有以下函数：
+    ```
+    // 添加方法
+    BOOL class_addMethod ( Class cls, SEL name, IMP imp, const char *types );
+
+    // 获取实例方法
+    Method class_getInstanceMethod ( Class cls, SEL name );
+
+    // 获取类方法
+    Method class_getClassMethod ( Class cls, SEL name );
+
+    // 获取所有方法的数组
+    Method * class_copyMethodList ( Class cls, unsigned int *outCount );
+
+    // 替代方法的实现
+    IMP class_replaceMethod ( Class cls, SEL name, IMP imp, const char *types );
+
+    // 返回方法的具体实现
+    IMP class_getMethodImplementation ( Class cls, SEL name );
+    IMP class_getMethodImplementation_stret ( Class cls, SEL name );
+
+    // 类实例是否响应指定的selector
+    BOOL class_respondsToSelector ( Class cls, SEL sel );
+    ```
+    class_addMethod的实现会覆盖父类的方法实现，但不会取代本类中已存在的实现，如果本类中包含一个同名的实现，则函数会返回NO。如果要修改已存在实现，可以使用method_setImplementation。一个Objective-C方法是一个简单的C函数，它至少包含两个参数—self和_cmd。所以，我们的实现函数(IMP参数指向的函数)至少需要两个参数，如下所示：
+    ```
+    void myMethodIMP(id self, SEL _cmd)
+    {
+        // implementation ....
+    }
+    ```
+    与成员变量不同的是，我们可以为类动态添加方法，不管这个类是否已存在。
+
+    另外，参数types是一个描述传递给方法的参数类型的字符数组，这就涉及到类型编码，我们将在后面介绍。
+
+    class_getInstanceMethod、class_getClassMethod函数，与class_copyMethodList不同的是，这两个函数都会去搜索父类的实现。
+
+    class_copyMethodList函数，返回包含所有实例方法的数组，如果需要获取类方法，则可以使用class_copyMethodList(object_getClass(cls), &count)(一个类的实例方法是定义在元类里面)。该列表不包含父类实现的方法。outCount参数返回方法的个数。在获取到列表后，我们需要使用free()方法来释放它。
+
+    class_replaceMethod函数，该函数的行为可以分为两种：如果类中不存在name指定的方法，则类似于class_addMethod函数一样会添加方法；如果类中已存在name指定的方法，则类似于method_setImplementation一样替代原方法的实现。
+
+    class_getMethodImplementation函数，该函数在向类实例发送消息时会被调用，并返回一个指向方法实现函数的指针。这个函数会比method_getImplementation(class_getInstanceMethod(cls, name))更快。返回的函数指针可能是一个指向runtime内部的函数，而不一定是方法的实际实现。例如，如果类实例无法响应selector，则返回的函数指针将是运行时消息转发机制的一部分。
+
+    class_respondsToSelector函数，我们通常使用NSObject类的respondsToSelector:或instancesRespondToSelector:方法来达到相同目的。
+
+  * 协议(objc_protocol_list)
+    协议相关的操作包含以下函数：
+    ```
+    // 添加协议
+    BOOL class_addProtocol ( Class cls, Protocol *protocol );
+
+    // 返回类是否实现指定的协议
+    BOOL class_conformsToProtocol ( Class cls, Protocol *protocol );
+
+    // 返回类实现的协议列表
+    Protocol * class_copyProtocolList ( Class cls, unsigned int *outCount );
+    ```
+    class_conformsToProtocol函数可以使用NSObject类的conformsToProtocol:方法来替代。
+
+    class_copyProtocolList函数返回的是一个数组，在使用后我们需要使用free()手动释放。
+
+  * 版本(version)
+    版本相关的操作包含以下函数：
+    ```
+    // 获取版本号
+    int class_getVersion ( Class cls );
+
+    // 设置版本号
+    void class_setVersion ( Class cls, int version );
+    其它
+    ```
+    runtime还提供了两个函数来供CoreFoundation的tool-free bridging使用，即：
+    ```
+    Class objc_getFutureClass ( const char *name );
+    void objc_setFutureClass ( Class cls, const char *name );
+    ```
+    通常我们不直接使用这两个函数。
 
 ### 动态创建类和对象
 
+runtime的强大之处在于它能在运行时创建类和对象。
 
 
 
