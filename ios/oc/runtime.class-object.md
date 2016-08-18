@@ -291,9 +291,99 @@ runtime的强大之处在于它能在运行时创建类和对象。
     [instance performSelector:@selector(method1)];
     ```
 
+  * 动态创建对象
+    动态创建对象的函数如下：
+    ```
+    // 创建类实例
+    id class_createInstance ( Class cls, size_t extraBytes );
+
+    // 在指定位置创建类实例
+    id objc_constructInstance ( Class cls, void *bytes );
+
+    // 销毁类实例
+    void * objc_destructInstance ( id obj );
+    ```
+    class_createInstance函数：创建实例时，会在默认的内存区域为类分配内存。extraBytes参数表示分配的额外字节数。这些额外的字节可用于存储在类定义中所定义的实例变量之外的实例变量。该函数在ARC环境下无法使用。
+
+    调用class_createInstance的效果与+alloc方法类似。不过在使用class_createInstance时，我们需要确切的知道我们要用它来做什么。
+
+    使用class_createInstance函数获取的是NSString实例，而不是类簇中的默认占位符类__NSCFConstantString。
+
+    objc_constructInstance函数：在指定的位置(bytes)创建类实例。
+
+    objc_destructInstance函数：销毁一个类的实例，但不会释放并移除任何与其相关的引用。
+
 ### 实例操作函数
 
+  * 实例操作函数主要是针对我们创建的实例对象的一系列操作函数，我们可以使用这组函数来从实例对象中获取我们想要的一些信息，如实例对象中变量的值。这组函数可以分为三小类：
 
+  1.针对整个对象进行操作的函数，这类函数包含
+  ```
+  // 返回指定对象的一份拷贝
+  id object_copy ( id obj, size_t size );
+
+  // 释放指定对象占用的内存
+  id object_dispose ( id obj );
+  ```
+  有这样一种场景，假设我们有类A和类B，且类B是类A的子类。类B通过添加一些额外的属性来扩展类A。现在我们创建了一个A类的实例对象，并希望在运行时将这个对象转换为B类的实例对象，这样可以添加数据到B类的属性中。这种情况下，我们没有办法直接转换，因为B类的实例会比A类的实例更大，没有足够的空间来放置对象。此时，我们就要以使用以上几个函数来处理这种情况，如下代码所示：
+  ```
+  NSObject *a = [[NSObject alloc] init];
+  id newB = object_copy(a, class_getInstanceSize(MyClass.class));
+  object_setClass(newB, MyClass.class);
+  object_dispose(a);
+  ```
+
+  2.针对对象实例变量进行操作的函数，这类函数包含：
+  ```
+  // 修改类实例的实例变量的值
+  Ivar object_setInstanceVariable ( id obj, const char *name, void *value );
+
+  // 获取对象实例变量的值
+  Ivar object_getInstanceVariable ( id obj, const char *name, void **outValue );
+
+  // 返回指向给定对象分配的任何额外字节的指针
+  void * object_getIndexedIvars ( id obj );
+
+  // 返回对象中实例变量的值
+  id object_getIvar ( id obj, Ivar ivar );
+
+  // 设置对象中实例变量的值
+  void object_setIvar ( id obj, Ivar ivar, id value );
+  ```
+  如果实例变量的Ivar已经知道，那么调用object_getIvar会比object_getInstanceVariable函数快，相同情况下，object_setIvar也比object_setInstanceVariable快。
+
+  3.针对对象的类进行操作的函数，这类函数包含：
+  ```
+  // 返回给定对象的类名
+  const char * object_getClassName ( id obj );
+
+  // 返回对象的类
+  Class object_getClass ( id obj );
+
+  // 设置对象的类
+  Class object_setClass ( id obj, Class cls );
+  ```
+
+  * 获取类定义
+    Objective-C动态运行库会自动注册我们代码中定义的所有的类。我们也可以在运行时创建类定义并使用objc_addClass函数来注册它们。runtime提供了一系列函数来获取类定义相关的信息，这些函数主要包括：
+    ```
+    // 获取已注册的类定义的列表
+    int objc_getClassList ( Class *buffer, int bufferCount );
+
+    // 创建并返回一个指向所有已注册类的指针列表
+    Class * objc_copyClassList ( unsigned int *outCount );
+
+    // 返回指定类的类定义
+    Class objc_lookUpClass ( const char *name );
+    Class objc_getClass ( const char *name );
+    Class objc_getRequiredClass ( const char *name );
+
+    // 返回指定类的元类
+    Class objc_getMetaClass ( const char *name );
+    ```
+    objc_getClassList函数：获取已注册的类定义的列表。我们不能假设从该函数中获取的类对象是继承自NSObject体系的，所以在这些类上调用方法是，都应该先检测一下这个方法是否在这个类中实现。
+
+    objc_getMetaClass函数：如果指定的类没有注册，则该函数会调用类处理回调，并再次确认类是否注册，如果确认未注册，再返回nil。不过，每个类定义都必须有一个有效的元类定义，所以这个函数总是会返回一个元类定义，不管它是否有效。
 
 ### Reference
 
