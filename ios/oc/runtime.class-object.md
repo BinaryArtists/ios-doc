@@ -251,7 +251,45 @@ runtime提供了大量的函数来操作类与对象。类的操作方法大部�
 
 runtime的强大之处在于它能在运行时创建类和对象。
 
+  * 动态创建类
+    动态创建类涉及到以下几个函数：
+    ```
+    // 创建一个新类和元类
+    Class objc_allocateClassPair ( Class superclass, const char *name, size_t extraBytes );
 
+    // 销毁一个类及其相关联的类
+    void objc_disposeClassPair ( Class cls );
+
+    // 在应用中注册由objc_allocateClassPair创建的类
+    void objc_registerClassPair ( Class cls );
+    ```
+    objc_allocateClassPair函数：如果我们要创建一个根类，则superclass指定为Nil。extraBytes通常指定为0，该参数是分配给类和元类对象尾部的索引ivars的字节数。
+
+    为了创建一个新类，我们需要调用objc_allocateClassPair。然后使用诸如class_addMethod，class_addIvar等函数来为新创建的类添加方法、实例变量和属性等。完成这些后，我们需要调用objc_registerClassPair函数来注册类，之后这个新类就可以在程序中使用了。
+
+    实例方法和实例变量应该添加到类自身上，而类方法应该添加到类的元类上。
+
+    objc_disposeClassPair函数用于销毁一个类，不过需要注意的是，如果程序运行中还存在类或其子类的实例，则不能调用针对类调用该方法。
+
+    在前面介绍元类时，我们已经有接触到这几个函数了，在此我们再举个实例来看看这几个函数的使用。
+    ```
+    Class cls = objc_allocateClassPair(MyClass.class, "MySubClass", 0);
+    class_addMethod(cls, @selector(submethod1), (IMP)imp_submethod1, "v@:");
+    class_replaceMethod(cls, @selector(method1), (IMP)imp_submethod1, "v@:");
+    class_addIvar(cls, "_ivar1", sizeof(NSString *), log(sizeof(NSString *)), "i");
+
+    objc_property_attribute_t type = {"T", "@\"NSString\""};
+    objc_property_attribute_t ownership = { "C", "" };
+    objc_property_attribute_t backingivar = { "V", "_ivar1"};
+    objc_property_attribute_t attrs[] = {type, ownership, backingivar};
+
+    class_addProperty(cls, "property2", attrs, 3);
+    objc_registerClassPair(cls);
+
+    id instance = [[cls alloc] init];
+    [instance performSelector:@selector(submethod1)];
+    [instance performSelector:@selector(method1)];
+    ```
 
 ### 实例操作函数
 
