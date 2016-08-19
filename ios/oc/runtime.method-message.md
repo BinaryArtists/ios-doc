@@ -138,81 +138,82 @@ Runtime提供了一系列的方法来处理与方法相关的操作。包括方�
 
 ### 方法调用流程
 
-在Objective-C中，消息直到运行时才绑定到方法实现上。编译器会将消息表达式[receiver message]转化为一个消息函数的调用，即objc_msgSend。这个函数将消息接收者和方法名作为其基础参数，如以下所示：
-```
-objc_msgSend(receiver, selector)
-```
-如果消息中还有其它参数，则该方法的形式如下所示：
-```
-objc_msgSend(receiver, selector, arg1, arg2, ...)
-```
-这个函数完成了动态绑定的所有事情：
+  在Objective-C中，消息直到运行时才绑定到方法实现上。编译器会将消息表达式[receiver message]转化为一个消息函数的调用，即objc_msgSend。这个函数将消息接收者和方法名作为其基础参数，如以下所示：
+  ```
+  objc_msgSend(receiver, selector)
+  ```
+  如果消息中还有其它参数，则该方法的形式如下所示：
+  ```
+  objc_msgSend(receiver, selector, arg1, arg2, ...)
+  ```
+  这个函数完成了动态绑定的所有事情：
 
-1. 首先它找到selector对应的方法实现。因为同一个方法可能在不同的类中有不同的实现，所以我们需要依赖于接收者的类来找到的确切的实现。
+  1. 首先它找到selector对应的方法实现。因为同一个方法可能在不同的类中有不同的实现，所以我们需要依赖于接收者的类来找到的确切的实现。
 
-2. 它调用方法实现，并将接收者对象及方法的所有参数传给它。
+  2. 它调用方法实现，并将接收者对象及方法的所有参数传给它。
 
-3. 最后，它将实现返回的值作为它自己的返回值。
+  3. 最后，它将实现返回的值作为它自己的返回值。
 
-消息的关键在于我们前面章节讨论过的结构体objc_class，这个结构体有两个字段是我们在分发消息的关注的：
+  消息的关键在于我们前面章节讨论过的结构体objc_class，这个结构体有两个字段是我们在分发消息的关注的：
 
-1. 指向父类的指针
+  1. 指向父类的指针
 
-2. 一个类的方法分发表，即methodLists。
+  2. 一个类的方法分发表，即methodLists。
 
-当我们创建一个新对象时，先为其分配内存，并初始化其成员变量。其中isa指针也会被初始化，让对象可以访问类及类的继承体系。
+  当我们创建一个新对象时，先为其分配内存，并初始化其成员变量。其中isa指针也会被初始化，让对象可以访问类及类的继承体系。
 
-下图演示了这样一个消息的基本框架：
+  下图演示了这样一个消息的基本框架：
 
-当消息发送给一个对象时，objc_msgSend通过对象的isa指针获取到类的结构体，然后在方法分发表里面查找方法的selector。如果 没有找到selector，则通过objc_msgSend结构体中的指向父类的指针找到其父类，并在父类的分发表里面查找方法的selector。依 此，会一直沿着类的继承体系到达NSObject类。一旦定位到selector，函数会就获取到了实现的入口点，并传入相应的参数来执行方法的具体实 现。如果最后没有定位到selector，则会走消息转发流程，这个我们在后面讨论。
+  ![image](https://github.com/BinaryArtists/not-just-code/blob/master/ios/imges/message_foundamental_framework.gif)
 
-为了加速消息的处理，运行时系统缓存使用过的selector及对应的方法的地址。这点我们在前面讨论过，不再重复。
+  当消息发送给一个对象时，objc_msgSend通过对象的isa指针获取到类的结构体，然后在方法分发表里面查找方法的selector。如果 没有找到selector，则通过objc_msgSend结构体中的指向父类的指针找到其父类，并在父类的分发表里面查找方法的selector。依 此，会一直沿着类的继承体系到达NSObject类。一旦定位到selector，函数会就获取到了实现的入口点，并传入相应的参数来执行方法的具体实 现。如果最后没有定位到selector，则会走消息转发流程，这个我们在后面讨论。
 
-隐藏参数
+  为了加速消息的处理，运行时系统缓存使用过的selector及对应的方法的地址。这点我们在前面讨论过，不再重复。
 
-objc_msgSend有两个隐藏参数：
+    * 隐藏参数
 
-1. 消息接收对象
+  objc_msgSend有两个隐藏参数：
 
-2. 方法的selector
+  1. 消息接收对象
 
-这两个参数为方法的实现提供了调用者的信息。之所以说是隐藏的，是因为它们在定义方法的源代码中没有声明。它们是在编译期被插入实现代码的。
+  2. 方法的selector
 
-虽然这些参数没有显示声明，但在代码中仍然可以引用它们。我们可以使用self来引用接收者对象，使用_cmd来引用选择器。如下代码所示：
-```
-- strange
-{
-    id  target = getTheReceiver();
-    SEL method = getTheMethod();
+  这两个参数为方法的实现提供了调用者的信息。之所以说是隐藏的，是因为它们在定义方法的源代码中没有声明。它们是在编译期被插入实现代码的。
 
-    if ( target == self || method == _cmd )
-        return nil;
-    return [target performSelector:method];
-}
-```
-当然，这两个参数我们用得比较多的是self，_cmd在实际中用得比较少。
+  虽然这些参数没有显示声明，但在代码中仍然可以引用它们。我们可以使用self来引用接收者对象，使用_cmd来引用选择器。如下代码所示：
+  ```
+  - strange
+  {
+      id  target = getTheReceiver();
+      SEL method = getTheMethod();
 
-获取方法地址
+      if ( target == self || method == _cmd )
+          return nil;
+      return [target performSelector:method];
+  }
+  ```
+  当然，这两个参数我们用得比较多的是self，_cmd在实际中用得比较少_。
 
-Runtime中方法的动态绑定让我们写代码时更具灵活性，如我们可以把消息转发给我们想要的对象，或者随意交换一个方法的实现等。不过灵活性的提 升也带来了性能上的一些损耗。毕竟我们需要去查找方法的实现，而不像函数调用来得那么直接。当然，方法的缓存一定程度上解决了这一问题。
+  * 获取方法地址
+    Runtime中方法的动态绑定让我们写代码时更具灵活性，如我们可以把消息转发给我们想要的对象，或者随意交换一个方法的实现等。不过灵活性的提 升也带来了性能上的一些损耗。毕竟我们需要去查找方法的实现，而不像函数调用来得那么直接。当然，方法的缓存一定程度上解决了这一问题。
 
-我们上面提到过，如果想要避开这种动态绑定方式，我们可以获取方法实现的地址，然后像调用函数一样来直接调用它。特别是当我们需要在一个循环内频繁地调用一个特定的方法时，通过这种方式可以提高程序的性能。
+    我们上面提到过，如果想要避开这种动态绑定方式，我们可以获取方法实现的地址，然后像调用函数一样来直接调用它。特别是当我们需要在一个循环内频繁地调用一个特定的方法时，通过这种方式可以提高程序的性能。
 
-NSObject类提供了methodForSelector:方法，让我们可以获取到方法的指针，然后通过这个指针来调用实现代码。我们需要将methodForSelector:返回的指针转换为合适的函数类型，函数参数和返回值都需要匹配上。
+    NSObject类提供了methodForSelector:方法，让我们可以获取到方法的指针，然后通过这个指针来调用实现代码。我们需要将methodForSelector:返回的指针转换为合适的函数类型，函数参数和返回值都需要匹配上。
 
-我们通过以下代码来看看methodForSelector:的使用：
-```
-void (*setter)(id, SEL, BOOL);
-int i;
+    我们通过以下代码来看看methodForSelector:的使用：
+    ```
+    void (*setter)(id, SEL, BOOL);
+    int i;
 
-setter = (void (*)(id, SEL, BOOL))[target
-    methodForSelector:@selector(setFilled:)];
-for ( i = 0 ; i < 1000 ; i++ )
-    setter(targetList[i], @selector(setFilled:), YES);
-```
-这里需要注意的就是函数指针的前两个参数必须是id和SEL。
+    setter = (void (*)(id, SEL, BOOL))[target
+        methodForSelector:@selector(setFilled:)];
+    for ( i = 0 ; i < 1000 ; i++ )
+        setter(targetList[i], @selector(setFilled:), YES);
+    ```
+    这里需要注意的就是函数指针的前两个参数必须是id和SEL。
 
-当然这种方式只适合于在类似于for循环这种情况下频繁调用同一方法，以提高性能的情况。另外，methodForSelector:是由Cocoa运行时提供的；它不是Objective-C语言的特性。
+    当然这种方式只适合于在类似于for循环这种情况下频繁调用同一方法，以提高性能的情况。另外，methodForSelector:是由Cocoa运行时提供的；它不是Objective-C语言的特性。
 
 ### 消息传递
 
