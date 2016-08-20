@@ -160,7 +160,64 @@ id objc_storeWeak ( id *location, id obj );
 
 ### 宏定义
 
+在runtime中，还定义了一些宏定义供我们使用，有些值我们会经常用到，如表示BOOL值的YES/NO；而有些值不常用，如OBJC_ROOT_CLASS。在此我们做一个简单的介绍。
 
+布尔值
+```
+#define YES  (BOOL)1
+#define NO   (BOOL)0
+```
+这两个宏定义定义了表示布尔值的常量，需要注意的是YES的值是1，而不是非0值。
+
+空值
+```
+#define nil  __DARWIN_NULL
+#define Nil  __DARWIN_NULL
+```
+其中nil用于空的实例对象，而Nil用于空类对象。
+
+分发函数原型
+```
+#define OBJC_OLD_DISPATCH_PROTOTYPES  1
+```
+该宏指明分发函数是否必须转换为合适的函数指针类型。当值为0时，必须进行转换
+
+Objective-C根类
+```
+#define OBJC_ROOT_CLASS
+```
+如果我们定义了一个Objective-C根类，则编译器会报错，指明我们定义的类没有指定一个基类。这种情况下，我们就可以使用这个宏定义来避过这个编译错误。该宏在iOS 7.0后可用。
+
+其实在NSObject的声明中，我们就可以看到这个宏的身影，如下所示：
+```
+__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0)
+OBJC_ROOT_CLASS
+OBJC_EXPORT
+@interface NSObject <nsobject> {
+    Class isa  OBJC_ISA_AVAILABILITY;
+}</nsobject>
+```
+我们可以参考这种方式来定义我们自己的根类。
+
+局部变量存储时长
+```
+#define NS_VALID_UNTIL_END_OF_SCOPE
+```
+该宏表明存储在某些局部变量中的值在优化时不应该被编译器强制释放。
+
+我们将局部变量标记为id类型或者是指向ObjC对象类型的指针，以便存储在这些局部变量中的值在优化时不会被编译器强制释放。相反，这些值会在变量再次被赋值之前或者局部变量的作用域结束之前都会被保存。
+
+关联对象行为
+```
+enum {
+   OBJC_ASSOCIATION_ASSIGN  = 0,
+   OBJC_ASSOCIATION_RETAIN_NONATOMIC  = 1,
+   OBJC_ASSOCIATION_COPY_NONATOMIC  = 3,
+   OBJC_ASSOCIATION_RETAIN  = 01401,
+   OBJC_ASSOCIATION_COPY  = 01403
+};
+```
+这几个值在前面已介绍过，在此不再重复。
 
 ### 参考
 
