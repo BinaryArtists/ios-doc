@@ -1,6 +1,3 @@
-[submodule "Objective-C"]
-	path = Objective-C
-	url = https://github.com/Xcode-Snippets/Objective-C.git
 [submodule "DZTableView"]
 	path = DZTableView
 	url = https://github.com/yishuiliunian/DZTableView.git
