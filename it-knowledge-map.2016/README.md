@@ -10,6 +10,9 @@
 
 ![image](https://github.com/BinaryArtists/not-just-code/blob/master/it-knowledge-map.2016/images/ios.png)
 
+![ios route image](https://github.com/BinaryArtists/not-just-code/blob/master/it-knowledge-map.2016/images/ios-route.jpg)
+[参考](https://github.com/shaojiankui/iOS-Route)
+
 ### 3 运维工程师必备技能
 
 ![image](https://github.com/BinaryArtists/not-just-code/blob/master/it-knowledge-map.2016/images/operation.png)
