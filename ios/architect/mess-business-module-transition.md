@@ -15,6 +15,8 @@
 
   * 代表作：
     1. [URLManager](https://github.com/gaosboy/urlmanager)
+    2. [DarielChen/DCURLRouter](https://github.com/DarielChen/DCURLRouter)
+    3. [oenius/DarwinNativeRouter](https://github.com/oenius/DarwinNativeRouter)
 
   * 优点：
     1.
