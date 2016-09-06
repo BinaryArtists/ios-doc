@@ -20,3 +20,4 @@
   6. netconfig 抽象
   7. url 缓存
     *     1. https://github.com/rs/SDURLCache
+    *     2. AFURLCache

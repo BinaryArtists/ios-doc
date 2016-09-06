@@ -1,8 +1,8 @@
-## SegmentFault 源码分析
+## [SegmentFault](https://github.com/gaosboy/iOSSF) 源码分析
 
 ### 基于版本
 
-
+略
 
 ### 架构模式
 
@@ -22,7 +22,7 @@
     |-- Supports
       |-- JSONKit
       |-- URLManager
-      |-- Kache
+      |-- Kache （自主开发的缓存控件）（fallenink: 比较火的，是TMCache，YYCache）
       |-- AF
       |-- GTM
       |-- SlimeRefresh
@@ -41,3 +41,5 @@
 无
 
 ### 有趣的方案或者代码段
+
+无
