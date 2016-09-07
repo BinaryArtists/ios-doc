@@ -19,11 +19,12 @@
     3. [oenius/DarwinNativeRouter](https://github.com/oenius/DarwinNativeRouter)
 
   * 优点：
-    1.
+    1. 页面跳转解耦
+    2. 可通过配置实现重写规则动态化
 
   * 缺点
     1. 不容易梳理逻辑（可以使用宏生成协议，技巧性）
-    2. URL称为一个内部及与外部握手的协议，容易变得异构化严重（异构化，各模块内部结构迥异）
+    2. URL称为一个内部及与外部握手的协议，容易变得异构化严重（异构化，url协议本身规则滥用）
     3. 容易产生不符合W3C的URL标准
 
 ### 方案二：route by dependency injection
@@ -35,3 +36,8 @@
     1.
 
   * 缺点
+
+
+### 参考
+
+  1. [解耦神器 —— 统跳协议和Rewrite引擎](http://pingguohe.net/2015/11/24/Navigator-and-Rewrite.html)
