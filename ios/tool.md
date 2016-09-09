@@ -8,6 +8,9 @@
 
 ### 外围工具
 
+  * [Mac效率工具－Alfred]()
+  * [Mac清理工具－CleanMyMac]()
+  * []()
 
 ### 开发工具
 
@@ -26,4 +29,25 @@
 
     4. [http://blog.sina.com.cn/s/blog_923fdd9b0101g9kz.html](http://blog.sina.com.cn/s/blog_923fdd9b0101g9kz.html)
 
+  * [UI调试神器－Reveal]()
+  * [接口调试－Postman]()
+  * [网络拦截－Charles]()
+  * [取色工具－Sip]()
+  * [JSON生成数据模型工具－JSONExport]()
+  * [Git代码界面管理工具－SourceTree]()
+  * [Svn代码界面管理工具－Cornerstone]()
+
 ### Xcode插件
+
+### UI工具
+
+  * [原型设计工具－Axure RP Pro]()
+  * [Logo设计工具－Logoist]()
+  * [扁平化UI设计工具－Sketch]()
+  * [UI与代码转换工具－PaintCode]()
+
+
+### 视频工具
+
+  * [视频录制－QuickTime Player]()
+  * [Gif生成工具－licecap]()
