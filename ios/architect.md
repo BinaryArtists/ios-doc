@@ -4,6 +4,8 @@
 
 其中，大家常用的manager，属于粘合代码（Glue code），对应上面的service，或者mediator，偏重后者吧。（？？？对么对么？再想想）
 
+还有，状态即缓存，Screen State, Session State, Record State
+
 ### Model
 
 1. 数据模型（Database Model）
