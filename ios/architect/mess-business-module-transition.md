@@ -43,3 +43,8 @@
 ### 参考
 
   1. [解耦神器 —— 统跳协议和Rewrite引擎](http://pingguohe.net/2015/11/24/Navigator-and-Rewrite.html)
+  2. [如何优雅的实现界面跳转 之 原生界面跳转的统跳实践 - DarwinNativeDispatcher](http://www.jianshu.com/p/d37a8cef42fb)
+  3. [客户端动态化系列之——URLroute](http://www.tuicool.com/articles/M36ZZzv)
+  4. [campusappcn/iOSUrlRoute](https://github.com/campusappcn/iOSUrlRoute)
+  5. [GirlCunt/URLRouter](https://github.com/GirlCunt/URLRouter)
+  6. [joeldev/JLRoutes](https://github.com/joeldev/JLRoutes)
