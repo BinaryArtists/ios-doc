@@ -15,7 +15,7 @@
 
   1. Serialization / Deserialization
   1.1 json支持，以及json合法性检查
-  2. 缓存设计（还没做）
+  2. 缓存设计（还没做）, 参考[artifacts/AFCache](https://github.com/artifacts/AFCache)
   2.1 请求缓存
   2.2 应答缓存
   2.3 按时间、版本号缓存

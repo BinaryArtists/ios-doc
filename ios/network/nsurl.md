@@ -5,27 +5,27 @@
 直接看代码：
 ```
     NSURL *url = [NSURL URLWithString:@"http://www.baidu.com/s?tn=baiduhome_pg&bs=NSRUL&f=8&rsv_bp=1&rsv_spt=1&wd=NSurl&inputT=2709"];  
-      
+
     NSLog(@"Scheme: %@", [url scheme]);  
-      
+
     NSLog(@"Host: %@", [url host]);  
-      
+
     NSLog(@"Port: %@", [url port]);  
-      
+
     NSLog(@"Path: %@", [url path]);  
-      
+
     NSLog(@"Relative path: %@", [url relativePath]);  
-      
+
     NSLog(@"Path components as array: %@", [url pathComponents]);  
-      
+
     NSLog(@"Parameter string: %@", [url parameterString]);  
-      
+
     NSLog(@"Query: %@", [url query]);  
-      
+
     NSLog(@"Fragment: %@", [url fragment]);  
-      
+
     NSLog(@"User: %@", [url user]);  
-      
+
     NSLog(@"Password: %@", [url password]);
 ```
 
@@ -48,6 +48,8 @@
 ```
 
 ### [完美替代 NSMutableURL:NSURLComponents](http://nshipster.cn/nsurl/)
+
+另外还可以参考：[NSURL/NSURLComponents](http://www.cocoachina.com/industry/20140414/8155.html)
 
 苹果在 iOS 7 和 OS X Mavericks 中悄悄添加了 NSURLComponents，这样就可以完美替代 NSMutableURL 了。但文档还不是很完善，所以这个类仍然是近期Foundation新增类中隐晦的一块。
 
