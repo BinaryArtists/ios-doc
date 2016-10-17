@@ -39,3 +39,17 @@
   7. url 缓存
     *     1. https://github.com/rs/SDURLCache
     *     2. AFURLCache
+
+
+### 文件下载、文件上传
+
+  1. 需求与功能
+    * pre／post处理filter，让用户可以方便前置、后置处理
+    * batch 理念，让用户可以方便为单个、多个添加进度提示
+    * 开始下载、挂起下载、恢复下载、设置最大并发量、添加下载队列
+    * 子类化NSOperation+NSOperationQueue并发处理
+    * 预定义model，与文件类型无关，可定义协议
+
+  2. 类设计
+
+  3. ???
