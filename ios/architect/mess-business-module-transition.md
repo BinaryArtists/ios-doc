@@ -51,7 +51,7 @@
 ### 总结
 
   1. 绝对的解耦，我认为解决的其实是“人”的问题，而非业务问题，减少沟通成本，提高响应速度，带来了学习成本、维护成本。
-  2. 
+  2. 统一：普通界面弹出与跳转，web跳转，reactnative跳转，app跳转，界面深链
 
 ### 参考
 
@@ -64,7 +64,12 @@
 
   2. [如何优雅的实现界面跳转 之 原生界面跳转的统跳实践 - DarwinNativeDispatcher](http://www.jianshu.com/p/d37a8cef42fb)
   2.1 [如何优雅的实现界面跳转 之 统跳协议 - DarwinNativeRouter](http://www.jianshu.com/p/d6a246752ca5?appinstall=0)
-    * 
+    * 全局路由协议能解决的问题
+      > 错中复杂的Controller的跳转依赖
+      > 推送通知，点击打开指定页面
+      > app间通讯 及 deeplink
+      > 一致的行为处理， Hybrid & React Native
+    ^_^ 非常具有参考意义
   3. [客户端动态化系列之——URLroute](http://www.tuicool.com/articles/M36ZZzv)
   4. [campusappcn/iOSUrlRoute](https://github.com/campusappcn/iOSUrlRoute)
   5. [GirlCunt/URLRouter](https://github.com/GirlCunt/URLRouter)
