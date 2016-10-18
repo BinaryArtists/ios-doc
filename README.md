@@ -22,19 +22,21 @@ fallen.ink
 
 ### I'm Just Saying:
 
-1. Xcode编辑区主题颜色和字体
-  * [Ciapre-Xcode-theme](https://github.com/vinhnx/Ciapre-Xcode-theme/tree/0c3ba9bdbb225a159504264987e08c814df66830)
-  * [xcode-themes]()
+1. 后端文章
+  * [J2EE框架(Struts&Hibernate&Spring)的理解](https://github.com/BinaryArtists/not-just-code/blob/master/backend/j2ee.md)
+  * [一篇文章，读懂Netty的高性能架构之道](https://github.com/BinaryArtists/not-just-code/blob/master/backend/netty.md)
+  * [Hello，服务端 Swift](https://github.com/BinaryArtists/not-just-code/blob/master/backend/swift-demo.md)
 
 2. 自己实现一个TableView，以及相关文章
   * [DZTableView](https://github.com/yishuiliunian/DZTableView/tree/37236d7be600b9e146bddc49ee2f13e3090375ab)
 
   * 包括：articles.fork_from_DZTableView
 
-3. 一些代码片段：
-  * [Objective-C](https://github.com/Xcode-Snippets/Objective-C/tree/a15a6f2cdd47b0d2eb6a1bbdf413411803c51e70)
+3. 其他人的技术博客
+  * [nixzhu/dev-blog](https://github.com/nixzhu/dev-blog/tree/db5dff60c667d4f0f3ffc0a7cf8b7aa8c1d89a85)
 
-4. iOS相关：articles.ios
+4. iOS文章
+  * ???
 
 5. mac相关：articles.mac
 
