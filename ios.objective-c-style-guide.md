@@ -4,6 +4,7 @@
 参考链接：
 1. http://www.cocoachina.com/ios/20131129/7445.html
 2. http://www.cocoachina.com/ios/20151014/13678.html
+3. [iOS开发编码建议与编程经验（持续更新中）](http://www.cocoachina.com/ios/20160324/15727.html)
 
 ## 空白（Whitespaces）
 
@@ -75,11 +76,11 @@
 
  ```objc
  @protocol CAMediaTiming
- 
+
 /* The begin time of the object, in relation to its parent object, if
  * applicable. Defaults to 0. */
 @property CFTimeInterval beginTime;
- 
+
 // 省略余下
 
 @end
@@ -268,7 +269,7 @@ NSArray *names = @[@"Brian", @"Matt", @"Chris", @"Alex", @"Steve", @"Paul"];
 NSDictionary *productManagers = @{@"iPhone" : @"Kate", @"iPad" : @"Kamal", @"Mobile Web" : @"Bill"};
 NSNumber *shouldUseLiterals = @YES;
 NSNumber *buildingZIPCode = @10018;
- 
+
 // bad:
 NSArray *names = [NSArray arrayWithObjects:@"Brian", @"Matt", @"Chris", @"Alex", @"Steve", @"Paul", nil];
 NSDictionary *productManagers = [NSDictionary dictionaryWithObjectsAndKeys: @"Kate", @"iPhone", @"Kamal", @"iPad", @"Bill", @"Mobile Web", nil];
@@ -304,7 +305,7 @@ CGFloat height = frame.size.height;
 // good:
 static NSString * const RNCAboutViewControllerCompanyName = @"The New York Times Company";
 static const CGFloat RNCImageThumbnailHeight = 50.0;
- 
+
 // bad:
 #define CompanyName @"The New York Times Company"
 #define thumbnailHeight 2
@@ -395,7 +396,7 @@ rate        = [number  floatValue];
 newString   = [string  decomposedStringWithCanonicalMapping];
 subarray    = [array   subarrayWithRange:segment];
 ```
- 
+
  * 方法签名尽量做到含义明确。
 ```objc
 // bad：
@@ -408,7 +409,7 @@ subarray    = [array   subarrayWithRange:segment];
 -refreshDefaultTimer  // refresh是一个动词。
 -updateMenuItemTitle  // 一个正在发生的动作
 ```
- 
+
  * 方法类型修饰符+/-后要放置一个空格，各参数名之间也要放置一个空格。
 ```objc
 // good
@@ -423,7 +424,7 @@ color = [NSColor colorWithCalibratedHue: 0.10
                              brightness: 0.89
                                   alpha: 1.00];
 ```
- 
+
  * 不要将私有的实例变量和方法声明在头文件中，应将私有变量和方法声明在实现文件的类扩展内。
 
 ```objc
@@ -465,7 +466,7 @@ color = [NSColor colorWithCalibratedHue: 0.10
  * 如果一个delegate只有几个方法，比如只是提交和取消，推荐使用block编写动作响应代码。
  * 由于代理方法的声明一般都很长，所以必须将代理对象和其他的协议对象放在实例变量定义的下面，否则实例变量定义的对齐方式将会被打乱掉。
  * 当需要实现多个协议的时候，将每一个协议名拆分到单独的行。
- 
+
 ```objc
 @interface CustomModelViewController : TTViewController <
 
@@ -502,12 +503,12 @@ id item;
 while (item = [e nextObject])
       NSLog (@"item: %@", item);
 ```
- 
+
  * 指针变量的星号指示符应该紧靠变量，比如NSString *text,而不是NSString* text或NSString * text。
- 
+
  * 尽量的使用属性而非实例变量。
    除了在初始化方法（init，initWithCoder：等）、dealloc方法以及自定义setter与getter方法中访问属性合成的实例变量，其他的情况使用属性进行访问。
- 
+
 ```objc
 // good:
 @interface RNCSection: NSObject
@@ -528,19 +529,19 @@ while (item = [e nextObject])
 }
 @property (nonatomic) NSString *headline;
 @end
- 
+
 // good:
 @interface RNCSection: NSObject
 @property (nonatomic) NSString *headline;
 @end
 ```
- 
+
  * 不要使用@synthesize除非是编译器需要。注意在@protoco协议中的@optional可选属性必须被显式地使用@synthesize指令合成属性。
  * 变量命名应该尽可能做到自描述：
 ```objc
 // good:
 UIButton *settingsButton;
- 
+
 // bad:
 UIButton *setBut;
 ```
@@ -559,11 +560,11 @@ NSMutableArray *mailboxArray;
 NSArray        *defaultHeadersArray;
 BOOL           userInputWasUpdatedBOOL;
 ```
- 
+
  * 如果变量不是以上基本常用类型，则变量的命名就应该反映出自身的类型。但有时仅需要某些类的一个实例的情况下，那么只需要基于类名进行命名。
 ```objc
-NSImage              *previewPaneImage; 
-NSProgressIndicator  *uploadIndicator; 
+NSImage              *previewPaneImage;
+NSProgressIndicator  *uploadIndicator;
 NSFontManager        *fontManager;       // 基于类名命名
 ```
 
@@ -576,11 +577,11 @@ NSIndexSet   * selectedMailboxesIndexSet;
 
  * 由于Objective-C不支持名字空间，为了防止出现命名空间的冲突，在类名和常类型变量名前添加一个由三个大写的字母组成的前缀（如RNC），对于Core Data实体名则可以忽略此规则。如果你子类化了标准的Cocoa类，将前缀和父类名合并是一个很好的做法。如继承UITableView的类可命名为RNCTableView。
  * 常类型变量名的书写风格采用驼峰式大小写（第一个单词的首字母小写，其余单词的第一个字母大写。如firstName而不是first_name或firstname。），并使用关联的类名作为其命名前缀，
- 
+
 ```objc
 // good:
 static const NSTimeInterval RNCArticleViewControllerNavigationFadeAnimationDuration = 0.3;
- 
+
 // bad:
 static const NSTimeInterval fadetime = 1.7;
 ```
@@ -615,8 +616,3 @@ static const NSTimeInterval fadetime = 1.7;
     return self;
 }
 ```
-
-
-
-
-
