@@ -2,6 +2,8 @@
 
   * [iOS App 安全基础](http://mp.weixin.qq.com/s?__biz=MjM5NTIyNTUyMQ==&mid=2709545086&idx=1&sn=5752da24f9ea57f629681fb392c666cb&scene=0#wechat_redirect)
   * [打造安全的App！iOS安全系列之 HTTPS 进阶](http://www.cocoachina.com/ios/20150918/13488.html)
+  * [iOS应用安全开发概述](http://blog.devtang.com/2014/05/08/ios-security-dev-overview/)
+    > 网络传输安全，资源文件安全，源代码安全
 
 ### iOS App 安全基础
 
