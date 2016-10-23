@@ -6,6 +6,7 @@
 
 todo：
 以YYCache为目标做性能优化：[YYCache源码分析(一)](http://www.cocoachina.com/ios/20160614/16672.html), [YYCache 源码分析(二)](http://ios.jobbole.com/85740/), [YYCache 源码分析(三)](http://ios.jobbole.com/85940/)
+[缓存更新的套路](http://coolshell.cn/articles/17416.html?hmsr=toutiao.io&amp;utm_medium=toutiao.io&amp;utm_source=toutiao.io)
 
 ### 系统方案
 
