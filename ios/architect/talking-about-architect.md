@@ -1,5 +1,9 @@
 ## 讨论 iOS 应用架构
 
+“维基百科上有个专门的页面，上面罗列了常见的形式逻辑错误和非形式逻辑错误。但实际上，导致人们犯下这些逻辑错误的最重要的原因只有两个：概念不清，拒绝接受不确定性。” —— 李笑来。
+
+所以，我们要理清各种概念，而有关架构这档子事儿，概念很多。
+
 ### 思想：分层、隔离、解耦
 
 1. 分层：UI层、逻辑层、数据层
@@ -57,6 +61,13 @@ http://www.cnblogs.com/eugenewu0808/archive/2008/12/25/1362122.html 
   * MVVM
     1.
     2. 单页面交互模型, ![mvvm-single-view-model](https://github.com/BinaryArtists/not-just-code/blob/master/ios/imges/mvvm-single-view-model.png)
+    3. ViewModel的责任（它其实就是个打杂的，可测试，但他的责任与“ViewModel”并不搭配。）
+      * 用户输入数据验证
+      * 网络数据获取
+      * view数据处理（mapping a model value to a formatted string ）
+      * VC的跳转控制逻辑（视图逻辑）
+      * 数据绑定（RAC）
+      * 数据变化通知（update）
 
   * MVP
     1.
@@ -65,7 +76,9 @@ http://www.cnblogs.com/eugenewu0808/archive/2008/12/25/1362122.html 
   *
 
 
-4. VIPER
+  * VIPER（View, Interactor, Presenter, Entity, Routing），并且，他的陈述者提到了[简明架构](http://blog.8thlight.com/uncle-bob/2012/08/13/the-clean-architecture.html)
+    1.
+
 
 * 然后，我们需要“理清概念”，写代码的时候，那些代码做了什么事，属于架构的哪一环，也就是要知道他的“责任”。
 *
@@ -112,7 +125,7 @@ http://www.cnblogs.com/eugenewu0808/archive/2008/12/25/1362122.html 
   * 2. [简明架构](http://blog.8thlight.com/uncle-bob/2011/11/22/Clean-Architecture.html)
   * 3. [更轻量的 View Controllers](http://objccn.io/issue-1-1/)
   * 4. [测试 View Controllers](https://objccn.io/issue-13-5/)
-  * 5. [](https://objccn.io/issue-13-5/)
+  * 5. [使用 VIPER 构建 iOS 应用](https://objccn.io/issue-13-5/)
     > [VIPER TODO, 文章示例](https://github.com/objcio/issue-13-viper)
     > [VIPER SWIFT, 基于 Swift 的文章示例](https://github.com/objcio/issue-13-viper-swift)
 
@@ -125,3 +138,11 @@ http://www.cnblogs.com/eugenewu0808/archive/2008/12/25/1362122.html 
 
   * 8. [Designing Rich Client Applications](https://msdn.microsoft.com/en-us/library/ee658087.aspx), [
 Chapter 24: Designing Mobile Applications](https://msdn.microsoft.com/en-us/library/ee658087.aspx)
+    > Figure 1 shows an overall view of typical rich client architecture, and identifies the components usually found in each layer.
+    ![image](https://github.com/BinaryArtists/not-just-code/blob/master/ios/imges/IC350992.png)
+    > A typical rich client application is decomposed into three layers: the presentation layer, business layer and data layer.
+    >> the presentation layer:  UI and presentation logic components
+    >> the business layer: business logic, business workflow and business entity components
+    >> the data layer: data access and service agent components
+
+  * 9. []()
