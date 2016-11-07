@@ -14,3 +14,9 @@
 
 
 ### 工具流
+
+
+### 参考
+
+  * 1. [豆瓣的混合开发框架 -- Rexxar](http://lincode.github.io/Rexxar-OpenSource)
+  * 2. [Hybrid APP 架构设计思路](http://blog.csdn.net/zhangcanyan/article/details/51344187)

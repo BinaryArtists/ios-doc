@@ -81,3 +81,6 @@
   * 7. [糯米移动组件架构演进之路](http://blog.csdn.net/fallenink/article/details/52905833)
   * 8. [iOS 组件化方案探索](http://blog.csdn.net/fallenink/article/details/52905854)
   * 9. [APP组件化之路](http://blog.csdn.net/fallenink/article/details/52905874)，蘑菇街的组件化方案，贡献出了：MGJRouter
+  * 10. [一个iOS模块化开发解决方案](http://blog.csdn.net/fallenink/article/details/53063823)
+    > 问题域：页面耦合严重，多个app下相同模块重复开发，等，讲了一些模块化过程中的细节点，可以看看。
+    > 他们使用了，router，巧叔的YTKNetwork，热更新。
