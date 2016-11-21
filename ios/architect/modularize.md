@@ -12,28 +12,34 @@
 
 2. 本地组件
 
+### 组件 之 定义 【参考：《风险驱动的软件架构》】
+
+1. 组件
+2. 端口
+3. 连接器
+
 ### 代码组件 之 usage
 
-1. 业务组件
+0. 功能组件：带UI属性的独立业务模块。
+1. 业务组件：不具备UI属性的独立业务模块。
+2. UI组件：不具备业务场景的独立UI模块。
+3. 工具组件：不具备业务场景的功能模块。
 
-2. UI组件
+或这么看：
 
-3. 工具组件
+0. 独立业务组件
+1. 基础业务组件
+2. 基础通用组件
+3. UI组件
 
 ### 动态插件式
 
 
-###
+### TODO
 
-###
-
-
-
-###
-
-###
-
-###
+1. 2017 年前，完成代码级别的组件化尝试
+2. 2017 年3月，完成组件化的完整支持，从代码，到工程组织，到版本管理
+3. 2017 年6月，支持组件的动态更新机制
 
 ### 参考
 
@@ -84,3 +90,21 @@
   * 10. [一个iOS模块化开发解决方案](http://blog.csdn.net/fallenink/article/details/53063823)
     > 问题域：页面耦合严重，多个app下相同模块重复开发，等，讲了一些模块化过程中的细节点，可以看看。
     > 他们使用了，router，巧叔的YTKNetwork，热更新。
+
+  * 11. [iOS组件化思路－大神博客研读和思考](http://blog.csdn.net/fallenink/article/details/53127082), 实际项目中的组件化问题,这段说的很中肯。
+
+  * 12. [iOS组件化方案](http://mrpeak.cn/blog/module/?utm_source=tuicool&utm_medium=referral), 枚举了这些组件类型：【用户登录】，【内存管理】，【日志打点系统】，【个人Profile模块】。它除了对个别其他组件化方案的评估，同时给出了组件接口定义的案例：
+    ```
+    @protocol IAppModule <NSObject>
+    //module life cycle
+    - (void)initModule;
+    - (void)destroyModule;
+    //common behavior
+    - (NSString*)getModuleVersion;
+    - (BOOL)handleUrl:(NSString*)url;
+    - (UIViewController*)getDefaultController;
+    @end
+    ```
+    > 最后作者提到的Dependency Hell，其实是依赖性下的版本控制问题，独立业务模块对基础业务模块，是多对一关系，但是版本控制，让这个拓扑变成了多对多，复杂性增加了。。【我建议对基础业务模块的设计，采用长时间设计，少部分时间打磨，迭代过程中争取通用化，这样对外接口保持干净不变，更新与部署也会一步到位。】
+
+  * 13. []()
