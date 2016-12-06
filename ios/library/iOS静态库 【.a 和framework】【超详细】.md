@@ -71,3 +71,7 @@ framework 的第三方库，只是参与link，并不会 build 进你自己新�
 同理，可以可以控制引用的第三方.a文件不被打入新的.a，只要在静态库项目的binary里删除.a引用，但是是searchpath里保留，一样可以编译通过，这样可以避免耦合导致的多  framework冲突，特别是公用一些第三方基础库，比如 sdwebimage之类的 
 
 [ Xcode6.4打包静态framework时包含其他第三方framework(如Alipay),而且里面写了OC的分类,然后出现了问题](http://www.cocoachina.com/bbs/read.php?tid-323584-page-3.html)
+
+[Xcode 8制作动态及静态Framework](http://blog.csdn.net/u011662987/article/details/53021786)
+
+我们制作动态库的时候，选的设备是模拟器，如果选真机的话，那生成的库也只能在真机上使用，那我们该怎样制作一个通用的动态库呢? 简单的方法是分别生成模拟器和真机上运行的库，然后在合并，这个方法，在每次生成动态库的时候，过程都会很繁琐，下面我们用一个脚本来自动完成它。
