@@ -75,3 +75,9 @@ framework 的第三方库，只是参与link，并不会 build 进你自己新�
 [Xcode 8制作动态及静态Framework](http://blog.csdn.net/u011662987/article/details/53021786)
 
 我们制作动态库的时候，选的设备是模拟器，如果选真机的话，那生成的库也只能在真机上使用，那我们该怎样制作一个通用的动态库呢? 简单的方法是分别生成模拟器和真机上运行的库，然后在合并，这个方法，在每次生成动态库的时候，过程都会很繁琐，下面我们用一个脚本来自动完成它。
+
+[Xcode6.4打包静态framework时包含其他第三方framework(如Alipay),而且里面写了OC的分类,然后出现了问题](http://www.cocoachina.com/bbs/read.php?tid-323584.html)
+
+请在Build Setting中检索Other Linker flags 加入参数 -ObjC
+
+在写SDK的时候需要注意的是如果不想让接入方在接入的时候加入 -ObjC参数，就不要使用catagory。 

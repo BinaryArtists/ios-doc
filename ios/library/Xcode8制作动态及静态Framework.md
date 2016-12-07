@@ -81,3 +81,10 @@ ld: warning: embedded dylibs/frameworks only run on iOS 8 or later
 其它扩展阅读：
 	* [How to distribute Swift Library without exposing the source code?](http://stackoverflow.com/questions/25020783/how-to-distribute-swift-library-without-exposing-the-source-code)
 	* [Pod Authors Guide to CocoaPods Frameworks](http://blog.cocoapods.org/Pod-Authors-Guide-to-CocoaPods-Frameworks/)
+
+### 库之间的引用
+
+特征：静态库会链接到app binary中，而动态库只是参与链接，在运行时加载
+结论：我们在制作静态库是，一般引用第三方静态库、系统动态库；如果你同时引入第三方动态库，那其实在我们要制作的静态库被主工程使用的时候，是无法链接通过的。所以如果需要将第三方动态库封装，那么就要对应制作对应的动态库、iOS 8.0+
+
+详细可以参考：[一篇较为详细的 ios静态动态库 的使用方法总结](http://blog.csdn.net/fallenink/article/details/53501969)
