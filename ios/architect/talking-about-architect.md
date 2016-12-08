@@ -213,3 +213,10 @@ Chapter 24: Designing Mobile Applications](https://msdn.microsoft.com/en-us/libr
     >> FRDIntent/Intent 是一个消息传递对象，用于启动 UIViewController。可以认为它是对 Android 系统中的 Intent 的模仿。当然，FRDIntent/Intent 做了极度简化。这是因为 FRDIntent/Intent 的使用场景更为简单：只处理应用内的 view controller 间跳转。
 
     >> 直接使用 iOS 系统方法完成各 view controller 之间的跳转，各 view controller 代码会耦合得很紧。跳转时，一个 view controller 需要知道下一个 view controller 是如何创建的各种细节。这造成了 view controller 之间的依赖。使用 FRDIntent/Intent 传递 view controller 跳转信息，可以解除 view controller 之间的代码耦合。
+
+  * 19. [基于彻底解耦合的实验性iOS架构](http://www.cocoachina.com/ios/20160114/14995.html)
+    > “如果所有的应用内通讯都通过一个事件流来完成会怎么样？”
+    > Event, EventsSignal & EventsObserver, Server, Model, ViewModel, View
+    > 1. 使用少量的MVVM(Model-View-ViewModel)架构
+    > 2. 使用ReactiveCocoa作为事件流的管道
+    > 3. [show us the code](https://github.com/twocentstudios/CircuitMVVM)
