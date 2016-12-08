@@ -15,6 +15,10 @@
 
 3. [电商小程序](https://github.com/liuxuanqiang/wechat-weapp-mall)
 
+4. [yuanhe-wechat-mall](https://github.com/inspawn/yuanhe-wechat-mall)
+
+5. [这是一个巴爷商城的微信小应用版本，是巴爷微信商城的简单版本。](https://github.com/bayetech/wechat_mall_applet)
+
 https://github.com/zhengxiaowai/weapp-github
 
 ### startup
