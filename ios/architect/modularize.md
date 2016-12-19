@@ -34,6 +34,8 @@
 
 ### 动态插件式
 
+1. [iOS 利用 framework 进行动态更新](https://yq.aliyun.com/articles/3024)
+2. [IOS-使用framework实现功能模块动态更新](http://blog.csdn.net/like7xiaoben/article/details/44081257)
 
 ### TODO
 
