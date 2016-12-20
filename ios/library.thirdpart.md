@@ -70,3 +70,14 @@
 
 ### Web
 	* [TransitApp/SVWebViewController](https://github.com/TransitApp/SVWebViewController)
+
+### 图片浏览
+	* [ideaismobile/IDMPhotoBrowser](https://github.com/ideaismobile/IDMPhotoBrowser)
+	* [michaelhenry/MHFacebookImageViewer](https://github.com/michaelhenry/MHFacebookImageViewer)
+	* [gsdios/SDPhotoBrowser](https://github.com/gsdios/SDPhotoBrowser)
+	* [dkhamsing/DKImageBrowser](https://github.com/dkhamsing/DKImageBrowser)，上下联动
+	* [cuzv/PhotoBrowser](https://github.com/cuzv/PhotoBrowser)，挺简洁的多图片、全屏浏览
+
+### 依赖注入
+	* [atomicobject/objection](https://github.com/atomicobject/objection)
+	* [appsquickly/Typhoon](https://github.com/appsquickly/Typhoon)
