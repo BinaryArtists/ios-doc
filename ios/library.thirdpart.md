@@ -81,3 +81,4 @@
 ### 依赖注入
 	* [atomicobject/objection](https://github.com/atomicobject/objection)
 	* [appsquickly/Typhoon](https://github.com/appsquickly/Typhoon)
+	* [DyCI/dyci-main](https://github.com/DyCI/dyci-main), This tool allows you to inject code into running iOS application, without restarting it.
