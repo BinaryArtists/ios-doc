@@ -13,3 +13,7 @@
   * 7. 跟着貌似在run一下（上传app）
   * 8. 造bug
   * 9. 在有限的延迟，观察崩溃日志上报
+
+### pod 配置 fabric
+
+[integrate-fabric-crashlytics-via-cocoapods](http://stackoverflow.com/questions/29071277/integrate-fabric-crashlytics-via-cocoapods)
