@@ -78,6 +78,11 @@
 	* [dkhamsing/DKImageBrowser](https://github.com/dkhamsing/DKImageBrowser)，上下联动
 	* [cuzv/PhotoBrowser](https://github.com/cuzv/PhotoBrowser)，挺简洁的多图片、全屏浏览
 
+### 图片选择
+	* [donobono/DoImagePickerController](https://github.com/donobono/DoImagePickerController), 图片多选，支持手势选择，使用ALAsset，4_0, 9_0
+	* [wenzhaot/InstagramPhotoPicker](https://github.com/wenzhaot/InstagramPhotoPicker)，图片选择，可以切割
+	* [guillermomuntaner/GMImagePicker](https://github.com/guillermomuntaner/GMImagePicker)，Designed for iOS 8 with Photo framework ( PhotoKit )
+
 ### 依赖注入
 	* [atomicobject/objection](https://github.com/atomicobject/objection)
 	* [appsquickly/Typhoon](https://github.com/appsquickly/Typhoon)
