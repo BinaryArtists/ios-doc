@@ -51,3 +51,14 @@
 
   * [视频录制－QuickTime Player]()
   * [Gif生成工具－licecap]()
+
+
+### 其他未整理
+
+AppStore软件排名相关,工欲善其事，必先利其器。
+1.下载排名相关:appannie
+2.用户行为分析:flurry
+3.majicrank -各国排名查询工具 (推荐)
+4.AppViz -App销售统计软件 (推荐)
+5.PodViz -用户评论等查看工具
+6.appfigures -报表统计分析工具
