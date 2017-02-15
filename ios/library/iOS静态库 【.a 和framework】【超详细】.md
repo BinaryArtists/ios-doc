@@ -1,6 +1,7 @@
 ## iOS静态库 【.a 和framework】【超详细】
 
 [iOS静态库 【.a 和framework】【超详细】](https://my.oschina.net/kaqijiang/blog/649632)
+[framework--怎么样使用bundle来共享资源](http://www.jianshu.com/p/ff50bce87f55)
 
 ### 什么是库？
 

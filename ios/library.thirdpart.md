@@ -87,3 +87,11 @@
 	* [atomicobject/objection](https://github.com/atomicobject/objection)
 	* [appsquickly/Typhoon](https://github.com/appsquickly/Typhoon)
 	* [DyCI/dyci-main](https://github.com/DyCI/dyci-main), This tool allows you to inject code into running iOS application, without restarting it.
+
+### 拼音处理
+	* [pinyin4j](http://pinyin4j.sourceforge.net), java 版本
+	* [pinyin4objc](https://github.com/kimziv/PinYin4Objc), objc 版本
+
+*[github下基于“pinyin”的搜索结果，哈](https://github.com/search?utf8=✓&q=pinyin)*
+
+###
