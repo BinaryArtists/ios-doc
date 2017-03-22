@@ -62,3 +62,4 @@ fallen.ink
 ### 其他：
 
 * [既然所有语言都是图灵完备的，为什么适用的领域不一样？](http://www.zhihu.com/question/23457627)
+* [什么是图灵完备的编程语言？](https://segmentfault.com/q/1010000000692654), 
