@@ -46,3 +46,10 @@
     * 如果使用摄像头，不得关闭快门声音
 5. 被拒绝敏感区
     * 应用里面带检测更新按钮
+    * Info.Plist中的注意点
+        > NSCalendarsUsageDescription
+        > NSPhotoLibraryUsageDescription
+        > NSBluetoothPeripheralUsageDescription
+        > NSMicrophoneUsageDescription
+        > NSMotionUsageDescription
+        > Missing Push Notification Entitlement (如果创建App的时候，选择了推送服务）
