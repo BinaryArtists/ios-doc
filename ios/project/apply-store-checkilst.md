@@ -8,8 +8,9 @@
 2. 第三方库
     * 环境配置
     * KEY设置
-    * 
+    *
 3. 苹果硬性要求
+    * [IPv6支持](https://github.com/BinaryArtists/not-just-code/blob/master/ios-check/ipv6.md)
 
 ## 提审
 
@@ -29,7 +30,7 @@
     * 提供各种尺寸的图标：57，72 (iPad)，114，512
     * 版本号大于等于1.0
     * info.plist文件中所需要的设备功能和应用的实际需求相符
-    * NSZombieEnabled设为NO 
+    * NSZombieEnabled设为NO
     * 如使用推送通知，需要在entitlements.plist中添加用于“aps-environment”授权信息
     * 若使用推送通知，你的应用ID必须已经激活推送通知功能
     * 在更新iTunes的“新功能”介绍时，内容要和应用实际变化相符
