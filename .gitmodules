@@ -4,6 +4,3 @@
 [submodule "dev-blog"]
 	path = dev-blog
 	url = https://github.com/nixzhu/dev-blog.git
-[submodule "swift-compiler-crashes"]
-	path = swift-compiler-crashes
-	url = https://github.com/practicalswift/swift-compiler-crashes.git
