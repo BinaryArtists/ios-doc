@@ -1,12 +1,12 @@
 # 你好
 
-[resume-en]()
+[resume-en](https://github.com/BinaryArtists/not-just-code/blob/master/ios/resume-en.md)
 
 # 联系我
 
 - 电话：18616361836
 - 邮箱：fengzi_lijie@163.com
-- 微信号：fengzilijie
+- 微信：fengzilijie
 
 ---
 
@@ -15,7 +15,7 @@
  - 李杰/男/1989
  - 本科/西南交通大学 通信
  - 工作年限：6年
- - 技术博客：http://blog.csdn.net/fallenink, https://github.com/BinaryArtists/not-just-code
+ - 技术博客：http://blog.csdn.net/fallenink
  - Github：https://github.com/fallending
 
  - 期望职位：iOS高级程序员，应用架构师
@@ -25,7 +25,6 @@
 ---
 
 # 工作
-（工作经历按逆序排列，最新的在最前边，按公司做一级分组，公司内按二级分组）
 
 ## ABC公司 （ 2012年9月 ~ 2014年9月 ）
 
@@ -58,27 +57,19 @@
 
 ---
 
-# 开源项目和作品
-（这一段用于放置工作以外的、可证明你的能力的材料）
+# 开源项目
 
-## 开源项目
-（对于程序员来讲，没有什么比Show me the code能有说服力了）
-
- - [STU](http://github.com/yourname/projectname)：项目的简要说明，Star和Fork数多的可以注明
- - [WXYZ](http://github.com/yourname/projectname)：项目的简要说明，Star和Fork数多的可以注明
+- [suite.great](https://github.com/BinaryArtists/suite.great)：Objective-C写的iOS全栈式应用开发框架，它的特点是拆分，模块化实践、调试辅助等
+- [not-just-code](https://github.com/BinaryArtists/not-just-code)：技术总结
 
 # 技能清单
 
-以下均为我熟练使用的技能
-
-- Web开发：PHP/Hack/Node
-- Web框架：ThinkPHP/Yaf/Yii/Lavaral/LazyPHP
-- 前端框架：Bootstrap/AngularJS/EmberJS/HTML5/Cocos2dJS/ionic
-- 前端工具：Bower/Gulp/SaSS/LeSS/PhoneGap
-- 数据库相关：MySQL/PgSQL/PDO/SQLite
-- 版本管理、文档和自动化部署工具：Svn/Git/PHPDoc/Phing/Composer
-- 单元测试：PHPUnit/SimpleTest/Qunit
-- 云和开放平台：SAE/BAE/AWS/微博开放平台/微信应用开发
+- iOS开发：Objective-C/Swift
+- 前端框架：HTML5/ionic/
+- 数据库相关：MySQL/SQLite
+- 版本管理、自动化部署工具：Svn/Git/Jekins
+- 单元测试：xtest/ocMock/specta
+- 云和开放平台：AWS/微信应用开发/阿里云
 
 # 致谢
 
