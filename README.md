@@ -26,6 +26,7 @@ fallen.ink
   * [J2EE框架(Struts&Hibernate&Spring)的理解](https://github.com/BinaryArtists/not-just-code/blob/master/backend/j2ee.md)
   * [一篇文章，读懂Netty的高性能架构之道](https://github.com/BinaryArtists/not-just-code/blob/master/backend/netty.md)
   * [Hello，服务端 Swift](https://github.com/BinaryArtists/not-just-code/blob/master/backend/swift-demo.md)
+  * [JavaWeb的Cookie和Session使用场景](https://github.com/BinaryArtists/not-just-code/blob/master/backend/JavaWeb%E7%9A%84Cookie%E5%92%8CSession%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF.docx)
 
 2. 自己实现一个TableView，以及相关文章
   * [DZTableView](https://github.com/yishuiliunian/DZTableView/tree/37236d7be600b9e146bddc49ee2f13e3090375ab)
@@ -36,7 +37,7 @@ fallen.ink
   * [nixzhu/dev-blog](https://github.com/nixzhu/dev-blog/tree/db5dff60c667d4f0f3ffc0a7cf8b7aa8c1d89a85)
 
 4. iOS文章
-  * ???
+  *
 
 5. mac相关：articles.mac
 
@@ -62,4 +63,4 @@ fallen.ink
 ### 其他：
 
 * [既然所有语言都是图灵完备的，为什么适用的领域不一样？](http://www.zhihu.com/question/23457627)
-* [什么是图灵完备的编程语言？](https://segmentfault.com/q/1010000000692654), 
+* [什么是图灵完备的编程语言？](https://segmentfault.com/q/1010000000692654),
