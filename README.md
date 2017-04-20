@@ -45,7 +45,14 @@ fallen.ink
 
 ### 泛编程相关：programming
 
-  * 
+  * [编程语言 2016年整理](https://github.com/BinaryArtists/not-just-code/blob/master/programming/all-programming-language.md)
+  * [concurrency](https://github.com/BinaryArtists/not-just-code/blob/master/programming/concurrency.md)
+  * [如何看待编程语言](https://github.com/BinaryArtists/not-just-code/blob/master/programming/how-to-treat-programming-language.md)
+  * [locker](https://github.com/BinaryArtists/not-just-code/blob/master/programming/locker.md)
+  * [HTTP](https://github.com/BinaryArtists/not-just-code/blob/master/programming/network.http-staff.md)
+  * [ORM](https://github.com/BinaryArtists/not-just-code/blob/master/programming/orm.md)
+  * [thread](https://github.com/BinaryArtists/not-just-code/blob/master/programming/thread.md)
+  * [侵入式和非侵入式的区别](https://github.com/BinaryArtists/not-just-code/blob/master/programming/%E4%BE%B5%E5%85%A5%E5%BC%8F%E5%92%8C%E9%9D%9E%E4%BE%B5%E5%85%A5%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB.md)
 
 ### 编程工程类
 
