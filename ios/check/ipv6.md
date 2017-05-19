@@ -1,5 +1,8 @@
 # ipv6的支持备案
 
+客户端需要：[针对苹果最新审核要求 为应用兼容IPv6](http://blog.csdn.net/baidu_25743639/article/details/51482293)
+ipv6支持内幕：[iOS 支持 IPv6](http://blog.csdn.net/flying_in_the_world/article/details/51725247)
+
 ## 有用的博客
 1. [iOS 被拒6次的ipv6](http://www.jianshu.com/p/ba627e73e5b4)
 2. [苹果app上架因IPv6不支持而拒绝，本地IPV6测试方法](http://blog.csdn.net/iosworker/article/details/51595432)
