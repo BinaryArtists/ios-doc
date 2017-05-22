@@ -1,7 +1,9 @@
 # ipv6的支持备案
 
+ipv6测试：[Website IPv6 accessibility validator](http://ipv6-test.com/validate.php)
 客户端需要：[针对苹果最新审核要求 为应用兼容IPv6](http://blog.csdn.net/baidu_25743639/article/details/51482293)
 ipv6支持内幕：[iOS 支持 IPv6](http://blog.csdn.net/flying_in_the_world/article/details/51725247)
+冗余一篇：[iOS IPv6测试环境搭建及服务器ipv6测试](http://blog.csdn.net/ws1836300/article/details/52280130)
 
 ## 有用的博客
 1. [iOS 被拒6次的ipv6](http://www.jianshu.com/p/ba627e73e5b4)
