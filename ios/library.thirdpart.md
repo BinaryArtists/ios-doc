@@ -152,10 +152,20 @@
 
 ### 工具栏 ToolBar
 
-### 导航栏
+### 导航栏 NavigationBar
 
 * [KMNavigationBarTransition](https://github.com/MoZhouqi/KMNavigationBarTransition), 一个用来统一管理导航栏转场以及当 push 或者 pop 的时候使动画效果更加顺滑的通用库，并且同时支持竖屏和横屏。
 * [TLYShyNavBar](https://github.com/telly/TLYShyNavBar)
 *	[DropdownMenu](https://github.com/nmattisson/DropdownMenu)
 	> 在导航栏以下，下拉菜单
 * [KLNoteViewController](https://github.com/KieranLafferty/KLNoteViewController)
+
+### 输入框 TextField
+
+* [jverdi/JVFloatLabeledTextField](https://github.com/jverdi/JVFloatLabeledTextField)，获取焦点的时候，placehold文字上浮
+
+### 时间选择：
+
+* [DIDatepicker](https://github.com/noxt/DIDatepicker), 横向、顶部贴边日期选择
+* [THCalendarDatePicker](https://github.com/hons82/THCalendarDatePicker), 整个月份的日期选择
+* 
