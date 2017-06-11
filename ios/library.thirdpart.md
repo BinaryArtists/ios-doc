@@ -159,6 +159,7 @@
 *	[DropdownMenu](https://github.com/nmattisson/DropdownMenu)
 	> 在导航栏以下，下拉菜单
 * [KLNoteViewController](https://github.com/KieranLafferty/KLNoteViewController)
+* [bryankeller/BLKFlexibleHeightBar](https://github.com/bryankeller/BLKFlexibleHeightBar)
 
 ### 输入框 TextField
 
