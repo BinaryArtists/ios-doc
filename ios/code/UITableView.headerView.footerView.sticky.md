@@ -14,7 +14,7 @@
     }  
 }
 	```
-* 还有一种方法蛮好（这样实际上市吧table向上移动了一部分隐藏在navigation下面）
+* 还有一种方法蛮好（这样实际上是把table向上移动了一部分隐藏在navigation下面）
 
 	```objc
 	_mainTable.contentInset = UIEdgeInsetsMake(sectionHeight, 0, 0, 0); 
