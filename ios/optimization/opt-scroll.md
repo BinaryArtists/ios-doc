@@ -70,8 +70,6 @@ Image views can perform two operations that are relatively expensive performance
 适用场景
 　　所有需要使用图片的场景都可以使用此方案优化，无副作用。
 
-
-
 ### 总结
 
 　　滑动性能优化这块儿涉及到的知识还是挺多的，不要盲目，过早的优化。使用Instrument找出瓶颈，然后合理使用不同的方案。性能优化有很多奇淫技巧，但通常做到上面几个大的点，基本上性能就能接受了。
@@ -82,10 +80,6 @@ Profile -> 优化 -> Profile
 
 　　一直重复上面的流程，直到达到预期为止。
 
-　　最后重要的事情说三遍：
-
-　　Profile一定请使用真机，最好使用Release模式，以达到最真实的效果。
-　　Profile一定请使用真机，最好使用Release模式，以达到最真实的效果。
 　　Profile一定请使用真机，最好使用Release模式，以达到最真实的效果。
 
 ### 更多参考资料：

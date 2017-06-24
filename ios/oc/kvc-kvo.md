@@ -6,11 +6,12 @@
 
 ### Content
 
-KVC的消息传递
-KVC容器操作
-KVC与容器类(集合代理对象)
-KVO和容器类
-KVO的实现原理
+1. KVC的消息传递
+2. KVC容器操作
+3. KVC与容器类(集合代理对象)
+4. KVC的实现原理
+4. KVO和容器类
+5. KVO的实现原理
 
 ### KVC的消息传递
 
@@ -120,6 +121,15 @@ ok上例中我们实现了第二条中的特殊命名函数组合：
 ```
 这使得我们调用valueForKey:@"elfins"时，KVC会为我们返回一个可以响应NSArray所有方法的代理数组对象(NSKeyValueArray)，这是NSArray的子类，- (NSUInteger)countOfElfins决定了这个代理数组的容量，- (id)objectInElfinsAtIndex:(NSUInteger)index决定了代理数组的内容。本例中使用的key是elfins，同理的如果key叫human，KVC就会去寻找-countOfHuman:
 
+### KVC的实现原理
+
+当一个对象调用setValue方法时，方法内部会做以下操作：
+①检查是否存在相应key的set方法，如果存在，就调用set方法
+②如果set方法不存在，就会查找与key相同名称并且带下划线的成员属性，如果有，则直接给成员属性赋值
+③如果没有找到_key,就会查找相同名称的属性key，如果有就直接赋值
+④如果还没找到，则调用valueForUndefinedKey:和setValue:forUndefinedKey:方法。
+这些方法的默认实现都是抛出异常，我们可以根据需要重写它们。
+
 ### 可变容器呢
 
 当然我们也可以在可变集合(NSMutableArray、NSMutableSet、NSMutableOrderedSet)中使用集合代理:
@@ -210,7 +220,10 @@ NSMutableArray *delegateElfins = [ElfinsArray mutableArrayValueForKey:@"elfins"]
 
 ### KVO的实现原理
 
-？？？？未完。。。
+- kvo基于runtime机制实现。
+- 使用了isa 混写（isa-swizzling），当一个对象(假设是person对象，person的类是MYPerson)的属性值(假设person的age)发生改变时，系统会自动生成一个类，继承自MYPerson ：NSKVONotifying_MYPerson，在这个类的setAge方法里面，调用[super setAge:age] [self willChangeValueForKey:@"age"] 和 [self didChangeValueForKey:@"age"] 
+,而这两个方法内部会主动调用监听者内部的 - (void)observeValueForKeyPath 这个方法。
+- 想要看到NSKVONotifying_MYPerson很简单，在self.person.age = 20; 这里打断点，在调试区域就能看到 _person->NSObject->isa=(Class)NSKVONotifying_MYPerson.同时我们在 self.person = [[MYPerson alloc]init];后面打断点，看到_person->NSObject->isa=(Class)MYPerson,由此可见，在添加监听者之后，person类型已经由MYPerson被改变成NSKVONotifying_MYPerson
 
 ### 参考
 

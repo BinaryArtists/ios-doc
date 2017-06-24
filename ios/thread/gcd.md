@@ -340,3 +340,4 @@ dispatch_set_target_queue(serialQueue, globalQueue);
 	对于场景#2，发生的次数并不会很多，甚至很多时候一次都不会发生，假如发生了，那么也只是一个符合预期的行为：后来的线程需要等待第一线程完成。即使你写一个受虐型的单元测试来故意模拟场景#2，也不能说明什么问题，得不到的永远在骚动，被偏爱的都有恃无恐。
 	对于场景#3，在程序进行过程中，可能发生成千上万次或者天文数字次，这才是效率提升的关键之处
 	```
+* [dispatch_once实现](http://www.dreamingwish.com/article/gcd-guide-dispatch-once-2.html%EF%BC%88%E8%B6%85%E7%BA%A7%E8%AF%A6%E7%BB%86%E8%A7%A3%E6%9E%90%EF%BC%89)
