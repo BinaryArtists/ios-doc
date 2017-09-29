@@ -118,3 +118,10 @@ UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"back" style
 **
 
 ###  UINavigationControllerDelegate
+
+
+### UINavigationBar设置shadowImage
+
+/* Default is nil. When non-nil, a custom shadow image to show instead of the default shadow image. For a custom shadow to be shown, a custom background image must also be set with -setBackgroundImage:forBarMetrics: (if the default background image is used, the default shadow image will be used).
+
+想要设置shadowImage必须要先设置navigationBar的backgroundImage。
