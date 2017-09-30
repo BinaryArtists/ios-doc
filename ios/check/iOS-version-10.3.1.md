@@ -5,4 +5,4 @@
 1. 机器：iOS10国行
 2. 其他博文：[iOS10国行网络权限问题](http://blog.csdn.net/yan325098/article/details/53115914)
 
-## []()
+## [iOS 10 的适配问题](http://www.jianshu.com/p/f8151d556930)

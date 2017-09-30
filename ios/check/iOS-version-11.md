@@ -159,3 +159,6 @@ self.edgesForExtendedLayout = UIRectEdgeAll;    // 默认就为all
 ```
 
 编译器识别：contentScrollView，然后调用insetCoordinatableContentScrollView
+
+
+问题：为何#10	0x0000000113306d1b in -[UINavigationController pushViewController:transition:forceImmediate:]()，会在#12	0x00000001132e5cd1 in -[UINavigationController initWithRootViewController:]()的时候调用？？
