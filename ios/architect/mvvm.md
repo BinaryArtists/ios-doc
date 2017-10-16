@@ -77,16 +77,29 @@
 ## 最后 额外阐述 当前项目中结构
 
 ### 主要构成对象
-	* View
-	* ViewService
-	* ViewController
-	* DataService
-	* Model、Entity
+
+View、ViewService、ViewController、DataService、Model
 
 ### 框图
 
 
 ### 责任
+
+* View
+	- DataSource protocol impl (其实是 数据源协议 的实现)
+	- 
+* ViewService
+	- DataSource data（其实是 data ）
+	- Data binding
+	- View logic
+* ViewController
+	- Event binding
+* DataService
+	- 面向view的DS：HomeDataService
+	- 面向model的DS：UserDataService，且面向view和面向data是上下层关系，不可逆向依赖
+	- 技巧：
+		> 如果要服用DataService，则拆分
+* Model、Entity
 
 
 ### 例子（文件夹例子）
@@ -98,6 +111,9 @@
 	- BaseViewController (XXXViewController or XXXVC)
 	- BaseDataService (XXXDataService or XXXDS)
 	- BaseModel, BaseEntity
+* Bean
+	- User
+	- Book
 * Module
 	- Home
 		> View
@@ -108,6 +124,9 @@
 		> Entity
 	- BookList
 * Manager
+	- PayManager
+	- ShareManager
+	- LocationManager
 
 ---
 * App
