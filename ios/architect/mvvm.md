@@ -74,6 +74,50 @@
 	- accessor 可以使用链式，但不推荐使用RAC
 
 
+## 最后 额外阐述 当前项目中结构
+
+### 主要构成对象
+	* View
+	* ViewService
+	* ViewController
+	* DataService
+	* Model、Entity
+
+### 框图
+
+
+### 责任
+
+
+### 例子（文件夹例子）
+
+---
+* Base
+	- BaseView
+	- BaseViewService (XXXViewService or XXXVS)
+	- BaseViewController (XXXViewController or XXXVC)
+	- BaseDataService (XXXDataService or XXXDS)
+	- BaseModel, BaseEntity
+* Module
+	- Home
+		> View
+		> ViewService
+		> ViewController
+		> DataService
+		> Model
+		> Entity
+	- BookList
+* Manager
+
+---
+* App
+	- TrainTicketApp
+		> Module
+		> Manager
+	- HotelTicketApp
+	- BusTicketApp
+
+
 ## 参考
 
 1. [MVVM模式的简单通俗理解](http://www.open-open.com/lib/view/open1483067348480.html)

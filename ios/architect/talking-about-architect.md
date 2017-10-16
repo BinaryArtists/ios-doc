@@ -4,6 +4,17 @@
 
 所以，我们要理清各种概念，而有关架构这档子事儿，概念很多。
 
+### 架构的本质是管理复杂性
+
+1. 复杂性一：复杂界面设计的实现和样式管理
+  - 使用Atomic Design和Component Driven Development管理界面开发的复杂度
+  - UI界面的复杂度本质上是一个点上的复杂度，其复杂性集中在系统的某些小细节处，不会增加系统整体规划的复杂度，所以控制其复杂度的主要方式是隔离，避免一个UI组件之间的相互交织，变成一个面上的复杂度，导致复杂度不可控。在UI层，最流行的隔离方式就是组件化，在笔者之前的一篇文章《前端组件化方案》中详细解释了前端组件化方案的实施细节
+2. 复杂性二：路由设计
+  - App间路由， App内路由
+  - [基于ReSwift和App Coordinator的iOS架构](http://www.infoq.com/cn/articles/ios-arch-based-on-reswift-and-app-coordinator)
+
+3. 复杂性三：应用状态管理
+
 ### 思想：分层、隔离、解耦
 
 1. 分层：UI层、逻辑层、数据层
@@ -251,3 +262,6 @@ Chapter 24: Designing Mobile Applications](https://msdn.microsoft.com/en-us/libr
     > 1. 使用少量的MVVM(Model-View-ViewModel)架构
     > 2. 使用ReactiveCocoa作为事件流的管道
     > 3. [show us the code](https://github.com/twocentstudios/CircuitMVVM)
+  * 20. [猿题库 iOS 客户端架构设计-唐巧](http://www.cnblogs.com/weiboyuan/p/5090592.html)
+    > 十分客观的看待了MVC、MVVM
+    > ![image10](res/MVVM without Binding with DataController.jpg)
