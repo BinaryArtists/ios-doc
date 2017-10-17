@@ -127,6 +127,7 @@ View、ViewService、ViewController、DataService、Model
 	- PayManager
 	- ShareManager
 	- LocationManager
+	- SessionManager：管理应用的临时信息
 
 ---
 * App
