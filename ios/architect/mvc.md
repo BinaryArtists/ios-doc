@@ -1,5 +1,9 @@
 ## MVC
 
+讨论它的时候，无法脱离分层架构，可以看[《软件架构入门》by 阮一峰](http://www.ruanyifeng.com/blog/2016/09/software-architecture.html),然而常说的app架构MVC之类的，我把它归到GUI架构，也就是[《GUI Architectures》by Martin Fowler](https://www.martinfowler.com/eaaDev/uiArchs.html)
+
+后面是两篇其他人的文章：[UI 架构小史1（GUI Architectures），实际上是《GUI Architectures》的翻译](http://www.jianshu.com/p/d52e662db75c), [GUI应用程序架构的十年变迁:MVC,MVP,MVVM,Unidirectional,Clean](https://segmentfault.com/a/1190000006016817)
+
 ## MVC渊源
 
 
