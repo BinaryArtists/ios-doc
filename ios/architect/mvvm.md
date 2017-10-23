@@ -99,6 +99,7 @@ View、ViewService、ViewController、DataService、Model
 	- 面向model的DS：UserDataService，且面向view和面向data是上下层关系，不可逆向依赖
 	- 技巧：
 		> 如果要服用DataService，则拆分
+	- 注意：跨模块接口依赖，需要产生manager
 * Model、Entity
 
 
