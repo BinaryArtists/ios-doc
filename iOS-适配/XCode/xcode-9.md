@@ -1,6 +1,7 @@
 # XCode9
 
 * [XCode9的新变化](http://www.cnblogs.com/lurenq/archive/2017/09/26/7594909.html)
+* [What's New in LLVM](http://yulingtianxia.com/blog/2017/07/17/What-s-New-in-LLVM-2017/)
 
 ### 折叠代码
 
@@ -59,3 +60,22 @@ rename,
 ### 无线开发
 
 ###  Folder和Group的同步性
+
+## LLVM
+
+### ARC 中的 Block 捕获参数
+
+```
+- (void)validateDictionary:(NSDictionary<NSString *, NSString *> *)dict error:(NSError **)error
+{
+    [dict enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSString * _Nonnull obj, BOOL * _Nonnull stop) {
+        if (obj.length > 0) {
+            if (error) {
+                *error = [NSError errorWithDomain:@"FishDomain" code:0 userInfo:nil];
+            }
+        }
+    }];
+}
+```
+
+ARC 会将 (NSError **)error 这种 “out-parameter” 隐式修饰为 __autoreleasing，也就是其实会被转化成 (NSError * __autoreleasing *)error。
