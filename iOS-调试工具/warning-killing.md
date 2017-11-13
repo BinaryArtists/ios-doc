@@ -13,6 +13,11 @@ http://blog.csdn.net/dream9393/article/details/53907241
 #pragma clang diagnostic pop
 ```
 
+## 枚举一些警告清除
+
+* [Warning: The Copy Bundle Resources build phase contains this target's Info.plist file](https://stackoverflow.com/questions/3095612/warning-the-copy-bundle-resources-build-phase-contains-this-targets-info-plist)
+	> [引用 官方说明](https://developer.apple.com/library/content/qa/qa1649/_index.html)
+
 
 ## 第三方库警告信息
 
