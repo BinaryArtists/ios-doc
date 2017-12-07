@@ -1,13 +1,51 @@
 # iPhone X 适配
 
 1. 官方文档[Application Icons and Launch Images for iOS](https://developer.apple.com/library/content/samplecode/Icons/Introduction/Intro.html#//apple_ref/doc/uid/DTS40010442-Intro-DontLinkElementID_2)
-2. [iOS项目基础一 - 官方应用图标和启动图片的尺寸规范和相应的工程设置](http://www.jianshu.com/p/3e333c55b43c)
+2. [iOS项目基础 - 官方应用图标和启动图片的尺寸规范和相应的工程设置](http://www.jianshu.com/p/3e333c55b43c)
+3. [iPhone X 适配手Q H5 页面通用解决方案](https://cloud.tencent.com/community/article/686372)
+
+## 强势典范：
+
+1. [iPhoneX 适配实践](https://cloud.tencent.com/community/article/322940)
+2. [Human Interface Guidelines iOS](https://developer.apple.com/ios/human-interface-guidelines/overview/iphone-x/)
 
 ## 启动图 (LaunchImage)
 
-### 格式
+### 规格：
 
 1125px × 2436px (375pt × 812pt @3x)
+
+竖屏规格：1125px × 2436px (375pt × 812pt @3x)
+横屏规格：2436px × 1125px (812pt × 375pt @3x)
+
+### 状态栏
+
+高度增加了24像素，来电或者热点不会导致状态栏高度变化（iPhone X 以外的机型，在来电、热点出现时，会导致状态栏高度变化？）
+
+### 底部栏
+
+TabBar高度增加了34像素
+
+```
+UITabBar: 0x7f94ca71a7b0; frame = (0 729; 375 83);
+```
+
+ToolBar高度不变，只是向上偏移了34像素
+```
+UIToolbar: 0x7f89c7c0b9e0; frame = (0 730; 375 48);
+```
+
+### SafeArea安全区域
+
+#### 设计原则
+
+1. 所有设计的内容（不包括滚动列表）不要被屏幕圆角、上方传感器区域和下方home键指示器区域遮挡。
+
+2. 提供全屏用户体验、这里主要是指列表要延展到屏幕底部
+
+3. 避免将可交互控件放在屏幕底部或者屏幕圆角区域，防止视觉遮挡和系统边缘手势冲突 (屏幕角落边缘可交互按钮需要在SafeArea内部)
+
+4. 不要刻意遮挡和和引导屏幕的关键位置，比如用纯黑色的navigationbar和toolbar遮住上下区域，或者用闪亮的背景强调底部指示器区域。
 
 ### 命名
 
@@ -97,7 +135,7 @@ if #available(iOS 11.0, *) {
 
 ### safeAreaLayoutGuide
 
-作为参照物，让view可以相对某个view的safeAreaLayoutGuide做布局，从而保证view能正常、安全地显
+作为参照物，让view可以相对某个view的safeAreaLayoutGuide做布局，从而保证view能正常、安全地显示
 
 
 
