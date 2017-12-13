@@ -52,7 +52,7 @@
     - 插件资源id冲突问题
     - Activity启动和生命周期问题
 
-  * 2. [对组件化架构的再思考](http://blog.csdn.net/fallenink/article/details/52884348)
+  * 2. [对组件化架构的再思考](http://blog.sina.com.cn/s/blog_493a845501012c1p.html)
     - 组件，要关注分模块，模块内分层（UI层、逻辑层、数据层）
     - 依赖原则：
       > 上层调用下层，不可逆；模块间
