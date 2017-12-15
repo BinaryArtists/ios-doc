@@ -36,6 +36,8 @@
 
 1. [iOS 利用 framework 进行动态更新](https://yq.aliyun.com/articles/3024)
 2. [IOS-使用framework实现功能模块动态更新](http://blog.csdn.net/like7xiaoben/article/details/44081257)
+3. http://blog.csdn.net/u012907783/article/details/53158657
+4. http://blog.csdn.net/YCM1101743158/article/details/61925145
 
 ### TODO
 
