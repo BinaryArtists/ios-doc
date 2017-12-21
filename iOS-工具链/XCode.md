@@ -9,4 +9,8 @@
 	- DWARF						不会生成 dSYM 文件
 
 
-###
+## 编辑 xcodeproj
+
+1. https://draveness.me/bei-xcodeproj-keng-de-zhe-ji-tian
+2. http://www.jianshu.com/p/98029cf49a69
+3. https://github.com/CocoaPods/Xcodeproj
