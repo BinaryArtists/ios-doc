@@ -16,7 +16,7 @@
 解决办法：类库增加判断
 ```
 if (range.location != NSNotFound) {  
-            language = [language substringToIndex:range.location];  
+    language = [language substringToIndex:range.location];  
 }  
 ```
 
@@ -79,6 +79,54 @@ if (range.location != NSNotFound) {
     * [iOS 10 的适配问题](http://www.jianshu.com/p/f8151d556930)
 
     * [SpringBoard was unable to service the request.](http://www.jianshu.com/p/14fce940346a)
+
+### 权限问题记录
+
+使用UIImageWriteToSavedPhotosAlbum保存图片崩溃，且没有出现是否允许app读取相册的弹窗, 解决思路:
+```
+1>图片太大导致的，换成本地图片依旧崩溃，说明不是图片问题；
+2>没有出现让用户选择是否可以读取相册的弹窗，说明可能是权限问题导致的，但是已经添加了Photo Library Usage Description权限，所以，应该是有另一个权限字段未添加；
+```
+
+权限配置案例
+
+```
+// 相册写入权限
+<key>NSPhotoLibraryAddUsageDescription</key>
+<string>App需要您的同意,才能访问媒体资料库</string>
+
+// 相册读取权限
+<key>NSPhotoLibraryUsageDescription</key>
+<string>App需要您的同意,才能访问媒体资料库</string>
+
+其他的权限添加语句：
+<key>NSBluetoothPeripheralUsageDescription</key>
+<string>App需要您的同意,才能访问蓝牙</string>
+<key>NSCalendarsUsageDescription</key>
+<string>App需要您的同意,才能访问日历</string>
+<key>NSCameraUsageDescription</key>
+<string>App需要您的同意,才能访问相机</string>
+<key>NSContactsUsageDescription</key>
+<string>App需要您的同意,才能访问通讯录</string>
+<key>NSHealthShareUsageDescription</key>
+<string>App需要您的同意,才能访问健康分享</string>
+<key>NSHealthUpdateUsageDescription</key>
+<string>App需要您的同意,才能访问健康更新</string>
+<key>NSLocationAlwaysUsageDescription</key>
+<string>App需要您的同意,才能访问位置</string>
+<key>NSLocationUsageDescription</key>
+<string>App需要您的同意,才能访问位置</string>
+<key>NSLocationWhenInUseUsageDescription</key>
+<string>App需要您的同意,才能在试用期间访问位置</string>
+<key>NSMicrophoneUsageDescription</key>
+<string>App需要您的同意,才能访问麦克风</string>
+<key>NSMotionUsageDescription</key>
+<string>App需要您的同意,才能访问运动与健身</string>
+<key>NSRemindersUsageDescription</key>
+<string>App需要您的同意,才能访问事件提醒</string>
+<key>NSSpeechRecognitionUsageDescription</key>
+<string>App需要您的同意,才能访问语音识别</string>
+```
 
 ### 参考：
 	* 1. [iOS10的错误解决办法](http://blog.csdn.net/zhao15127334470/article/details/52623944)
