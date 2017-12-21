@@ -13,12 +13,7 @@
 * [iOS开发之SQLite安全问题解析之SQLite的锁机制和WAL技术](http://blog.csdn.net/zhonggaorong/article/details/52179696)
 * [Performance Optimization of SQLite on iOS with Xamarin](http://blog.thomasbandt.de/39/2433/de/blog/performance-optimization-of-sqlite-on-ios-with-xamarin.html)
 
-* [Sqlite学习笔记(一)&&编译安装](http://www.cnblogs.com/cchust/p/4722931.html)
-* [Sqlite学习笔记(二)&&性能测试](http://www.cnblogs.com/cchust/p/4738002.html)
-* [Sqlite学习笔记(三)&&WAL性能测试](http://www.cnblogs.com/cchust/p/4754580.html)
-* [Sqlite学习笔记(四)&&SQLite-WAL原理](http://www.cnblogs.com/cchust/p/4754619.html)
-
-### 场景
+### 场景 - 优化一定要有的需求点
 
 有个SDK的数据库读写挺慢的，写入 1000 条数据耗时 18.5 秒，虽然放在了异步线程做，但感觉还慢了点。另外手机的硬件配置比较低，考虑到电池续航，大小等等因素不可能做得很快。硬件改不了，考虑从代码层面优化。
 
