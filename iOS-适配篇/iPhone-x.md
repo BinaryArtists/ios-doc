@@ -2,6 +2,19 @@
 
 [iPhone X的简单适配](http://www.cocoachina.com/ios/20170917/20590.html)
 
+iOS 11 设备上运行出现最多问题应该就是 tableView 莫名奇妙地偏移了 20pt 或者 64pt。原因是 iOS 11 弃用了 automaticallyAdjustsScrollViewInsets 属性，取而代之的是 UIScrollView 新增了 contentInsetAdjustmentBehavior 属性，这一切的罪魁祸首都是新引入的 Safe Area。
+
+Safe Area 帮助我们将 view 放置在整个屏幕的可视的部分。即使把 navigationBar 设置为透明，系统也认为安全区域是从 navigationBar 的 bottom 开始的。
+
+安全区域定义了 view 中可视区域的部分，保证不被系统的状态栏、或父视图提供的 view 如导航栏覆盖。可以使用 additionalSafeAreaInsets 去扩展安全区域。每个 view 都可以改变安全区域嵌入的大小，controller 也可以。
+
+safeAreaInsets 属性反映了一个 view 距离该 view 的安全区域的边距。对于一个 controller 的 rootView 而言，safeAreaInsets 值包括了被 statusBar 和其他可视的bars 覆盖的区域和其他通过 additionalSafeAreaInsets 自定义的 insets 值。对于 view 层次中的其他 view，safeAreaInsets 值反映了 view 被覆盖的部分。如果一个 view 全部在它父视图的安全区域内，则 safeAreaInsets 值为(0,0,0,0)。
+
+## 数值
+
+1. 刘海高度：30
+2. 屏幕分辨率 1125 x 2436px（375pt×812pt @3x）
+
 ## 状态栏
 
 iPhone X状态条由20px变成了44px，UITabBar由49px变成了83px。设置布局时y直接写成64的就要根据机型设置。可以设置宏
@@ -51,11 +64,11 @@ iOS 11适配
 iPhone X 适配
 ------------
 
+[三分钟了解iPhone X设计规范（详细）](http://www.gamfe.com/news/201709/sheji-10451.html)
+
 [饿了么 UED iPhone X设计适配指南 & iOS 11新特性](https://zhuanlan.zhihu.com/p/29327102)
 
 [iPhone X 适配](http://www.jianshu.com/p/9796cd3f180e)
-
-[三分钟弄懂iPhone X 设计尺寸和适配](http://www.zcool.com.cn/article/ZNTU1MTUy.html)
 
 [iPhone X 适配指南 (官方版)](https://developer.apple.com/cn/ios/update-apps-for-iphone-x/)
 
@@ -71,6 +84,10 @@ iPhone X 适配
 [ios 11 UITabBar UITabBarItem positioning issue](https://stackoverflow.com/questions/44822558/ios-11-uitabbar-uitabbaritem-positioning-issue)
 
 [奇点在 iPhone X 的 break](https://imtx.me/archives/2374.html)
+
+[iPhone X在push的时候tabbar会上移是怎么回事？](http://www.cocoachina.com/bbs/read.php?tid=1726043)，结论：系统问题，解决方案：[iPhoneX的带有TabBar的画面跳转时，位置跳动的问题](http://blog.csdn.net/SVALBARDKSY/article/details/78294352?locationNum=10&fps=1)
+
+[Change UITabBar height](https://stackoverflow.com/questions/23044218/change-uitabbar-height), 我遇到的问题是：视图的切换，隐藏、显示tabbar等操作后，在viewWillAppear方法中，tabbar的frame变成了{{0, 763}, {375, 49}}，应该是 {{0, 729}, {375, 83}}
 
  2017.9.28 增加界面底部不带TabBar，iPhone X适配的问题
  -------------------------------------------

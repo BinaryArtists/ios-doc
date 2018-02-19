@@ -44,6 +44,8 @@ CGSizeMake(200, 40); 宽高 自己根据实际情况自己设置具体值就可�
 
 ### 列表 偏移
 
+[iOS11适配tableView顶部空白](https://www.cnblogs.com/liyingnan/p/7802520.html)
+
 在iOS 11上运行tableView向下偏移64px或者20px，因为iOS 11废弃了automaticallyAdjustsScrollViewInsets，而是给UIScrollView增加了contentInsetAdjustmentBehavior属性。避免这个坑的方法是要判断
 ```
 if (@available(iOS 11.0, *)) {
