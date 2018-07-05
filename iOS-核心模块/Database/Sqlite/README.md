@@ -14,3 +14,4 @@ SQLite，是一款轻型的数据库，是遵守ACID的关系型数据库管理�
 4. [SQLite这么娇小可爱，不多了解点都不行啊](http://www.cocoachina.com/ios/20150824/13169.html)
 5. [SQLite入门与分析(五)---Page Cache之并发控制](http://www.cnblogs.com/hustcat/archive/2009/03/01/1400757.html)
 6. [SQLite入门与分析(六)---再谈SQLite的锁](http://www.cnblogs.com/hustcat/archive/2009/03/10/1408208.html)
+7. [iOS端数据库解决方案分析](http://www.cocoachina.com/ios/20161108/18001.html)
