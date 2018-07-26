@@ -140,7 +140,7 @@
   大概一个对应列表如下：
   armv6：iPhone 2G/3G，iPod 1G/2G
   armv7：iPhone 3GS/4/4s，iPod 3G/4G，iPad 1G/2G/3G
-  armv7s：iPhone5
+  armv7s：iPhone5 iPhone5C
   arm64: iPhone5s
   我们用Xcode5默认的是支持armv7和armv7s，支持arm64的iPhone5s是兼容和可以使用这个配置打包出来的应用的。
 
