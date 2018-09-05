@@ -1,0 +1,1 @@
+[检测App、静态库、framework是否支持bitcode](https://blog.csdn.net/skylin19840101/article/details/72415279)
