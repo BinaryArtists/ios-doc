@@ -1,7 +1,6 @@
 ## runtime
 
 1. http://www.cnblogs.com/ygm900/p/3599081.html中的cocoa对象
-2. 特性：kvo、kvc、method swizzling、block
 3. [iOS-Runtime知识点整理](http://www.cnblogs.com/Mike-zh/p/4557014.html)
 4. 推荐看：[iOS开发之runtime详解](http://www.jianshu.com/p/ea1743715609)
 5. 推荐看：[Objective-C Runtime 运行时之一：类与对象](http://www.cocoachina.com/ios/20141031/10105.html)
