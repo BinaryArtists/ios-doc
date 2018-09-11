@@ -1,5 +1,7 @@
 ## runtime
 
+[［通俗易懂］理解“委托”](https://www.cnblogs.com/ygm900/p/3598527.html)
+
 1. http://www.cnblogs.com/ygm900/p/3599081.html中的cocoa对象
 3. [iOS-Runtime知识点整理](http://www.cnblogs.com/Mike-zh/p/4557014.html)
 4. 推荐看：[iOS开发之runtime详解](http://www.jianshu.com/p/ea1743715609)
@@ -10,14 +12,23 @@
 9. [Objective-C Runtime 运行时之五：协议与分类](http://www.cocoachina.com/ios/20141110/10174.html)
 9.1??? [Associated Objects](http://esoftmobile.com/2014/02/18/associated-objects/)
 10. [Objective-C Runtime 运行时之六：拾遗](http://www.cocoachina.com/ios/20141111/10186.html)
-
-### Runtime是什么？
-
-Objc是一门动态语言，所以它总是想办法把一些决定工作从编译、链接延迟到运行时。这意味着只有编译器是不够的，还需要一个运行时系统（runtime system）来执行编译后的代码。
-
-Runtime其实有两个版本:“modern”和 “legacy”。我们现在用的 Objective-C 2.0 采用的是现行(Modern)版的Runtime系统，只能运行在 iOS 和 OS X 10.5 之后的64位程序中。而OS X较老的32位程序仍采用 Objective-C 1中的（早期）Legacy 版本的 Runtime 系统。这两个版本最大的区别在于当你更改一个类的实例变量的布局时，在早期版本中你需要重新编译它的子类，而现行版就不需要。
-
-可以在这里下到苹果维护的开源代码[runtime源码](http://opensource.apple.com/tarballs/objc4/)。
+11. https://halfrost.com/objc_runtime_isa_class/
+12. Objective-C Runtime 中内存释放的并发问题, https://swift.gg/2018/06/11/friday-qa-2015-05-29-concurrent-memory-deallocation-in-the-objective-c-runtime/
+13. https://docs.nativescript.org/core-concepts/ios-runtime/Overview
+14. https://developer.apple.com/documentation/objectivec
+15. https://blog.csdn.net/Hello_Hwc/article/details/49687543
+16. https://segmentfault.com/a/1190000004521645
+17. https://segmentfault.com/blog/sourcecode
+18. https://segmentfault.com/a/1190000007094896
+19. https://segmentfault.com/a/1190000006783038
+20. https://segmentfault.com/a/1190000007396918
+21. https://segmentfault.com/a/1190000006699632
+22. https://segmentfault.com/a/1190000006601382
+23. https://segmentfault.com/a/1190000006260319
+24. https://segmentfault.com/a/1190000006220192
+25. https://segmentfault.com/a/1190000006194691
+26. https://juejin.im/post/5ac0a6116fb9a028de44d717
+27. https://www.zhihu.com/question/27179396
 
 ### Runtime的技术点
 
