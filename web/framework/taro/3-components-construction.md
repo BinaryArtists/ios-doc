@@ -22,7 +22,31 @@ https://nervjs.github.io/taro/docs/composition.html
 eslint-config-taro	taro eslint 规则
 eslint-plugin-taro	taro eslint 插件
 
-## 开发构成
+## 开发工具
+
+### @tarojs/cli
+
+主要负责项目初始化、编译、构建等
+
+> 安装
+
+```
+npm install -g @tarojs/cli
+```
+
+> 与 Taro 工程的关系
+
+Taro工程的目录结构：[这里](https://github.com/fallending/venom/tree/master/packages)
+
+Taro 项目主要是由一系列 NPM 包组成，位于工程的 Packages 目录下。它的包管理方式和 Babel 项目一样，将整个项目作为一个 monorepo 来进行管理，并且同样使用了包管理工具 [Lerna](vendor/lerna.md)
+
+Packages 目录下十几个包中，最常用的项目初始化与构建的命令行工具 Taro CLI 就是其中一个。在 Taro 工程根目录运行 lerna publish 命令之后， lerna.json 里面配置好的所有的包会被发布到 NPM 上
+
+> cli 开发目录
+
+
+
+## 开发组件
 
 
 ### @tarojs/taro

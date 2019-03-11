@@ -28,12 +28,13 @@ $ npx @tarojs/cli init myApp
 *[微信小程序](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)*
 
 ```
-# npm script
 $ npm run dev:weapp
 $ npm run build:weapp
+
 # 仅限全局安装
 $ taro build --type weapp --watch
 $ taro build --type weapp
+
 # npx 用户也可以使用
 # 去掉 --watch 将不会监听文件修改，并会对代码进行压缩打包
 $ npx taro build --type weapp --watch
@@ -43,12 +44,13 @@ $ npx taro build --type weapp
 *[百度小程序](https://smartprogram.baidu.com/docs/develop/devtools/show_sur/)*
 
 ```
-# npm script
 $ npm run dev:swan
 $ npm run build:swan
+
 # 仅限全局安装
 $ taro build --type swan --watch
 $ taro build --type swan
+
 # npx 用户也可以使用
 $ npx taro build --type swan --watch
 $ npx taro build --type swan
@@ -57,12 +59,13 @@ $ npx taro build --type swan
 *[支付宝小程序](https://docs.alipay.com/mini/developer/getting-started/)*
 
 ```
-# npm script
 $ npm run dev:alipay
 $ npm run build:alipay
+
 # 仅限全局安装
 $ taro build --type alipay --watch
 $ taro build --type alipay
+
 # npx 用户也可以使用
 $ npx taro build --type alipay --watch
 $ npx taro build --type alipay
@@ -71,12 +74,13 @@ $ npx taro build --type alipay
 *[字节跳动小程序](https://microapp.bytedance.com/docs/devtool/versionUpdate.html)*
 
 ```
-# npm script
 $ npm run dev:tt
 $ npm run build:tt
+
 # 仅限全局安装
 $ taro build --type tt --watch
 $ taro build --type tt
+
 # npx 用户也可以使用
 $ npx taro build --type tt --watch
 $ npx taro build --type tt
@@ -85,21 +89,19 @@ $ npx taro build --type tt
 *H5*
 
 ```
-# Preview
-
-# npm script
 $ npm run dev:h5
+
 # 仅限全局安装
 $ taro build --type h5 --watch
+
 # npx 用户也可以使用
 $ npx taro build --type h5 --watch
 
-# Build
-
-# npm script
 $ npm run build:h5
+
 # 仅限全局安装
 $ taro build --type h5
+
 # npx 用户也可以使用
 $ npx taro build --type h5
 ```
@@ -107,10 +109,11 @@ $ npx taro build --type h5
 *[React Native](https://nervjs.github.io/taro/docs/react-native.html)*
 
 ```
-# npm script
 $ npm run dev:rn
+
 # 仅限全局安装
 $ taro build --type rn --watch
+
 # npx 用户也可以使用
 $ npx taro build --type rn --watch
 ```
@@ -118,11 +121,10 @@ $ npx taro build --type rn --watch
 ### 命令
 
 ```
-# taro
 $ taro update self
-# npm
+
 npm i -g @tarojs/cli@latest
-# yarn
+
 yarn global add @tarojs/cli@latest
 
 # 更新项目中 Taro 相关的依赖
