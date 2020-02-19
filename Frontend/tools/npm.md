@@ -1,18 +1,34 @@
 ## 命令
 
-#### -
+#### Basic
 
 ```
-npm ls
-npm login
 npm whoami
-npm publish
 npm get prefix
 npm root -g 
+```
+
+#### Account
+
+```
+npm login
 npm adduser
 ```
 
-#### control
+#### Package
+
+```
+npm ls
+npm publish
+npm unpublish
+npm i/install
+npm i -S/--save
+npm i -D/--save-dev
+npm uninstall
+```
+
+
+#### Control
 
 ```
 npm start 启动模块
