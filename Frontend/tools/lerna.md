@@ -117,3 +117,10 @@ lerna create <name>
 * 进行merge pr操作。
 * 本地切换到master分支并进行pull操作。
 * 执行lerna-changelog，既可得到一份changeling。
+
+
+### 问题
+
+* @somescope/somepackage 这样的包如何发布？
+
+进入 packages/你的包目录，执行：npm publish --access=public，发布完以后，下次你就可以在主项目里面使用：lerna publish来管理
