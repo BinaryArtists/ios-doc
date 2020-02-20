@@ -1,6 +1,9 @@
 ## 命令
 
-#### Basic
+* [版本管理](./VERSION.md)
+* [依赖关系](./DEPEND.md)
+
+### Basic
 
 ```
 npm whoami
@@ -8,42 +11,49 @@ npm get prefix
 npm root -g 
 ```
 
-#### Account
+### Account
 
 ```
 npm login
 npm adduser
 ```
 
-#### Package
+### Package
 
 ```
 npm ls
 npm publish
+npm publish --access=public
 npm unpublish
 npm i/install
 npm i -S/--save
 npm i -D/--save-dev
 npm uninstall
+npm view <package-name> version
+
+cd npm-link-module
+npm link
+cd npm-link-example
+npm link npm-link-module
 ```
 
 
-#### Control
+### Control
 
 ```
-npm start 启动模块
-npm stop 停止模块
-npm restart 重新启动模块
-npm test 测试模块
+npm start
+npm stop
+npm restart
+npm test
 ```
 
-#### Cache
+### Cache
 
 ```
 npm cache clean -f
 ```
 
-#### Config
+### Config
 
 ```
 npm config ls
@@ -51,15 +61,15 @@ npm config get registry
 npm config set registry http://registry.npmjs.org 
 ```
 
-#### Scope
+### Scope
 
+**如何发布scope包呢，如：@<org-name>/<package-name>？**
+
+1. 登录 npmjs.com
+2. 创建组织/团队/成员
+3. 确认发布者是团队成员
 ```
-// publish默认发布私有包，package的private属性无效，必须使用：
-
 npm publish --access=public
-
-// 组织包需要先创建团队（团队被删掉，包就没了！）
-// 将自己添加进团队
 ```
 
 ## 问题
@@ -71,7 +81,7 @@ npm publish --access=public
 ```
 npm publish --access public
 ```
-#### 
+### 
 
 ```
 npm config set registry https://registry.npmjs.org/

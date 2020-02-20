@@ -2,6 +2,8 @@
 
 **基于 GIT(主要是 commit) 和 NPM(工具链) 来辅助和优化开发者管理多包。**
 
+* lerna-changelog
+
 ### Monorepo vs Multirepo
 
 Monorepo 的全称是 monolithic repository，即单体式仓库，与之对应的是 Multirepo(multiple repository)，这里的“单”和“多”是指每个仓库中所管理的模块数量。
@@ -107,7 +109,20 @@ lerna create <name>
 
 ```
 
-### 使用
+#### Link
+
+https://github.com/lerna/lerna/tree/master/commands/link#readme
+
+### 进阶使用
+
+https://www.dazhuanlan.com/2019/10/02/5d939b682e3a2/
+
+Lerna-changelog
+lerna-changelog基于pr来为项目生成changelog
+
+可参考repo
+
+使用步骤
 
 * 从master分支切换出feature/bugfix等分支，参考git-flow。
 * 完成开发后进行commit，推荐使用commitizen来规范commit msg，同时有助于对后续子项目生成changelog。
